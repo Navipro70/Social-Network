@@ -1,0 +1,16 @@
+
+.header {
+  background-color: #282c34;
+  color: #6bffdb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(15px + 2vmin);
+  grid-area: header;
+}
+
+
+.header img {
+  height: 70px;
+  width: 70px;
+}

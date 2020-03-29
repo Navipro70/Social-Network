@@ -1,0 +1,21 @@
+.nav {
+  grid-area: nav;
+  background-color: #5dffec;
+  padding-left: 1.5vh;
+  padding-top: 1.5vh;
+}
+
+.nav a {
+  text-decoration: none;
+  margin-top: 2vh;
+  display: inline-block;
+  color: #380000;
+  font-size: calc(8px + 0.5vw);
+  font-weight: 600;
+  width: calc(30px + 4vw);
+}
+
+.nav a:hover {
+  opacity: 50%;
+  transition: .2s linear;
+}

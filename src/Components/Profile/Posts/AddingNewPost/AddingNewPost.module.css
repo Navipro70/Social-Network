@@ -1,0 +1,6 @@
+.adding_new_post textarea {
+  resize: none;
+  outline: none;
+  font-size: 20px;
+  width: 100%;
+}
