@@ -1,15 +1,15 @@
 import React from "react";
-// import logo from './logo.svg';
 import "./App.css";
+import Header from "./Components/Header";
+import Navbar from "./Components/Navbar";
+import Profile from "./Components/Profile";
 
 const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <ul className="ulName">
-          <li> hi </li>
-        </ul>
-      </header>
+    <div className="app-wrapper container">
+      <Header />
+      <Navbar />
+      <Profile />
     </div>
   );
 };
