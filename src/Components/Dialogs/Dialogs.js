@@ -9,3 +9,5 @@ const Dialogs = () => {
     </div>
   );
 };
+
+export default Dialogs;

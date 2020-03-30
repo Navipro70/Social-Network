@@ -7,6 +7,8 @@
   justify-content: center;
   font-size: calc(15px + 2vmin);
   grid-area: header;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
 }
 
 

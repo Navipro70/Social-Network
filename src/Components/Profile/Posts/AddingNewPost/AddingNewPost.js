@@ -4,7 +4,7 @@ import classes from "./AddingNewPost.module.css";
 const AddingNewPost = () => {
   return (
     <div className={classes.adding_new_post}>
-      <h4>What new?</h4>
+      <h3>What new?</h3>
       <textarea name="post" id="post_text" placeholder="Ваш пост..."></textarea>
     </div>
   );

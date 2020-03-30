@@ -1,0 +1,12 @@
+.post {
+  display: inline-flex;
+  margin-top: 30px;
+}
+
+.post img {
+  margin-top: 15px;
+  margin-right: 10px;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+}
