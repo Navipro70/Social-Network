@@ -1,4 +1,46 @@
-.content {
-  grid-area: content;
-  background-color: #ad5031;
+.gridContent {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+}
+
+.names {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.names a {
+  display: block;
+  text-decoration: none;
+}
+
+.names a.active {
+  color: #ffb000;
+}
+
+.names a:hover {
+  color: #ffb000;
+  opacity: 75%;
+}
+
+.names a.active:hover {
+  opacity: 100%;
+}
+
+.names div {
+  margin-top: 20px;
+}
+
+.name {
+  font-size: 18px;
+  padding: 20px;
+}
+
+.dialog {
+  display: flex;
+  flex-flow: column;
+}
+
+.message {
+
 }
