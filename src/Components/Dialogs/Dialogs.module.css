@@ -21,6 +21,7 @@
 .names a:hover {
   color: #ffb000;
   opacity: 75%;
+  transition: .2s linear;
 }
 
 .names a.active:hover {

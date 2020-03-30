@@ -18,24 +18,40 @@ const Message = props => {
   return <div className={classes.message}>{props.mess}</div>;
 };
 
+let users = [
+  { id: 1, name: "Dmitry" },
+  { id: 2, name: "Sasha" },
+  { id: 3, name: "Kostya" },
+  { id: 4, name: "Diana" },
+  { id: 5, name: "Andrew" },
+  { id: 6, name: "Vadya" }
+];
+
+let currentUsers = users.map(user => (
+  <DialogId name={user.name} id={user.id} />
+));
+
+let messages = [
+  { id: 1, message: "Hello" },
+  { id: 2, message: "How are you" },
+  { id: 3, message: "Fine. What about you?" },
+  { id: 4, message: "Me too, thanks" },
+  { id: 5, message: "Goodbye" }
+];
+
+let currentMessages = messages.map(currentValue => (
+  <Message mess={currentValue.message} />
+));
+
 const Dialogs = () => {
   return (
     <div className={classes.gridContent}>
       <div className={classes.names}>
         <div>Direct messages</div>
-        <DialogId name="Dmitry" id="1" />
-        <DialogId name="Sasha" id="2" />
-        <DialogId name="Kostya" id="3" />
-        <DialogId name="Diana" id="4" />
-        <DialogId name="Andrew" id="5" />
-        <DialogId name="Vadya" id="6" />
+        {currentUsers}
       </div>
 
-      <div className={classes.dialog}>
-        <Message mess="Hi" />
-        <Message mess="How are you?" />
-        <Message mess="I'm ok thank you" />
-      </div>
+      <div className={classes.dialog}>{currentMessages}</div>
     </div>
   );
 };

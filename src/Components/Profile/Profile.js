@@ -5,7 +5,7 @@ import Posts from "./Posts/Posts";
 
 const Profile = () => {
   return (
-    <div>
+    <div className={classes.profile}>
       <Information />
       <Posts />
     </div>
