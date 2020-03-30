@@ -19,3 +19,7 @@
   opacity: 50%;
   transition: .2s linear;
 }
+
+.nav a.activeColor {
+  color: #fff;
+}
