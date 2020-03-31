@@ -4,8 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-
-let render = (state) => {
+let render = state => {
   ReactDOM.render(
     <React.StrictMode>
       <App state={state} />
@@ -19,4 +18,4 @@ let render = (state) => {
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-export {render};
+export { render };
