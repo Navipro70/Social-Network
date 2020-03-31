@@ -1,10 +1,11 @@
 import React from "react";
 import classes from "./AddingNewPost.module.css";
 
-const AddingNewPost = () => {
+const AddingNewPost = props => {
   let textareaElement = React.createRef();
   function makePost(){
-    alert(textareaElement.current.value)
+  props.newPost(textareaElement.current.value);
+  textareaElement.current.value = "";
   }
 
   return (

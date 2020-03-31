@@ -25,7 +25,7 @@ const Dialogs = props => {
         {currentMessages}
         <div>
           <textarea ref={info}></textarea>
-          <button onClick={() => alert(info.current.value)}>Send message</button>
+          <button>Send message</button>
         </div>
       </div>
     </div>

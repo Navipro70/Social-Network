@@ -1,18 +1,17 @@
+import { render } from "../index";
+
 let state = {
   profilePage: {
     posts: [
       {
-        id: 1,
         postText:
           "This is post from other user element to resemble a link, use a button and change it with appropriate styles. Learn more:"
       },
       {
-        id: 2,
         postText:
           "This is post from other user The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value."
       },
       {
-        id: 3,
         postText:
           "This is post from other user The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the"
       }
@@ -37,4 +36,11 @@ let state = {
   }
 };
 
+function newPost(text) {
+  if (text.trim() === "") return;
+  state.profilePage.posts.unshift({ postText: text });
+  render(state);
+}
+
+export { newPost };
 export default state;
