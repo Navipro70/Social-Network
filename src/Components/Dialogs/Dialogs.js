@@ -3,14 +3,15 @@ import classes from "./Dialogs.module.css";
 import Message from "./Messages/Messages";
 import DialogId from "./DialogId/DialogId";
 
-const Dialogs = (props) => {
-  let currentUsers = props.users.map(user => (
+const Dialogs = props => {
+  let currentUsers = props.dialogPage.users.map(user => (
     <DialogId name={user.name} id={user.id} />
   ));
 
-  let currentMessages = props.messages.map(currentValue => (
+  let currentMessages = props.dialogPage.messages.map(currentValue => (
     <Message mess={currentValue.message} />
   ));
+
   return (
     <div className={classes.gridContent}>
       <div className={classes.names}>
