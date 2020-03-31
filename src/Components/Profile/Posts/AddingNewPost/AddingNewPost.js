@@ -8,10 +8,16 @@ const AddingNewPost = props => {
   textareaElement.current.value = "";
   }
 
+  function keyDownFunction(){
+    let valueTextArea = textareaElement.current.value;
+    if (valueTextArea === "") return;
+    props.onKeyDown(valueTextArea);
+  }
+
   return (
     <div className={classes.adding_new_post}>
       <h3>What new?</h3>
-      <textarea name="post" id="post_text" placeholder="Ваш пост..." ref={textareaElement}></textarea>
+      <textarea name="post" id="post_text" placeholder="Ваш пост..." ref={textareaElement} onKeyUp={keyDownFunction}></textarea>
       <button type="button" onClick={makePost}>Add new post</button>
     </div>
   );
