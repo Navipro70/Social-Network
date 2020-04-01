@@ -16,7 +16,7 @@ let state = {
           "This is post from other user The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the"
       }
     ],
-    currentMessage: ""
+    newPostText: ""
   },
   dialogPage: {
     messages: [
@@ -39,13 +39,15 @@ let state = {
 
 function newPost(text) {
   if (text.trim() === "") return;
-  state.profilePage.posts.unshift({ postText: text });
+  state.profilePage.posts.unshift({ postText: state.profilePage.newPostText });
+  state.profilePage.newPostText = "";
   render(state);
 }
 
-function onKeyDownEventListener(value) {
-  state.profilePage.currentMessage = value;
-  console.log(state.profilePage.currentMessage);
+function onKeyDownEventListener(newText) {
+  state.profilePage.newPostText = newText;
+  render(state);
+  console.log(state.profilePage);
 }
 
 export { newPost };

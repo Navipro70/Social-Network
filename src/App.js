@@ -1,8 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Route, BrowserRouter } from "react-router-dom";
-import {newPost} from "./redux/state";
-import {onKeyDownEventListener} from "./redux/state";
+import {newPost, onKeyDownEventListener} from "./redux/state";
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
