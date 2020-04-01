@@ -23,7 +23,7 @@ const AddingNewPost = props => {
         ref={textareaElement}
         onChange={onChangeFunction}
         value={props.newPostText}
-      ></textarea>
+      />
       <button type="button" onClick={makePost}>
         Add new post
       </button>

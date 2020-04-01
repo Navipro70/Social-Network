@@ -14,7 +14,7 @@ const Dialogs = props => {
 
   let info = React.createRef();
 
-  function onChangeFunction(){
+  function onChangeFunction() {
     props.newMessageChanger(info.current.value);
   }
 
@@ -32,7 +32,11 @@ const Dialogs = props => {
       <div className={classes.dialog}>
         {currentMessages}
         <div>
-          <textarea ref={info} onChange={onChangeFunction} value={props.dialogPage.newMessage}></textarea>
+          <textarea
+            ref={info}
+            onChange={onChangeFunction}
+            value={props.dialogPage.newMessage}
+          />
           <button onClick={messageMaker}>Send message</button>
         </div>
       </div>

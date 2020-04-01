@@ -3,32 +3,25 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import state from "./redux/state";
-import {
-  newPost,
-  newPostTextChanger,
-  newMessage,
-  newMessageChanger,
-  subscribe
-} from "./redux/state";
+import store from "./redux/state";
 
-let render = () => {
+let render = (state) => {
   ReactDOM.render(
     <React.StrictMode>
       <App
         state={state}
-        newPost={newPost}
-        newPostTextChanger={newPostTextChanger}
-        newMessage={newMessage}
-        newMessageChanger={newMessageChanger}
+        newPost={store.newPost.bind(store)}
+        newPostTextChanger={store.newPostTextChanger.bind(store)}
+        newMessage={store.newMessage.bind(store)}
+        newMessageChanger={store.newMessageChanger.bind(store)}
       />
     </React.StrictMode>,
     document.getElementById("root")
   );
 };
 
-render();
+render(store.getState());
 
-subscribe(render);
+store.subscribe(render);
 
 serviceWorker.unregister();
