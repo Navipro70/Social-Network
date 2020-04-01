@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { Route, BrowserRouter } from "react-router-dom";
-import {newPost, onKeyDownEventListener} from "./redux/state";
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
@@ -19,13 +18,15 @@ const App = props => {
         <div className="content">
           <Route
             path="/profile"
-            render={() => <Profile profilePage={props.state.profilePage} newPost={newPost} onKeyDown={onKeyDownEventListener} />}
+            render={() => <Profile profilePage={props.state.profilePage} newPost={props.newPost} onKeyDown={props.newPostTextChanger} />}
           />
           <Route
             path="/dialogs"
             render={() => (
               <Dialogs
                 dialogPage={props.state.dialogPage}
+                newMessage={props.newMessage}
+                newMessageChanger={props.newMessageChanger}
               />
             )}
           />

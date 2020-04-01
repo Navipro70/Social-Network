@@ -1,4 +1,6 @@
-import { render } from "../index";
+let render = () => {};
+
+const subscribe = observer => render = observer;
 
 let state = {
   profilePage: {
@@ -33,7 +35,8 @@ let state = {
       { id: 4, name: "Diana" },
       { id: 5, name: "Andrew" },
       { id: 6, name: "Vadya" }
-    ]
+    ],
+    newMessage: ""
   }
 };
 
@@ -41,15 +44,26 @@ function newPost(text) {
   if (text.trim() === "") return;
   state.profilePage.posts.unshift({ postText: state.profilePage.newPostText });
   state.profilePage.newPostText = "";
-  render(state);
+  render();
 }
 
-function onKeyDownEventListener(newText) {
+function newPostTextChanger(newText) {
   state.profilePage.newPostText = newText;
-  render(state);
+  render();
   console.log(state.profilePage);
 }
 
-export { newPost };
-export { onKeyDownEventListener };
+function newMessage(){
+  state.dialogPage.messages.push({id:6, message: state.dialogPage.newMessage});
+  state.dialogPage.newMessage = "";
+  render();
+}
+
+function newMessageChanger(text) {
+  state.dialogPage.newMessage = text;
+  render();
+  console.log(state.dialogPage.newMessage)
+}
+
+export { newPost, newPostTextChanger, newMessage, newMessageChanger, subscribe};
 export default state;
