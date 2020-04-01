@@ -15,11 +15,12 @@ const Dialogs = props => {
   let info = React.createRef();
 
   function onChangeFunction() {
-    props.newMessageChanger(info.current.value);
+    let currentText = info.current.value;
+    props.dispatch({type:"NEW-MESSAGE-CHANGER", text: currentText})
   }
 
   function messageMaker() {
-    props.newMessage();
+    props.dispatch({type:"NEW-MESSAGE"})
   }
 
   return (

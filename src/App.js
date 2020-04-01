@@ -18,15 +18,19 @@ const App = props => {
         <div className="content">
           <Route
             path="/profile"
-            render={() => <Profile profilePage={props.state.profilePage} newPost={props.newPost} onKeyDown={props.newPostTextChanger} />}
+            render={() => (
+              <Profile
+                profilePage={props.state.profilePage}
+                dispatch={props.dispatch}
+              />
+            )}
           />
           <Route
             path="/dialogs"
             render={() => (
               <Dialogs
                 dialogPage={props.state.dialogPage}
-                newMessage={props.newMessage}
-                newMessageChanger={props.newMessageChanger}
+                dispatch={props.dispatch}
               />
             )}
           />

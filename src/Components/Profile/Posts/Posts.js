@@ -7,7 +7,7 @@ const Posts = props => {
   let currentPosts = props.posts.map(post => <Post postText={post.postText} />);
   return (
     <div className={clasees.post}>
-      <AddingNewPost newPost={props.newPost} onKeyDown={props.onKeyDown} newPostText={props.newPostText}/>
+      <AddingNewPost dispatch={props.dispatch} newPostText={props.newPostText}/>
       {currentPosts}
     </div>
   );

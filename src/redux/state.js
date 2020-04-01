@@ -36,41 +36,42 @@ let store = {
       newMessage: ""
     }
   },
-  newPost(text) {
-    if (text.trim() === "") return;
-    this._state.profilePage.posts.unshift({
-      postText: this._state.profilePage.newPostText
-    });
-    this._state.profilePage.newPostText = "";
-    this.render(this._state);
-  },
-  newPostTextChanger(newText) {
-    this._state.profilePage.newPostText = newText;
-    this.render(this._state);
-    console.log(this._state.profilePage);
-  },
-  newMessage() {
-    this._state.dialogPage.messages.push({
-      id: 6,
-      message: this._state.dialogPage.newMessage
-    });
-    this._state.dialogPage.newMessage = "";
-    this.render(this._state);
-  },
-  newMessageChanger(text) {
-    this._state.dialogPage.newMessage = text;
-    this.render(this._state);
-    console.log(this._state.dialogPage.newMessage);
-  },
   render() {},
   subscribe(observer) {
     this.render = observer;
   },
   getState() {
     return this._state;
+  },
+
+  dispatch(action) {
+    if (action.type === "NEW-POST") {
+      if (this._state.profilePage.newPostText.trim() === "") return;
+      this._state.profilePage.posts.unshift({
+        postText: this._state.profilePage.newPostText
+      });
+      this._state.profilePage.newPostText = "";
+      this.render(this._state);
+    }
+    else if (action.type === "NEW-POST-TEXT-CHANGER") {
+      this._state.profilePage.newPostText = action.newText;
+      this.render(this._state);
+    }
+    else if (action.type === "NEW-MESSAGE") {
+      this._state.dialogPage.messages.push({
+        id: 6,
+        message: this._state.dialogPage.newMessage
+      });
+      this._state.dialogPage.newMessage = "";
+      this.render(this._state);
+    }
+    else if (action.type === "NEW-MESSAGE-CHANGER") {
+      this._state.dialogPage.newMessage = action.text;
+      this.render(this._state);
+    }
   }
 };
 
-store.render(store.getState())
+store.render(store.getState());
 window.store = store;
 export default store;

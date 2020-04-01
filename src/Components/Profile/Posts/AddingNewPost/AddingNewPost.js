@@ -4,13 +4,12 @@ import classes from "./AddingNewPost.module.css";
 const AddingNewPost = props => {
   let textareaElement = React.createRef();
   function makePost() {
-    props.newPost(textareaElement.current.value);
-    textareaElement.current.value = "";
+    props.dispatch({type: "NEW-POST"})
   }
 
   function onChangeFunction() {
     let valueTextArea = textareaElement.current.value;
-    props.onKeyDown(valueTextArea);
+    props.dispatch({type: "NEW-POST-TEXT-CHANGER", newText: valueTextArea})
   }
 
   return (
