@@ -1,7 +1,26 @@
 const NEW_MESSAGE = "NEW-MESSAGE";
 const NEW_MESSAGE_CHANGER = "NEW-MESSAGE-CHANGER";
 
-const dialogReducer = (state, action) => {
+let initialState = {
+  messages: [
+    { id: 1, message: "Hello" },
+    { id: 2, message: "How are you" },
+    { id: 3, message: "Fine. What about you?" },
+    { id: 4, message: "Me too, thanks" },
+    { id: 5, message: "Goodbye" }
+  ],
+  users: [
+    { id: 1, name: "Dmitry" },
+    { id: 2, name: "Sasha" },
+    { id: 3, name: "Kostya" },
+    { id: 4, name: "Diana" },
+    { id: 5, name: "Andrew" },
+    { id: 6, name: "Vadya" }
+  ],
+  newMessage: ""
+};
+
+const dialogReducer = (state = initialState, action) => {
   switch (action.type) {
     case "NEW-MESSAGE":
       state.messages.push({

@@ -48,12 +48,10 @@ let store = {
   },
 
   dispatch(action) {
-    profileReducer(this._state.profilePage, action);
-    dialogReducer(this._state.dialogPage, action);
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogPage = dialogReducer(this._state.dialogPage, action);
     this.render(this._state);
   }
 };
 
 store.render(store.getState());
-window.store = store;
-export default store;
