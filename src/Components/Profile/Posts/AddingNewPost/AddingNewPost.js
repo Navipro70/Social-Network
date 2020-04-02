@@ -6,7 +6,6 @@ import {
 } from "../../../../redux/profile-reducer";
 
 const AddingNewPost = props => {
-
   let textareaElement = React.createRef();
   function makePost() {
     props.dispatch(newPostActionCreator());
@@ -14,7 +13,7 @@ const AddingNewPost = props => {
 
   function onChangeFunction() {
     let text = textareaElement.current.value;
-    props.dispatch(newPostTextChangerActionCreator(text))
+    props.dispatch(newPostTextChangerActionCreator(text));
   }
 
   return (
