@@ -64,7 +64,7 @@ let store = {
     }
     else if (action.type === "NEW-MESSAGE") {
       this._state.dialogPage.messages.push({
-        id: 6,
+        id: this._state.dialogPage.messages.length+1,
         message: this._state.dialogPage.newMessage
       });
       this._state.dialogPage.newMessage = "";
