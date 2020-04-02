@@ -2,6 +2,10 @@ import React from "react";
 import classes from "./Dialogs.module.css";
 import Message from "./Messages/Messages";
 import DialogId from "./DialogId/DialogId";
+import {
+  newMessageActionCreator,
+  newMessageChangerActionCreator
+} from "../../redux/state";
 
 const Dialogs = props => {
   let currentUsers = props.dialogPage.users.map(user => (
@@ -16,11 +20,11 @@ const Dialogs = props => {
 
   function onChangeFunction() {
     let currentText = info.current.value;
-    props.dispatch({type:"NEW-MESSAGE-CHANGER", text: currentText})
+    props.dispatch(newMessageChangerActionCreator(currentText));
   }
 
   function messageMaker() {
-    props.dispatch({type:"NEW-MESSAGE"})
+    props.dispatch(newMessageActionCreator());
   }
 
   return (

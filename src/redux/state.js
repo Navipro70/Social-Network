@@ -1,3 +1,8 @@
+const NEW_POST = "NEW-POST";
+const NEW_POST_TEXT_CHANGER = "NEW-POST-TEXT-CHANGER";
+const NEW_MESSAGE = "NEW-MESSAGE";
+const NEW_MESSAGE_CHANGER = "NEW-MESSAGE-CHANGER";
+
 let store = {
   _state: {
     profilePage: {
@@ -71,6 +76,12 @@ let store = {
     }
   }
 };
+
+export const newPostActionCreator = () => ({type: NEW_POST});
+export const newPostTextChangerActionCreator = text => ({type: NEW_POST_TEXT_CHANGER, newText: text});
+
+export const newMessageActionCreator = () => ({type: NEW_MESSAGE});
+export const newMessageChangerActionCreator = text => ({type: NEW_MESSAGE_CHANGER, text: text});
 
 store.render(store.getState());
 window.store = store;

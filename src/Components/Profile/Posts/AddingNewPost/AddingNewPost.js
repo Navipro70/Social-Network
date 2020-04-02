@@ -1,15 +1,20 @@
 import React from "react";
 import classes from "./AddingNewPost.module.css";
+import {
+  newPostActionCreator,
+  newPostTextChangerActionCreator
+} from "../../../../redux/state";
 
 const AddingNewPost = props => {
+
   let textareaElement = React.createRef();
   function makePost() {
-    props.dispatch({type: "NEW-POST"})
+    props.dispatch(newPostActionCreator());
   }
 
   function onChangeFunction() {
-    let valueTextArea = textareaElement.current.value;
-    props.dispatch({type: "NEW-POST-TEXT-CHANGER", newText: valueTextArea})
+    let text = textareaElement.current.value;
+    props.dispatch(newPostTextChangerActionCreator(text))
   }
 
   return (
