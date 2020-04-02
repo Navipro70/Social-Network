@@ -5,7 +5,7 @@ import DialogId from "./DialogId/DialogId";
 import {
   newMessageActionCreator,
   newMessageChangerActionCreator
-} from "../../redux/state";
+} from "../../redux/dialog-reducer";
 
 const Dialogs = props => {
   let currentUsers = props.dialogPage.users.map(user => (
