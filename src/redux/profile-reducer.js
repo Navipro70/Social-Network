@@ -17,12 +17,12 @@ let initialState = {
     }
   ],
   newPostText: ""
-}
+};
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case "NEW-POST":
-      if (state.newPostText.trim() === "") return;
+      if (state.newPostText.trim() === "") return state;
       state.posts.unshift({
         postText: state.newPostText
       });

@@ -2,17 +2,14 @@ import React from "react";
 import classes from "./Dialogs.module.css";
 import Message from "./Messages/Messages";
 import DialogId from "./DialogId/DialogId";
-import {
-  newMessageActionCreator,
-  newMessageChangerActionCreator
-} from "../../redux/dialog-reducer";
+// import DialogsContainer from "./DialogsContainer";
 
 const Dialogs = props => {
-  let currentUsers = props.dialogPage.users.map(user => (
+  let currentUsers = props.users.map(user => (
     <DialogId name={user.name} id={user.id} />
   ));
 
-  let currentMessages = props.dialogPage.messages.map(currentValue => (
+  let currentMessages = props.messages.map(currentValue => (
     <Message mess={currentValue.message} />
   ));
 
@@ -20,11 +17,11 @@ const Dialogs = props => {
 
   function onChangeFunction() {
     let currentText = info.current.value;
-    props.dispatch(newMessageChangerActionCreator(currentText));
+    props.changeMessage(currentText)
   }
 
   function messageMaker() {
-    props.dispatch(newMessageActionCreator());
+    props.addMessage();
   }
 
   return (
@@ -40,7 +37,7 @@ const Dialogs = props => {
           <textarea
             ref={info}
             onChange={onChangeFunction}
-            value={props.dialogPage.newMessage}
+            value={props.messageValue}
           />
           <button onClick={messageMaker}>Send message</button>
         </div>

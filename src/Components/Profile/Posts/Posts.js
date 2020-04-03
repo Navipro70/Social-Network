@@ -1,13 +1,14 @@
 import React from "react";
-import AddingNewPost from "./AddingNewPost/AddingNewPost";
+import AddingNewPostContainer from "./AddingNewPost/AddingNewPostContainer";
 import Post from "./Post/Post";
 import clasees from "./Posts.module.css";
 
 const Posts = props => {
-  let currentPosts = props.posts.map(post => <Post postText={post.postText} />);
+  let posts = props.store.getState().profilePage.posts;
+  let currentPosts = posts.map(post => <Post postText={post.postText} />);
   return (
     <div className={clasees.post}>
-      <AddingNewPost dispatch={props.dispatch} newPostText={props.newPostText}/>
+      <AddingNewPostContainer dispatch={props.store.dispatch} newPostText={props.store.getState().profilePage.newPostText}/>
       {currentPosts}
     </div>
   );
