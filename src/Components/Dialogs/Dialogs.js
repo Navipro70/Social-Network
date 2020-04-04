@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./Dialogs.module.css";
 import Message from "./Messages/Messages";
 import DialogId from "./DialogId/DialogId";
-// import DialogsContainer from "./DialogsContainer";
 
 const Dialogs = props => {
   let currentUsers = props.users.map(user => (
@@ -37,7 +36,7 @@ const Dialogs = props => {
           <textarea
             ref={info}
             onChange={onChangeFunction}
-            value={props.messageValue}
+            value={props.newMessage}
           />
           <button onClick={messageMaker}>Send message</button>
         </div>
