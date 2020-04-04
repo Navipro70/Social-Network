@@ -21,16 +21,21 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "NEW-POST":
+    case "NEW-POST": {
       if (state.newPostText.trim() === "") return state;
-      state.posts.unshift({
+      let stateCopy = {...state};
+      stateCopy.posts = [...state.posts];
+      stateCopy.posts.unshift({
         postText: state.newPostText
       });
-      state.newPostText = "";
-      return state;
-    case "NEW-POST-TEXT-CHANGER":
-      state.newPostText = action.newText;
-      return state;
+      stateCopy.newPostText = "";
+      return stateCopy;
+    }
+    case "NEW-POST-TEXT-CHANGER": {
+      let stateCopy = {...state};
+      stateCopy.newPostText = action.newText;
+      return stateCopy;
+    }
     default:
       return state;
   }
