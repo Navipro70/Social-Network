@@ -4,16 +4,16 @@ const NEW_POST_TEXT_CHANGER = "NEW-POST-TEXT-CHANGER";
 let initialState = {
   posts: [
     {
-      postText:
-        "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ"
+      postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ",
+      id: 1
     },
     {
-      postText:
-        "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ"
+      postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ",
+      id: 2
     },
     {
-      postText:
-        "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ"
+      postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ",
+      id: 3
     }
   ],
   newPostText: ""
@@ -21,21 +21,18 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "NEW-POST": {
-      if (state.newPostText.trim() === "") return state;
-      let stateCopy = {...state};
-      stateCopy.posts = [...state.posts];
-      stateCopy.posts.unshift({
-        postText: state.newPostText
-      });
-      stateCopy.newPostText = "";
-      return stateCopy;
-    }
-    case "NEW-POST-TEXT-CHANGER": {
-      let stateCopy = {...state};
-      stateCopy.newPostText = action.newText;
-      return stateCopy;
-    }
+    case "NEW-POST":
+      debugger
+      return {
+        ...state,
+        posts: [...state.posts, {postText: state.newPostText, id: state.posts.length + 1}],
+        newPostText: ""
+      };
+    case "NEW-POST-TEXT-CHANGER":
+      return {
+        ...state,
+        newPostText: action.newText
+      };
     default:
       return state;
   }
