@@ -5,15 +5,15 @@ let initialState = {
   posts: [
     {
       postText:
-        "This is post from other user element to resemble a link, use a button and change it with appropriate styles. Learn more:"
+        "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ"
     },
     {
       postText:
-        "This is post from other user The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value."
+        "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ"
     },
     {
       postText:
-        "This is post from other user The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the"
+        "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ"
     }
   ],
   newPostText: ""
