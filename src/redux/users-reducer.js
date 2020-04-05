@@ -1,13 +1,8 @@
 const FOLLOWING = "FOLLOWING";
-const SHOW_MORE = "SHOW-MORE";
+const SET_USERS = "SET-USERS";
 
 let initialState = {
-  users: [
-    {id: 1, fullName: "Diana", status: "I'm boss", followed: true, location:{country: "Belarus", city:"Minsk"}},
-    {id: 2, fullName: "Alex", status: "Looking for job", followed: false, location:{country: "USA", city:"New-York"}},
-    {id: 3, fullName: "Andrew", status: "Create my app", followed: false, location:{country: "Russia", city:"Kiev"}},
-    {id: 4, fullName: "Bill", status: "Build my company", followed: true, location:{country: "USA", city:"Washington"}}
-  ]
+  users: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -26,20 +21,24 @@ const usersReducer = (state = initialState, action) => {
             }
         )
       };
-    case SHOW_MORE:
+    case SET_USERS:
       return {
-        ...state
+        ...state,
+        users: [...state.users, ...action.users]
       };
     default:
       return state;
   }
 };
 
+export default usersReducer;
+
 export const followingCreator = id => ({
   type: FOLLOWING,
   id: id
 });
 
-export const showingMoreAction = () => ({type: SHOW_MORE});
-
-export default usersReducer;
+export const setUsersCreator = users => ({
+  type: SET_USERS,
+  users: users
+});

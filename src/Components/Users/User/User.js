@@ -1,17 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import classes from "./User.module.css";
 
 const User = props => {
-    const handleClick = (e) => {
-        props.following(props.id)
+    const [butText, setButText] = useState(props.followed ? "Follow" : "unFollow");
+
+    const handleClick = () => {
+        props.following(props.id);
+        if (props.followed) setButText("unFollow");
+        else setButText("Follow")
     };
 
     return (
         <div className={classes.user}>
-            <img src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg"
-                 alt="nom"/>
-            <button onClick={handleClick}>{props.followed = " hi"}</button>
-            <p>{props.status}</p>
+            <div>
+                <img src={props.photoSrc}
+                     alt="nom"/>
+                <button onClick={handleClick}>{butText}</button>
+            </div>
+            <div>
+                <h2>{props.status}</h2>
+                <h4>{`${props.location.city}, ${props.location.country}`}</h4>
+            </div>
         </div>
     )
 };
