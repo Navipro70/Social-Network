@@ -7,8 +7,8 @@ const Navbar = () => {
     <nav className={classes.nav}>
         <NavLink to="/profile" activeClassName={classes.activeColor}>Profile</NavLink>
         <NavLink to="/dialogs" activeClassName={classes.activeColor}>Messages</NavLink>
+        <NavLink to="/users" activeClassName={classes.activeColor}>Users</NavLink>
         <NavLink to="/news" activeClassName={classes.activeColor}>News</NavLink>
-        <NavLink to="/music" activeClassName={classes.activeColor}>Music</NavLink>
         <NavLink to="/settings" activeClassName={classes.activeColor}>Settings</NavLink>
     </nav>
   );

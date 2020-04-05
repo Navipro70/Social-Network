@@ -21,14 +21,13 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "NEW-POST":
-      debugger
+    case NEW_POST:
       return {
         ...state,
         posts: [...state.posts, {postText: state.newPostText, id: state.posts.length + 1}],
         newPostText: ""
       };
-    case "NEW-POST-TEXT-CHANGER":
+    case NEW_POST_TEXT_CHANGER:
       return {
         ...state,
         newPostText: action.newText
