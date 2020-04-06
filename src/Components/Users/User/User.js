@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import classes from "./User.module.css";
+import brave from "./../../../Images/brave.png";
 
 const User = props => {
     const [butText, setButText] = useState(props.followed ? "Follow" : "unFollow");
@@ -13,13 +14,12 @@ const User = props => {
     return (
         <div className={classes.user}>
             <div>
-                <img src={props.photoSrc}
+                <img src={props.photoSrc != null ? props.photoSrc : brave}
                      alt="nom"/>
                 <button onClick={handleClick}>{butText}</button>
             </div>
             <div>
                 <h2>{props.status}</h2>
-                <h4>{`${props.location.city}, ${props.location.country}`}</h4>
             </div>
         </div>
     )
