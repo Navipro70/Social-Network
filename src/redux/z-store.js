@@ -29,12 +29,12 @@ let store = {
         { id: 5, message: "Goodbye" }
       ],
       users: [
-        { id: 1, name: "Dmitry" },
+        { id: 1, name: "Alex" },
         { id: 2, name: "Sasha" },
-        { id: 3, name: "Kostya" },
+        { id: 3, name: "John" },
         { id: 4, name: "Diana" },
         { id: 5, name: "Andrew" },
-        { id: 6, name: "Vadya" }
+        { id: 6, name: "James" }
       ],
       newMessage: ""
     }

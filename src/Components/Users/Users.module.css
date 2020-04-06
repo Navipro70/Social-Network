@@ -2,3 +2,7 @@
     display: block;
     width: 80vw;
 }
+
+.selected {
+    font-weight: bold;
+}
