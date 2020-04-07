@@ -1,22 +1,15 @@
 const NEW_POST = "NEW-POST";
 const NEW_POST_TEXT_CHANGER = "NEW-POST-TEXT-CHANGER";
+const SET_PROFILE_PAGE = "SET-PROFILE-PAGE";
 
 let initialState = {
   posts: [
-    {
-      postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ",
-      id: 1
-    },
-    {
-      postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ",
-      id: 2
-    },
-    {
-      postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ",
-      id: 3
-    }
+    {postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ", id: 1},
+    {postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ", id: 2},
+    {postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ", id: 3}
   ],
-  newPostText: ""
+  newPostText: "",
+  profile: null
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -32,6 +25,8 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         newPostText: action.newText
       };
+    case SET_PROFILE_PAGE:
+      return {...state, profile: action.profile};
     default:
       return state;
   }
@@ -42,5 +37,7 @@ export const newPostTextChangerActionCreator = text => ({
   type: NEW_POST_TEXT_CHANGER,
   newText: text
 });
+
+export const setProfilePage = (profile) => ({ type: SET_PROFILE_PAGE, profile});
 
 export default profileReducer;

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import classes from "./User.module.css";
 import brave from "./../../../Images/brave.png";
+import {NavLink} from "react-router-dom";
 
 const User = props => {
     const [butText, setButText] = useState(props.followed ? "Follow" : "unFollow");
@@ -14,8 +15,10 @@ const User = props => {
     return (
         <div className={classes.user}>
             <div>
-                <img src={props.photoSrc != null ? props.photoSrc : brave}
-                     alt="nom"/>
+                <NavLink to={`/profile/${props.id}`}>
+                    <img src={props.photoSrc != null ? props.photoSrc : brave}
+                         alt="nom"/>
+                </NavLink>
                 <button onClick={handleClick}>{butText}</button>
             </div>
             <div>

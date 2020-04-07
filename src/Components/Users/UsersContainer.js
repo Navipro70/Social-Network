@@ -26,9 +26,9 @@ class UsersContainer extends React.Component {
             .then(() => this.setState({isFetching: false}))
     }
 
-    setCurrentPage = (pageNumber) => {
-        this.setState({isFetching: true});
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`) //Запрос на сервер
+    setCurrentPage = async (pageNumber) => {
+        await this.setState({isFetching: true});
+        await axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`) //Запрос на сервер
             .then(response => this.props.setUsers(response.data.items))
             .then(() => this.props.setCurrentPage(pageNumber))
             .then(() => this.setState({isFetching: false}))
@@ -60,16 +60,12 @@ let mapStateToProps = state => {
     }
 };
 
-let mapDispatchToProps = dispatch => {
-    return {
-        following: id => dispatch(followingCreator(id)),
-        setUsers: users => dispatch(setUsersCreator(users)),
-        setCurrentPage: pageNumber => dispatch(setCurrentPageCreator(pageNumber)),
-        setTotalUsersCount: totalUsersCount => dispatch(setTotalUsersCountCreator(totalUsersCount))
-    }
-};
-
-const UsersProvider = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+const UsersProvider = connect(mapStateToProps, {
+    following: followingCreator,
+    setUsers: setUsersCreator,
+    setCurrentPage: setCurrentPageCreator,
+    setTotalUsersCount: setTotalUsersCountCreator
+})(UsersContainer);
 
 export default UsersProvider;
 
