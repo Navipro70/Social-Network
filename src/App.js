@@ -7,9 +7,10 @@ import Profile from "./Components/Profile/Profile";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import News from "./Components/News/News";
 import Settings from "./Components/Settings/Settings";
-import UsersContainer from "./Components/Users/UsersContainer";
+import UsersProvider from "./Components/Users/UsersContainer";
 
 const App = props => {
+
     return (
         <div className="app-wrapper container">
             <Header/>
@@ -25,7 +26,7 @@ const App = props => {
                 />
                 <Route
                     path="/users"
-                    render={() => <UsersContainer/>}
+                    render={() => <UsersProvider/>}
                 />
                 <Route
                     path="/news"

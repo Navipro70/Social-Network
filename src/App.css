@@ -16,3 +16,8 @@
   grid-area: content;
   background-color: #ff69cc;
 }
+
+.preloader {
+  display: flex;
+  justify-content: center;
+}
