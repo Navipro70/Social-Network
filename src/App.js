@@ -8,16 +8,17 @@ import News from "./Components/News/News";
 import Settings from "./Components/Settings/Settings";
 import UsersProvider from "./Components/Users/UsersContainer";
 import ProfileProvider from "./Components/Profile/ProfileContainer";
+import HeaderContainer from "./Components/Header/HeaderContainer";
 
 const App = props => {
 
     return (
         <div className="app-wrapper container">
-            <Header/>
-            <Navbar/>
+            <HeaderContainer />
+            <Navbar />
             <div className="content">
                 <Route
-                    path="/profile"
+                    path="/profile/:userId?"
                     render={() => <ProfileProvider />}
                 />
                 <Route

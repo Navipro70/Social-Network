@@ -16,3 +16,9 @@
   height: 70px;
   width: 70px;
 }
+
+.auth a {
+  color: #6bffdb;
+  text-decoration: none;
+  margin-left: 6vw;
+}
