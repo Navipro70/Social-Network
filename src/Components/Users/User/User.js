@@ -2,14 +2,31 @@ import React, {useState} from "react";
 import classes from "./User.module.css";
 import brave from "./../../../Images/brave.png";
 import {NavLink} from "react-router-dom";
+import * as axios from "axios";
+import {userApi} from "../../../API/usersAPI";
 
 const User = props => {
-    const [butText, setButText] = useState(props.followed ? "Follow" : "unFollow");
+    const [butText, setButText] = useState(props.followed ? "Unfollow" : "Follow");
 
     const handleClick = () => {
-        props.following(props.id);
-        if (props.followed) setButText("unFollow");
-        else setButText("Follow")
+        if (!props.followed) {
+            userApi.postFollowing(props.id)
+                .then(data => {
+                    if (data.resultCode === 0) {
+                        props.following(props.id);
+                        setButText("Unfollow")
+                    }
+                })
+        }
+        else {
+            userApi.deleteFollowing(props.id)
+                .then(data => {
+                    if (data.resultCode === 0) {
+                        props.following(props.id);
+                        setButText("Follow");
+                    }
+                })
+        }
     };
 
     return (

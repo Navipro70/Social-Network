@@ -7,8 +7,8 @@ import {
 import Users from "./Users";
 import {connect} from "react-redux";
 import React from "react";
-import * as axios from "axios";
 import Preloader from "../Common/Preloader";
+import {userApi} from "../../API/usersAPI";
 
 class UsersContainer extends React.Component {
     constructor(props){
@@ -17,19 +17,19 @@ class UsersContainer extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`) //Запрос на сервер
-            .then(response => {
-                this.props.setUsers(response.data.items);
-                return response;
+        userApi.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
+                this.props.setUsers(data.items);
+                return data;
             })
-            .then(response => this.props.setTotalUsersCount(response.data.totalCount/100))
+            .then(newData => this.props.setTotalUsersCount(newData.totalCount / 100))
             .then(() => this.setState({isFetching: false}))
     }
 
     setCurrentPage = async (pageNumber) => {
         await this.setState({isFetching: true});
-        await axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`) //Запрос на сервер
-            .then(response => this.props.setUsers(response.data.items))
+        await userApi.getUsers(pageNumber, this.props.pageSize)
+            .then(data => this.props.setUsers(data.items))
             .then(() => this.props.setCurrentPage(pageNumber))
             .then(() => this.setState({isFetching: false}))
     };

@@ -5,15 +5,20 @@ import * as axios from "axios";
 import {connect} from "react-redux";
 import {setProfilePage} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
+import {profileApi} from "../../API/profileAPI";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if(!userId) userId = 2;
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`) //Запрос на сервер
-            .then(response => {
-                this.props.setProfilePage(response.data);
-            });
+        profileApi.getUser(userId) //Запрос на сервер
+            .then(data => this.props.setProfilePage(data))
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.match.params.userId !== prevProps.match.params.userId){
+        this.componentDidMount()
+        }
     }
 
     render() {
