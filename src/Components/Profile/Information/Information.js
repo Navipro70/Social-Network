@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./Information.module.css";
-import avatar from "../../../Images/avatar-photo.jpg";
 import Preloader from "../../Common/Preloader";
 
 const Information = (props) => {

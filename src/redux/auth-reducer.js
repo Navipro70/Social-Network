@@ -1,3 +1,5 @@
+import {headerApi} from "../API/headerAPI";
+
 const USER_AUTHENTICATION = "USER-AUTHENTICATION";
 
 let initialState = {
@@ -13,9 +15,18 @@ const authReducer = (state = initialState, action) => {
     }
 };
 
-export const userAuthentication = (data) => ({
+const userAuthentication = (data) => ({
     type: USER_AUTHENTICATION,
     data
 });
+
+export const thunkAuthentication = () => {
+    return dispatch => {
+        headerApi.getCurrentUserProfile()
+            .then(data => {
+                dispatch(userAuthentication(data))
+            })
+    }
+};
 
 export default authReducer;

@@ -1,14 +1,11 @@
 import React from "react";
 import Header from "./Header";
-import * as axios from "axios";
 import {connect} from "react-redux";
-import {userAuthentication} from "../../redux/auth-reducer";
-import {headerApi} from "../../API/headerAPI";
+import { thunkAuthentication } from "../../redux/auth-reducer";
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
-        headerApi.getCureentUserProfile()
-            .then(data => this.props.userAuthentication(data));
+        this.props.thunkAuthentication()
     }
 
     render () {
@@ -21,5 +18,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-    userAuthentication
+    thunkAuthentication
 })(HeaderContainer);

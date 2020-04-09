@@ -15,7 +15,7 @@ const User = props => {
         <div className={classes.user}>
             <div>
                 <NavLink to={`/profile/${props.id}`}>
-                    <img src={props.photoSrc != null ? props.photoSrc : brave}/>
+                    <img src={props.photoSrc != null ? props.photoSrc : brave} alt="Profile img"/>
                 </NavLink>
                 <button disabled={props.isFollowingBlocker.some((id) => props.id === id)}
                         onClick={handleClick}>{butText}</button>

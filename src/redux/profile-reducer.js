@@ -1,3 +1,5 @@
+import {profileApi} from "../API/profileAPI";
+
 const NEW_POST = "NEW-POST";
 const NEW_POST_TEXT_CHANGER = "NEW-POST-TEXT-CHANGER";
 const SET_PROFILE_PAGE = "SET-PROFILE-PAGE";
@@ -39,5 +41,12 @@ export const newPostTextChangerActionCreator = text => ({
 });
 
 export const setProfilePage = (profile) => ({ type: SET_PROFILE_PAGE, profile});
+
+export const thunkSetCurrentProfile = userId => {
+  return dispatch => {
+    profileApi.getUser(userId) //Запрос на сервер
+        .then(data => dispatch(setProfilePage(data)))
+  }
+};
 
 export default profileReducer;
