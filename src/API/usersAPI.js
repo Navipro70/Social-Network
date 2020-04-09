@@ -2,8 +2,7 @@ import {axiosInstance} from "./axiosInstance";
 
 export const userApi = {
     getUsers(currentPage, pageSize){
-        return axiosInstance.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`,
-            {withCredentials: true})
+        return axiosInstance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
     },
     postFollowing (userId) {

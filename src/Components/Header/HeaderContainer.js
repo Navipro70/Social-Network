@@ -3,11 +3,12 @@ import Header from "./Header";
 import * as axios from "axios";
 import {connect} from "react-redux";
 import {userAuthentication} from "../../redux/auth-reducer";
+import {headerApi} from "../../API/headerAPI";
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}) //Запрос на сервер
-            .then(response => this.props.userAuthentication(response.data.data));
+        headerApi.getCureentUserProfile()
+            .then(data => this.props.userAuthentication(data));
     }
 
     render () {

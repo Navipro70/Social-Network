@@ -9,7 +9,8 @@ const Header = props => {
             <img src={brave} alt="hello"/>
             <h4>Grid social</h4>
             <div className={classes.auth}>
-                {props.currentUserProfile && <NavLink to={`/profile/${props.currentUserProfile.id}`}>
+                {props.currentUserProfile &&
+                <NavLink to={`/profile/${props.currentUserProfile.id}`}>
                     {props.currentUserProfile.login}
                 </NavLink>}
             </div>

@@ -13,7 +13,7 @@ let initialState = {
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
-  isFollowingBlocker: false
+  isFollowingBlocker: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -50,7 +50,11 @@ const usersReducer = (state = initialState, action) => {
     case TOGGLE_FETCHING:
       return {...state, isFetching: !action.isFetching};
     case TOGGLE_IS_FOLLOWING_BLOCKER:
-      return {...state, isFollowingBlocker: action.isFollowingBlocker};
+      return {...state,
+        isFollowingBlocker: action.isFollowingBlocker ?
+            [...state.isFollowingBlocker, action.userId]:
+            state.isFollowingBlocker.filter((id) => id !== action.userId)
+      };
     default:
       return state;
   }
@@ -68,7 +72,7 @@ export const setUsers = users => ({
   users: users
 });
 
-export const setCurrentPage= pageNumber => ({
+export const setCurrentPage = pageNumber => ({
   type: SET_PAGE,
   currentPage: pageNumber
 });
@@ -83,9 +87,10 @@ export const toggleFetching = isFetching => ({
   isFetching: isFetching
 });
 
-export const toggleBlocker = isFollowingBlocker => ({
+export const toggleBlocker = (isFollowingBlocker, userId) => ({
   type: TOGGLE_IS_FOLLOWING_BLOCKER,
-  isFollowingBlocker: isFollowingBlocker
+  isFollowingBlocker,
+  userId
 });
 
 export const thunkGetUsers = (currentPage, pageSize, isFetching) => {
@@ -117,15 +122,14 @@ export const thunkLoadUsers = (pageNumber, pageSize, isFetching) => {
 
 export const thunkUserFollowing = (followed, id) => {
   return dispatch => {
-    dispatch(toggleBlocker(true));
+    dispatch(toggleBlocker(true, id));
     if (!followed) {
-      // setButDisabled(true);
       userApi.postFollowing(id)
           .then(data => {
             if (data.resultCode === 0) {
               dispatch(following(id));
             }
-            dispatch(toggleBlocker(false));
+            dispatch(toggleBlocker(false, id));
           })
     } else {
       userApi.deleteFollowing(id)
@@ -133,7 +137,7 @@ export const thunkUserFollowing = (followed, id) => {
             if (data.resultCode === 0) {
               dispatch(following(id));
             }
-            dispatch(toggleBlocker(false));
+            dispatch(toggleBlocker(false, id));
           })
     }
   }

@@ -1,6 +1,4 @@
 import {
-    following,
-    setCurrentPage,
     thunkGetUsers,
     thunkLoadUsers, thunkUserFollowing
 } from "../../redux/users-reducer";
@@ -49,8 +47,6 @@ let mapStateToProps = state => {
 };
 
 const UsersProvider = connect(mapStateToProps, {
-    following,
-    setCurrentPage,
     thunkGetUsers,
     thunkLoadUsers,
     thunkUserFollowing
