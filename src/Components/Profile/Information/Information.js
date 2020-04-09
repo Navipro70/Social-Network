@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Information.module.css";
 import Preloader from "../../Common/Preloader";
+import Status from "./Status";
 
 const Information = (props) => {
     if (!props.profile) return <Preloader/>;
@@ -13,8 +14,7 @@ const Information = (props) => {
                 <ul className={classes.contact_information}>
                     <li className={classes.name}>{props.profile.fullName}</li>
                     <li>About me: {props.profile.aboutMe}</li>
-                    <li>City</li>
-                    <li>Place of education</li>
+                    <Status text={"Hello"} />
                 </ul>
             </div>
         </div>

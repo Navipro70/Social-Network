@@ -21,3 +21,12 @@
   font-size: 26px;
   margin-bottom: 20px;
 }
+
+.status {
+  cursor: pointer;
+  transition: linear .2s;
+}
+
+.status:hover {
+  color: navy;
+}
