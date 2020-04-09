@@ -8,6 +8,7 @@ import Settings from "./Components/Settings/Settings";
 import UsersProvider from "./Components/Users/UsersContainer";
 import ProfileProvider from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
+import Login from "./Components/Login/Login";
 
 const App = props => {
 
@@ -35,6 +36,10 @@ const App = props => {
                 <Route
                     path="/settings"
                     render={() => <Settings/>}
+                />
+                <Route
+                    path="/login"
+                    render={() => <Login />}
                 />
             </div>
         </div>

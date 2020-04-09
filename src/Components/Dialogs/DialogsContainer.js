@@ -4,12 +4,13 @@ import {
   newMessageChangerActionCreator
 } from "../../redux/dialog-reducer";
 import {connect} from "react-redux";
+import {authRedirect} from "../../HihgOrderComponents/redirectComponent";
 
 let mapStateToProps = (state) => {
   return {
     users: state.dialogPage.users,
     messages: state.dialogPage.messages,
-    newMessage: state.dialogPage.newMessage
+    newMessage: state.dialogPage.newMessage,
   }
 };
 
@@ -24,6 +25,7 @@ let mapDispatchToProps = (dispatch) => {
   }
 };
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogRedirect = authRedirect(Dialogs);
 
-export default DialogsContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(DialogRedirect);
+

@@ -6,6 +6,7 @@ import Users from "./Users";
 import {connect} from "react-redux";
 import React from "react";
 import Preloader from "../Common/Preloader";
+import {authRedirect} from "../../HihgOrderComponents/redirectComponent";
 
 class UsersContainer extends React.Component {
     componentDidMount (){
@@ -52,6 +53,6 @@ const UsersProvider = connect(mapStateToProps, {
     thunkUserFollowing
 })(UsersContainer);
 
-export default UsersProvider;
+export default authRedirect(UsersProvider);
 
 

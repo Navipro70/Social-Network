@@ -23,8 +23,8 @@ const Users = props => {
             className={i === props.currentPage ? null : classes.selected}
             onClick={() => props.setCurrentPage(i)}
         >
-                        {i}
-                    </span>)}
+            {i}
+        </span>)}
         </div>
 
     </div>
