@@ -9,34 +9,17 @@ const User = props => {
     const [butText, setButText] = useState(props.followed ? "Unfollow" : "Follow");
 
     const handleClick = () => {
-        if (!props.followed) {
-            userApi.postFollowing(props.id)
-                .then(data => {
-                    if (data.resultCode === 0) {
-                        props.following(props.id);
-                        setButText("Unfollow")
-                    }
-                })
-        }
-        else {
-            userApi.deleteFollowing(props.id)
-                .then(data => {
-                    if (data.resultCode === 0) {
-                        props.following(props.id);
-                        setButText("Follow");
-                    }
-                })
-        }
+        setButText(props.followed ? "Follow" : "Unfollow");
+        props.thunkUserFollowing(props.followed, props.id);
     };
 
     return (
         <div className={classes.user}>
             <div>
                 <NavLink to={`/profile/${props.id}`}>
-                    <img src={props.photoSrc != null ? props.photoSrc : brave}
-                         alt="nom"/>
+                    <img src={props.photoSrc != null ? props.photoSrc : brave}/>
                 </NavLink>
-                <button onClick={handleClick}>{butText}</button>
+                <button disabled={props.isFollowingBlocker} onClick={handleClick}>{butText}</button>
             </div>
             <div>
                 <h2>{props.status}</h2>

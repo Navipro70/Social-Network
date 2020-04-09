@@ -1,13 +1,19 @@
+import {userApi} from "../API/usersAPI";
+
 const FOLLOWING = "FOLLOWING";
 const SET_USERS = "SET-USERS";
 const SET_PAGE = "SET-PAGE";
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
+const TOGGLE_FETCHING = "TOGGLE-FETCHING";
+const TOGGLE_IS_FOLLOWING_BLOCKER = "TOGGLE-IS-FOLLOWING-BLOCKER";
 
 let initialState = {
   users: [],
   pageSize: 5,
   totalUsersCount: 0,
-  currentPage: 1
+  currentPage: 1,
+  isFetching: false,
+  isFollowingBlocker: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -41,6 +47,10 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         totalUsersCount: action.totalUsersCount
       };
+    case TOGGLE_FETCHING:
+      return {...state, isFetching: !action.isFetching};
+    case TOGGLE_IS_FOLLOWING_BLOCKER:
+      return {...state, isFollowingBlocker: action.isFollowingBlocker};
     default:
       return state;
   }
@@ -48,22 +58,83 @@ const usersReducer = (state = initialState, action) => {
 
 export default usersReducer;
 
-export const followingCreator = id => ({
+export const following = id => ({
   type: FOLLOWING,
   id: id
 });
 
-export const setUsersCreator = users => ({
+export const setUsers = users => ({
   type: SET_USERS,
   users: users
 });
 
-export const setCurrentPageCreator = pageNumber => ({
+export const setCurrentPage= pageNumber => ({
   type: SET_PAGE,
   currentPage: pageNumber
 });
 
-export const setTotalUsersCountCreator = totalUsersCount => ({
+export const setTotalUsersCount = totalUsersCount => ({
   type: SET_TOTAL_USERS_COUNT,
   totalUsersCount: totalUsersCount
 });
+
+export const toggleFetching = isFetching => ({
+  type: TOGGLE_FETCHING,
+  isFetching: isFetching
+});
+
+export const toggleBlocker = isFollowingBlocker => ({
+  type: TOGGLE_IS_FOLLOWING_BLOCKER,
+  isFollowingBlocker: isFollowingBlocker
+});
+
+export const thunkGetUsers = (currentPage, pageSize, isFetching) => {
+  return (dispatch) => {
+    dispatch(toggleFetching(isFetching));
+    userApi.getUsers(currentPage, pageSize)
+        .then(data => {
+          dispatch(setUsers(data.items));
+          return data;
+        })
+        .then(newData => {
+          dispatch(setTotalUsersCount(newData.totalCount / 100));
+          dispatch(toggleFetching(!isFetching));
+        })
+  }
+};
+
+export const thunkLoadUsers = (pageNumber, pageSize, isFetching) => {
+  return dispatch => {
+    dispatch(toggleFetching(isFetching));
+    userApi.getUsers(pageNumber,pageSize)
+        .then(data => dispatch(setUsers(data.items)))
+        .then(() => {
+          dispatch(setCurrentPage(pageNumber));
+          dispatch(toggleFetching(!isFetching));
+        })
+  }
+};
+
+export const thunkUserFollowing = (followed, id) => {
+  return dispatch => {
+    dispatch(toggleBlocker(true));
+    if (!followed) {
+      // setButDisabled(true);
+      userApi.postFollowing(id)
+          .then(data => {
+            if (data.resultCode === 0) {
+              dispatch(following(id));
+            }
+            dispatch(toggleBlocker(false));
+          })
+    } else {
+      userApi.deleteFollowing(id)
+          .then(data => {
+            if (data.resultCode === 0) {
+              dispatch(following(id));
+            }
+            dispatch(toggleBlocker(false));
+          })
+    }
+  }
+};
