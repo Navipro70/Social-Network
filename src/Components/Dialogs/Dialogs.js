@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./Dialogs.module.css";
 import Message from "./Messages/Messages";
 import DialogId from "./DialogId/DialogId";
+import MessageFormContainer from "./MessageForm/MessageForm";
 
 const Dialogs = props => {
   let currentUsers = props.users.map(user => (
@@ -12,16 +13,9 @@ const Dialogs = props => {
     <Message mess={currentValue.message} key={currentValue.id} />
   ));
 
-  let info = React.createRef();
-
-  function onChangeFunction() {
-    let currentText = info.current.value;
-    props.changeMessage(currentText)
-  }
-
-  function messageMaker() {
-    props.addMessage();
-  }
+  const addMessage = (messageText) => {
+    props.addMessage(messageText);
+  };
 
   return (
     <div className={classes.gridContent}>
@@ -32,14 +26,7 @@ const Dialogs = props => {
 
       <div className={classes.dialog}>
         {currentMessages}
-        <div>
-          <textarea
-            ref={info}
-            onChange={onChangeFunction}
-            value={props.newMessage}
-          />
-          <button onClick={messageMaker}>Send message</button>
-        </div>
+          <MessageFormContainer addMessage={addMessage}/>
       </div>
     </div>
   );

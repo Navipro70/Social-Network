@@ -43,7 +43,6 @@ export default compose(
     }),
     withRouter,
     authRedirect
-
 )(ProfileContainer);
 
 

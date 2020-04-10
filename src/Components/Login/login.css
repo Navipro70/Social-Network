@@ -78,7 +78,8 @@ body {
     border-color: #F77A52;
     color: #F77A52;
 }
-.ui-form input[type="submit"] {
+.ui-form input[type="submit"], input[type="button"] {
+    margin-bottom: 10px;
     width: 100%;
     padding: 0;
     line-height: 42px;
@@ -87,6 +88,7 @@ body {
     color: white;
     font-size: 20px;
 }
+
 .ui-form p {
     margin: 0;
     padding-top: 10px;

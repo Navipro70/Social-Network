@@ -20,6 +20,7 @@ const Login = (props) => {
                 <label htmlFor="checkbox" className="checkbox__text">Remember me</label>
             </div>
             <input type="submit" value="Sign up" />
+            <input type="button" value="Already have account" />
         </form>
     )
 };

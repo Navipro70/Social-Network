@@ -9,6 +9,7 @@ import UsersProvider from "./Components/Users/UsersContainer";
 import ProfileProvider from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import LoginContainer from "./Components/Login/LoginContainer";
+import SignIn from "./Components/SignIn/SignIn";
 
 const App = props => {
 
@@ -40,6 +41,10 @@ const App = props => {
                 <Route
                     path="/login"
                     render={() => <LoginContainer />}
+                />
+                <Route
+                    path="/signIn"
+                    render={() => <SignIn />}
                 />
             </div>
         </div>

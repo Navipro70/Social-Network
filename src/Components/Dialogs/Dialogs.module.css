@@ -48,21 +48,6 @@
   outline: none;
   font-size: 20px;
   width: 95%;
-}
-
-.dialog button {
-  width: 100px;
-  padding: 5px;
-  background-color: #bf0000;
-  color: #fff;
-  border-radius: 10px;
-  font-size: 20px;
-  font-weight: 500;
-  border:none;
-  transition: .3s linear;
-}
-
-.dialog button:hover {
-  background-color: #fff;
-  color: #bf0000;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

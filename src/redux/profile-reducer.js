@@ -1,7 +1,6 @@
 import {profileApi} from "../API/profileAPI";
 
-const NEW_POST = "NEW-POST";
-const NEW_POST_TEXT_CHANGER = "NEW-POST-TEXT-CHANGER";
+const ADD_POST = "ADD-POST";
 const SET_PROFILE_PAGE = "SET-PROFILE-PAGE";
 const SET_PROFILE_STATUS = "SET-PROFILE-STATUS";
 const GET_PROFILE_STATUS = "GET-PROFILE-STATUS";
@@ -12,23 +11,16 @@ let initialState = {
     {postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ", id: 2},
     {postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ", id: 3}
   ],
-  newPostText: "",
   profile: null,
-  statusText: ""
+  statusText: "",
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case NEW_POST:
+    case ADD_POST:
       return {
         ...state,
-        posts: [...state.posts, {postText: state.newPostText, id: state.posts.length + 1}],
-        newPostText: ""
-      };
-    case NEW_POST_TEXT_CHANGER:
-      return {
-        ...state,
-        newPostText: action.newText
+        posts: [...state.posts, {postText: action.newPostText, id: state.posts.length + 1}],
       };
     case SET_PROFILE_PAGE:
       return {...state, profile: action.profile};
@@ -41,10 +33,9 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const newPostActionCreator = () => ({ type: NEW_POST });
-export const newPostTextChangerActionCreator = text => ({
-  type: NEW_POST_TEXT_CHANGER,
-  newText: text
+export const addPost = newPostText => ({
+  type: ADD_POST,
+  newPostText
 });
 
 const setProfileStatus = (statusText) => ({
@@ -67,9 +58,12 @@ export const thunkSetCurrentProfile = userId => {
 };
 
 export const thunkSetStatus = statusText => {
+  debugger
   return dispatch => {
     profileApi.setStatus(statusText)
-        .then(data => dispatch(setProfileStatus))
+        .then(() => {
+          dispatch(setProfileStatus);
+        })
   }
 };
 
