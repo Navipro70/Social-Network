@@ -1,23 +1,31 @@
 import React from "react";
+import "./login.css"
+import {Field, reduxForm} from "redux-form";
+
 
 const Login = (props) => {
-    return <div>
-        <h2>Login</h2>
-        <form action="">
-            <div>
-                <input type="text" placeholder={"Login"}/>
+    return (
+        <form onSubmit={props.handleSubmit} className="ui-form">
+            <h3>Login</h3>
+            <div className="form-row">
+                <Field type="text" name={"login"} id="email" required autoComplete="off" component={"input"} />
+                <label htmlFor="email">Email</label>
             </div>
-            <div>
-                <input type="text" placeholder={"Password"}/>
+            <div className="form-row">
+                <Field type="password" name={"password"} id="password" required autoComplete="off" component={"input"} />
+                <label htmlFor="password">Password</label>
             </div>
-            <div>
-                <input type="checkbox"/>
+            <div className="checkbox-row">
+                <Field type="checkbox" name={"rememberMe"} id="checkbox" autoComplete="off" className="checkbox" component={"input"} />
+                <label htmlFor="checkbox" className="checkbox__text">Remember me</label>
             </div>
-            <div>
-                <button>Sign up</button>
-            </div>
+            <input type="submit" value="Sign up" />
         </form>
-    </div>
+    )
 };
 
-export default Login;
+export default reduxForm({
+    form: "login"
+})(Login);
+
+
