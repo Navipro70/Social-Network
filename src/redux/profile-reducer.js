@@ -3,6 +3,8 @@ import {profileApi} from "../API/profileAPI";
 const NEW_POST = "NEW-POST";
 const NEW_POST_TEXT_CHANGER = "NEW-POST-TEXT-CHANGER";
 const SET_PROFILE_PAGE = "SET-PROFILE-PAGE";
+const SET_PROFILE_STATUS = "SET-PROFILE-STATUS";
+const GET_PROFILE_STATUS = "GET-PROFILE-STATUS";
 
 let initialState = {
   posts: [
@@ -11,7 +13,8 @@ let initialState = {
     {postText: "СДЕЛАТЬ КОСПЕКТ И ПРОИСПЕКТИРОВАТЬ УРОКИ 45-46, ПОВТОРИТЬ МАТЕРИАЛ", id: 3}
   ],
   newPostText: "",
-  profile: null
+  profile: null,
+  statusText: ""
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -29,6 +32,10 @@ const profileReducer = (state = initialState, action) => {
       };
     case SET_PROFILE_PAGE:
       return {...state, profile: action.profile};
+    case GET_PROFILE_STATUS:
+      return {...state, statusText: action.statusText};
+    case SET_PROFILE_STATUS:
+      return {...state, statusText: action.statusText};
     default:
       return state;
   }
@@ -40,12 +47,36 @@ export const newPostTextChangerActionCreator = text => ({
   newText: text
 });
 
-export const setProfilePage = (profile) => ({ type: SET_PROFILE_PAGE, profile});
+const setProfileStatus = (statusText) => ({
+  type: SET_PROFILE_STATUS,
+  statusText
+});
+
+const getProfileStatus = (statusText) => ({
+  type: GET_PROFILE_STATUS,
+  statusText
+});
+
+const setProfilePage = (profile) => ({ type: SET_PROFILE_PAGE, profile});
 
 export const thunkSetCurrentProfile = userId => {
   return dispatch => {
     profileApi.getUser(userId) //Запрос на сервер
         .then(data => dispatch(setProfilePage(data)))
+  }
+};
+
+export const thunkSetStatus = statusText => {
+  return dispatch => {
+    profileApi.setStatus(statusText)
+        .then(data => dispatch(setProfileStatus))
+  }
+};
+
+export const thunkGetStatus = (userId) => {
+  return dispatch => {
+    profileApi.getStatus(userId)
+        .then(statusText => dispatch(getProfileStatus(statusText)))
   }
 };
 

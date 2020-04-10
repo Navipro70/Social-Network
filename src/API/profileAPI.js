@@ -5,4 +5,16 @@ export const profileApi = {
         return axiosInstance.get(`profile/${userId}`)
             .then(response => response.data)
     },
+    getStatus(userId) {
+        return axiosInstance.get(`profile/status/${userId}`)
+            .then(response => {
+                if (!response.data) return "";
+                return response.data
+            })
+    },
+    setStatus(statusText) {
+        return axiosInstance.put(`profile/status`, {
+            status: statusText,
+        })
+    }
 };

@@ -14,7 +14,11 @@ const Information = (props) => {
                 <ul className={classes.contact_information}>
                     <li className={classes.name}>{props.profile.fullName}</li>
                     <li>About me: {props.profile.aboutMe}</li>
-                    <Status text={"Hello"} />
+                    <Status
+                        statusText={props.statusText}
+                        setStatus={props.setStatus}
+                        userId={props.userId}
+                    />
                 </ul>
             </div>
         </div>

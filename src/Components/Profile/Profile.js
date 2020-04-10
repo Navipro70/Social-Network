@@ -4,9 +4,14 @@ import Information from "./Information/Information";
 import PostsContainer from "./Posts/PostsContainer";
 
 const Profile = (props) => {
-  return (
+    return (
     <div className={classes.profile}>
-      <Information profile={props.profilePage.profile} />
+      <Information
+          profile={props.profilePage.profile}
+          statusText={props.profilePage.statusText}
+          setStatus={props.thunkSetStatus}
+          userId={props.match.params.userId}
+      />
       <PostsContainer />
     </div>
   );

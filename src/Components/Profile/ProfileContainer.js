@@ -2,15 +2,17 @@ import React from "react";
 import classes from "./Profile.module.css";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {thunkSetCurrentProfile} from "../../redux/profile-reducer";
+import {thunkGetStatus, thunkSetCurrentProfile, thunkSetStatus} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
 import {authRedirect} from "../../HihgOrderComponents/redirectComponent";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if(!userId) userId = 2;
-        this.props.thunkSetCurrentProfile(userId)
+        if(!userId) userId = 7024;
+        this.props.thunkSetCurrentProfile(userId);
+        this.props.thunkGetStatus(userId)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -33,12 +35,15 @@ const mapStateToProps = (state) => ({
 });
 
 
-const ProfileRedirect = authRedirect(ProfileContainer);
+export default compose(
+    connect(mapStateToProps, {
+        thunkSetCurrentProfile,
+        thunkGetStatus,
+        thunkSetStatus
+    }),
+    withRouter,
+    authRedirect
 
-const ProfileProvider= withRouter(ProfileRedirect);
-
-export default connect(mapStateToProps, {
-    thunkSetCurrentProfile
-})(ProfileProvider);
+)(ProfileContainer);
 
 

@@ -127,9 +127,9 @@ export const thunkUserFollowing = (followed, id) => {
       userApi.postFollowing(id)
           .then(data => {
             if (data.resultCode === 0) {
-              dispatch(following(id));
+                dispatch(following(id));
             }
-            dispatch(toggleBlocker(false, id));
+              dispatch(toggleBlocker(false, id));
           })
     } else {
       userApi.deleteFollowing(id)
