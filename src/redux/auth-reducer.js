@@ -1,14 +1,14 @@
 import {headerApi} from "../API/headerAPI";
 import {loginApi} from "../API/loginAPI";
 import {stopSubmit} from "redux-form";
+import {Redirect} from "react-router-dom";
+import React from "react";
 
 const USER_AUTHENTICATION = "USER-AUTHENTICATION";
-const IS_LOADING = "IS-LOADING";
 
 let initialState = {
     currentUserProfile: null,
     isAuth: false,
-    loading: true
 };
 
 const authReducer = (state = initialState, action) => {
@@ -19,11 +19,6 @@ const authReducer = (state = initialState, action) => {
                 isAuth: action.isAuth,
                 loading: false
             };
-        case IS_LOADING: {
-            return {...state,
-                loading: action.loading
-            }
-        }
         default :
             return {...state}
     }
@@ -35,20 +30,13 @@ const userAuthentication = (data, isAuth) => ({
     isAuth
 });
 
-const toggleLoading = loading => ({
-    type: IS_LOADING,
-    loading
-});
-
 export const thunkAuthentication = () => {
     return dispatch => {
-        dispatch(toggleLoading(true));
-        headerApi.getCurrentUserProfile()
+       return headerApi.getCurrentUserProfile()
             .then(data => {
                 if (Object.keys(data).length !== 0) {
                     dispatch(userAuthentication(data, true))
                 }
-                dispatch(toggleLoading(false));
             })
     }
 };
@@ -68,6 +56,7 @@ export const thunkLogoutUser = () => {
         loginApi.logoutUser()
             .then((response) => {
                 if (response.data.resultCode === 0) dispatch(userAuthentication(null, false))
+                return <Redirect to="/login" /> // После выхода из профиля, редирект на регу
             })
     }
 };

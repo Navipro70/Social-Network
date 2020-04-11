@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route } from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import News from "./Components/News/News";
@@ -9,41 +9,60 @@ import UsersProvider from "./Components/Users/UsersContainer";
 import ProfileProvider from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import LoginContainer from "./Components/Login/LoginContainer";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {thunkInitializing} from "./redux/app-reducer";
+import Preloader from "./Components/Common/Preloader";
 
-const App = props => {
+class App extends React.Component {
+    componentDidMount() {
+        this.props.thunkInitializing()
+    }
 
-    return (
-        <div className="app-wrapper container">
-            <HeaderContainer />
-            <Navbar />
-            <div className="content">
-                <Route
-                    path="/profile/:userId?"
-                    render={() => <ProfileProvider />}
-                />
-                <Route
-                    path="/dialogs"
-                    render={() => <DialogsContainer />}
-                />
-                <Route
-                    path="/users"
-                    render={() => <UsersProvider />}
-                />
-                <Route
-                    path="/news"
-                    render={() => <News/>}
-                />
-                <Route
-                    path="/settings"
-                    render={() => <Settings/>}
-                />
-                <Route
-                    path="/login"
-                    render={() => <LoginContainer />}
-                />
+    render() {
+        if (!this.props.initialized) return <Preloader />
+        return (
+            <div className="app-wrapper container">
+                <HeaderContainer/>
+                <Navbar/>
+                <div className="content">
+                    <Route
+                        path="/profile/:userId?"
+                        render={() => <ProfileProvider/>}
+                    />
+                    <Route
+                        path="/dialogs"
+                        render={() => <DialogsContainer/>}
+                    />
+                    <Route
+                        path="/users"
+                        render={() => <UsersProvider/>}
+                    />
+                    <Route
+                        path="/news"
+                        render={() => <News/>}
+                    />
+                    <Route
+                        path="/settings"
+                        render={() => <Settings/>}
+                    />
+                    <Route
+                        path="/login"
+                        render={() => <LoginContainer/>}
+                    />
+                </div>
             </div>
-        </div>
-    );
-};
+        )
+    }
+}
 
-export default App;
+const mapStateToProps = state => ({
+    initialized: state.app.initialized
+});
+
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {
+        thunkInitializing
+    })
+)(App);
