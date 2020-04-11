@@ -25,8 +25,10 @@ const Login = (props) => {
                 <Field type="checkbox" name={"rememberMe"} id="checkbox" className="checkbox" component={"input"} />
                 <label htmlFor="checkbox" className="checkbox__text">Remember me</label>
             </div>
+            {props.error && <div className="form-row common-login-error">
+                {props.error}
+            </div>}
             <input type="submit" value="Sign up" />
-            <input type="button" value="Already have account" />
         </form>
     )
 };

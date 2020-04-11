@@ -1,5 +1,6 @@
 import {headerApi} from "../API/headerAPI";
 import {loginApi} from "../API/loginAPI";
+import {stopSubmit} from "redux-form";
 
 const USER_AUTHENTICATION = "USER-AUTHENTICATION";
 const IS_LOADING = "IS-LOADING";
@@ -56,7 +57,8 @@ export const thunkLoginUser = (email, password, rememberMe) => {
     return dispatch => {
         loginApi.loginUser(email, password, rememberMe)
             .then(response => {
-                if (response.data.resultCode === 0) dispatch(thunkAuthentication())
+                if (response.data.resultCode === 0) dispatch(thunkAuthentication());
+                else dispatch(stopSubmit("login", {_error: response.data.messages[0]}))
             })
     }
 };
@@ -65,7 +67,6 @@ export const thunkLogoutUser = () => {
     return dispatch => {
         loginApi.logoutUser()
             .then((response) => {
-                debugger
                 if (response.data.resultCode === 0) dispatch(userAuthentication(null, false))
             })
     }

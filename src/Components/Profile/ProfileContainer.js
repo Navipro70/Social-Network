@@ -8,9 +8,10 @@ import {authRedirect} from "../../HihgOrderComponents/redirectComponent";
 import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
+
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if(!userId) userId = 7024;
+        if(!userId ) userId = 2;
         this.props.thunkSetCurrentProfile(userId);
         this.props.thunkGetStatus(userId)
     }

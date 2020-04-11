@@ -14,7 +14,7 @@
 
 .content {
   grid-area: content;
-  background-color: #ff69cc;
+  background-color: darkturquoise;
 }
 
 .preloader {

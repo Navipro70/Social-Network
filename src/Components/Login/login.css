@@ -142,3 +142,8 @@ body {
 .checkbox:checked + .checkbox__text:after {
     left: 26px;
 }
+
+.common-login-error {
+    transition: .2s linear;
+    color: red;
+}
