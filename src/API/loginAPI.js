@@ -1,14 +1,14 @@
 import {axiosInstance} from "./axiosInstance";
 
-export const headerApi = {
-    getCurrentUserProfile(data) {
+export const loginApi = {
+    loginUser(email, password, rememberMe = false) {
         return axiosInstance.post(`/auth/login`, {
-            email: data.email,
-            password: data.password,
-            rememberMe: data.rememberMe
+            email,
+            password,
+            rememberMe
         })
-            .then(response => {
-                if (response.resultCode === 0) return response.userId;
-            })
+    },
+    logoutUser() {
+        return axiosInstance.delete(`/auth/login`)
     }
 };

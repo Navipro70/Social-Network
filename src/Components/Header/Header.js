@@ -9,10 +9,13 @@ const Header = props => {
             <img src={brave} alt="hello"/>
             <h4>Grid social</h4>
             <div className={classes.auth}>
-                {props.currentUserProfile &&
-                <NavLink to={`/profile/${props.currentUserProfile.id}`}>
-                    {props.currentUserProfile.login}
+                {props.data.currentUserProfile &&
+                <NavLink to={`/profile/${props.data.currentUserProfile.id}`}>
+                    {props.data.currentUserProfile.login}
                 </NavLink>}
+                {props.data.currentUserProfile &&
+                <button onClick={() => props.thunkLogoutUser()}>Logout</button>
+                }
             </div>
         </header>
     );

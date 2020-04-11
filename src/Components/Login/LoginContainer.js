@@ -4,10 +4,12 @@ import Login from "./Login";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {maxLength, minLength} from "../../utils/validators";
+import {thunkLoginUser} from "../../redux/auth-reducer";
 
 const LoginContainer = (props) => {
     const onSubmit = formData => {
-        console.log(formData)
+        const {login, password, rememberMe} = formData;
+        props.thunkLoginUser(login, password, rememberMe);
     };
     const minLength5 = minLength(5);
     const maxLength20 = maxLength(20);
@@ -25,6 +27,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-
+    thunkLoginUser
 })(LoginContainer);
 
