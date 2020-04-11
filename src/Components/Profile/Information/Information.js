@@ -17,7 +17,6 @@ const Information = (props) => {
                     <Status
                         statusText={props.statusText}
                         setStatus={props.setStatus}
-                        userId={props.userId}
                     />
                 </ul>
             </div>

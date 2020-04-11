@@ -11,7 +11,6 @@ export default class Status extends React.Component {
     }
 
     spanOnClick = () => {
-        if (this.props.userId !== "7024")  return;
         this.setState({visible: true})
     };
 

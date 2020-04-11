@@ -10,7 +10,6 @@ const Profile = (props) => {
           profile={props.profilePage.profile}
           statusText={props.profilePage.statusText}
           setStatus={props.thunkSetStatus}
-          userId={props.match.params.userId}
       />
       <PostsContainer />
     </div>
