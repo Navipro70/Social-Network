@@ -31,33 +31,28 @@ const userAuthentication = (data, isAuth) => ({
 });
 
 export const thunkAuthentication = () => {
-    return dispatch => {
-       return headerApi.getCurrentUserProfile()
-            .then(data => {
+    return async dispatch => {
+        const data = await headerApi.getCurrentUserProfile();
                 if (Object.keys(data).length !== 0) {
                     dispatch(userAuthentication(data, true))
                 }
-            })
+        return data;
     }
 };
 
 export const thunkLoginUser = (email, password, rememberMe) => {
-    return dispatch => {
-        loginApi.loginUser(email, password, rememberMe)
-            .then(response => {
+    return async dispatch => {
+        const response = await loginApi.loginUser(email, password, rememberMe);
                 if (response.data.resultCode === 0) dispatch(thunkAuthentication());
                 else dispatch(stopSubmit("login", {_error: response.data.messages[0]}))
-            })
     }
 };
 
 export const thunkLogoutUser = () => {
-    return dispatch => {
-        loginApi.logoutUser()
-            .then((response) => {
-                if (response.data.resultCode === 0) dispatch(userAuthentication(null, false))
+    return async dispatch => {
+        const response = await loginApi.logoutUser();
+                if (response.data.resultCode === 0) dispatch(userAuthentication(null, false));
                 return <Redirect to="/login" /> // После выхода из профиля, редирект на регу
-            })
     }
 };
 

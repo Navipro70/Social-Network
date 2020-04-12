@@ -9,7 +9,7 @@ const TOGGLE_IS_FOLLOWING_BLOCKER = "TOGGLE-IS-FOLLOWING-BLOCKER";
 
 let initialState = {
   users: [],
-  pageSize: 5,
+  pageSize: 10,
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
@@ -94,51 +94,40 @@ const toggleBlocker = (isFollowingBlocker, userId) => ({
 });
 
 export const thunkGetUsers = (currentPage, pageSize, isFetching) => {
-  return (dispatch) => {
+  return async dispatch => {
     dispatch(toggleFetching(isFetching));
-    userApi.getUsers(currentPage, pageSize)
-        .then(data => {
-          dispatch(setUsers(data.items));
-          return data;
-        })
-        .then(newData => {
-          dispatch(setTotalUsersCount(newData.totalCount / 100));
-          dispatch(toggleFetching(!isFetching));
-        })
+    const data = await userApi.getUsers(currentPage, pageSize);
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsersCount(data.totalCount));
+    dispatch(toggleFetching(!isFetching));
   }
 };
 
 export const thunkLoadUsers = (pageNumber, pageSize, isFetching) => {
-  return dispatch => {
+  return async dispatch => {
     dispatch(toggleFetching(isFetching));
-    userApi.getUsers(pageNumber,pageSize)
-        .then(data => dispatch(setUsers(data.items)))
-        .then(() => {
-          dispatch(setCurrentPage(pageNumber));
+    const data = await userApi.getUsers(pageNumber,pageSize);
+    await dispatch(setUsers(data.items));
+    await dispatch(setCurrentPage(pageNumber));
           dispatch(toggleFetching(!isFetching));
-        })
   }
 };
 
 export const thunkUserFollowing = (followed, id) => {
-  return dispatch => {
+  return async dispatch => {
     dispatch(toggleBlocker(true, id));
     if (!followed) {
-      userApi.postFollowing(id)
-          .then(data => {
+          const data = await userApi.postFollowing(id);
             if (data.resultCode === 0) {
-                dispatch(following(id));
+                await dispatch(following(id));
             }
               dispatch(toggleBlocker(false, id));
-          })
     } else {
-      userApi.deleteFollowing(id)
-          .then(data => {
+      const data = await userApi.deleteFollowing(id);
             if (data.resultCode === 0) {
-              dispatch(following(id));
+              await dispatch(following(id));
             }
             dispatch(toggleBlocker(false, id));
-          })
     }
   }
 };

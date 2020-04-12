@@ -20,9 +20,9 @@ const appIsInitialized = () => ({
     type: INITIALIZING_APP
 });
 
-export const thunkInitializing = () => (dispatch) => {
-    dispatch(thunkAuthentication())
-        .then(() => dispatch(appIsInitialized()))
+export const thunkInitializing = () => async dispatch => {
+    await dispatch(thunkAuthentication());
+    dispatch(appIsInitialized())
 };
 
 export default appReducer;

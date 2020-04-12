@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./FieldControls.module.css"
+import {reset} from "redux-form";
 
 export const Textarea = ({input, meta, ...props}) => {
     const {error, submitFailed, active} = meta;

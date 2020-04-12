@@ -51,26 +51,23 @@ const getProfileStatus = (statusText) => ({
 const setProfilePage = (profile) => ({ type: SET_PROFILE_PAGE, profile});
 
 export const thunkSetCurrentProfile = userId => {
-  return dispatch => {
-    profileApi.getUser(userId) //Запрос на сервер
-        .then(data => dispatch(setProfilePage(data)))
+  return async dispatch => {
+    const data = await profileApi.getUser(userId);
+    dispatch(setProfilePage(data))
   }
 };
 
 export const thunkSetStatus = statusText => {
-  debugger
-  return dispatch => {
-    profileApi.setStatus(statusText)
-        .then(() => {
-          dispatch(setProfileStatus);
-        })
+  return async dispatch => {
+    await profileApi.setStatus(statusText);
+    dispatch(setProfileStatus);
   }
 };
 
 export const thunkGetStatus = (userId) => {
-  return dispatch => {
-    profileApi.getStatus(userId)
-        .then(statusText => dispatch(getProfileStatus(statusText)))
+  return async  dispatch => {
+    let statusText = await profileApi.getStatus(userId);
+    dispatch(getProfileStatus(statusText))
   }
 };
 
