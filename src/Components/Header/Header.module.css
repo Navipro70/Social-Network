@@ -5,30 +5,32 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(15px + 2vmin);
+  font-size: calc(10px + 1vmin);
   grid-area: header;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
+}
+
+.auth {
+  margin-left: calc(20vw);
 }
 
 
 .header img {
-  height: 70px;
-  width: 70px;
+  height: 30px;
+  width: 30px;
 }
 
 .auth a {
   color: #6bffdb;
   text-decoration: none;
-  margin-left: 6vw;
 }
 
 .auth button {
   text-decoration: none;
   outline: none;
   display: inline-block;
-  padding: 10px 10px;
+  padding: 8px 8px;
   margin: 10px 20px;
+  margin-left: 30px;
   position: relative;
   color: white;
   border: 1px solid rgba(255,255,255,.4);

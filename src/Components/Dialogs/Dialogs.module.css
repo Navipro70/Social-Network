@@ -49,5 +49,7 @@
   font-size: 20px;
   width: 95%;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  padding: 5px;
 }

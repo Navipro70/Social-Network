@@ -30,3 +30,32 @@
 .status:hover {
   color: navy;
 }
+
+.profile_information a {
+  text-decoration: none;
+  color: black;
+  transition: .3s linear;
+}
+
+.profile_information a:hover {
+  color: peru;
+}
+
+.profileStatus {
+  margin-left: 40px;
+  margin-top: 30px;
+}
+
+.profileInfoForm {
+  list-style-type: none;
+}
+
+.profileInfoForm input {
+  margin-top: 5px;
+  width: 300px;
+  font-size: 13px;
+  padding: 6px 0 4px 10px;
+  border: 1px solid #cecece;
+  background: #F6F6f6;
+  border-radius: 8px;
+}

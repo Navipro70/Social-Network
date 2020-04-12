@@ -12,14 +12,3 @@
     margin-left: 20px;
     margin-top: 20px;
 }
-
-.user span {
-    margin-left: 15px;
-    transition: .3s linear;
-    cursor: pointer;
-}
-
-.user span:hover {
-    color: darkred;
-    font-weight: 600;
-}

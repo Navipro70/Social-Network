@@ -24,11 +24,10 @@ const MessageFormContainer = props => {
 const MessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} >
-            <Field name={"message"}
+            <Field name={"message"} placeholder={"Your message..."}
                    component={Textarea}
                    validate={[emptyField, props.maxLength300, props.minLength2]}
             />
-            <input type="submit" value="Send message" />
         </form>
     )
 };

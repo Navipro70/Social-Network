@@ -26,7 +26,7 @@ const StatusHook = (props) => {
         props.setStatus(status)
     };
 
-        return <li>
+        return <div>
             <span
                 placeholder="Введите статус"
                 className={classes.status}
@@ -43,7 +43,7 @@ const StatusHook = (props) => {
                           autoFocus
                 />}
             </div>
-        </li>
+        </div>
 };
 
 export default StatusHook;

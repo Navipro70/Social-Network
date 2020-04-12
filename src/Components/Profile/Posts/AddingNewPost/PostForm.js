@@ -2,6 +2,10 @@ import React from "react";
 import {Field, reduxForm, reset} from "redux-form";
 import {Textarea} from "../../../Common/FieldControls";
 import {emptyField, maxLength, minLength} from "../../../../utils/validators";
+import classes from "./AddingNewPost.module.css"
+import Button from "@material-ui/core/Button";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import Snackbar from "@material-ui/core/Snackbar/Snackbar";
 
 const PostFormContainer = props => {
     const onSubmit = data => {
@@ -30,7 +34,6 @@ const PostForm = (props) => {
                    placeholder="Ваш пост..."
                    validate={[emptyField, props.maxLength500, props.minLength2]}
             />
-            <input type="submit" value=" Add new post"/>
         </form>
     )
 };

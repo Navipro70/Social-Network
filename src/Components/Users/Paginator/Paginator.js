@@ -2,28 +2,28 @@ import React, {useState} from "react";
 import "./Paginator.css";
 import classes from "../Users.module.css";
 import {connect} from "react-redux";
+import Button from "@material-ui/core/Button";
 
 const Paginator = React.memo(({totalUsersCount, pageSize, currentPage, setCurrentPage}) => {
-    let pagesCount = Math.ceil(totalUsersCount/(pageSize));
+    let pagesCount = Math.ceil(totalUsersCount / (pageSize));
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) pages.push(i);
-    const[portionNumber, changePortionNumber] = useState(Math.ceil(currentPage/10));
-    let leftLimit = (portionNumber-1)*10 + 1;
+    const [portionNumber, changePortionNumber] = useState(Math.ceil(currentPage / 10));
+    let leftLimit = (portionNumber - 1) * 10 + 1;
     let rightLimit = leftLimit + 10;
 
-    return <div className={classes.numbers}>
+    return <div className={classes.numbers + " numbers"}>
         {portionNumber > 1 &&
-        < button className="user-button" onClick={() => changePortionNumber(portionNumber - 1)} >Prev</button>
+        < button className="user-button" onClick={() => changePortionNumber(portionNumber - 1)}>Prev</button>
         }
-        {pages
-            .filter(i => i >= leftLimit && i < rightLimit)
-            .map(i => <span
-            key={i}
-            className={i === currentPage ? null : classes.selected}
-            onClick={() => setCurrentPage(i)}
-        >{i}
-        </span>)}
-        {portionNumber < pagesCount/10 && <button className="user-button" onClick={() => changePortionNumber(portionNumber + 1)}>
+            {pages
+                .filter(i => i >= leftLimit && i < rightLimit)
+                .map(i => <span
+                    key={i}
+                    className={i === currentPage ? null : classes.selected}
+                    onClick={() => setCurrentPage(i)}>{i}</span>)}
+        {portionNumber < pagesCount / 10 &&
+        <button className="user-button" onClick={() => changePortionNumber(portionNumber + 1)}>
             Next</button>}
     </div>
 });

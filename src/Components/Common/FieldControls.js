@@ -1,16 +1,18 @@
 import React from "react";
 import classes from "./FieldControls.module.css"
 import {reset} from "redux-form";
+import Snackbar from "@material-ui/core/Snackbar";
+import Button from "@material-ui/core/Button";
 
 export const Textarea = ({input, meta, ...props}) => {
     const {error, submitFailed, active} = meta;
     const validation = error && submitFailed && !active;
-    const styles = [];
-    if (validation) styles.push(classes.error);
     return (
-        <div className={styles.join(' ')}>
+        <div >
             <textarea {...input} {...props}/>
-            {validation && <span>{error}</span>}
+            <Button type="submit" variant="contained"
+            color="primary"
+            disabled={validation}>Add new post</Button>
         </div>
     )
 };
