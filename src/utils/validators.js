@@ -15,5 +15,5 @@ export const emailValidator = value => {
         'Invalid email address' : undefined};
 
 export const urlValidator = value => {
-    return !value || /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(value) ?
+    return !value || /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w-]+)+[\w\-_~:/?#[\]@!&',;=.]+$/.test(value) ?
         undefined : 'Invalid url' };

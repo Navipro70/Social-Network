@@ -1,17 +1,20 @@
 import {profileApi} from "../API/profileAPI";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "ADD-POST";
 const SET_PROFILE_PAGE = "SET-PROFILE-PAGE";
 const SET_PROFILE_STATUS = "SET-PROFILE-STATUS";
 const GET_PROFILE_STATUS = "GET-PROFILE-STATUS";
+const FETCHING_PROFILE = "FETCHING-PROFILE";
 
 let initialState = {
   posts: [
-    {postText: "ПОПРОБОВАТЬ ДЕСТРУКТУРИЗИРОВАТЬ ПРОПСЫ В БОЛЬШИХ ОБЪЕКТАХ УРОК 12 ENGLISH", id: 1},
-    {postText: "ПОПРОБОВАТЬ ДЕСТРУКТУРИЗИРОВАТЬ ПРОПСЫ В БОЛЬШИХ ОБЪЕКТАХ УРОК 12 ENGLISH", id: 2},
-    {postText: "ПОПРОБОВАТЬ ДЕСТРУКТУРИЗИРОВАТЬ ПРОПСЫ В БОЛЬШИХ ОБЪЕКТАХ УРОК 12 ENGLISH", id: 3}
+    {postText:  "ПОМЕНЯТЬ ПРЕЛОАДЕР, ЧТОБЫ ЛОВИТЬ ОШИБКУ С БЭКА ПРИ ИЗМЕНЕНИИ СТАТУСА НЕ НУЖНО ДЕЛАТЬ НОВЫЙ ЗАПРОС НА СЕРВЕР, А НУЖНО ПОМЕНЯТЬ ДАННЫЕ В ПРОФИЛЕ, ИСПРАВИТЬ!", id: 1},
+    {postText: "ПОМЕНЯТЬ ПРЕЛОАДЕР, ЧТОБЫ ЛОВИТЬ ОШИБКУ С БЭКА ПРИ ИЗМЕНЕНИИ СТАТУСА НЕ НУЖНО ДЕЛАТЬ НОВЫЙ ЗАПРОС НА СЕРВЕР, А НУЖНО ПОМЕНЯТЬ ДАННЫЕ В ПРОФИЛЕ, ИСПРАВИТЬ!", id: 2},
+    {postText: "ПОМЕНЯТЬ ПРЕЛОАДЕР,  ЧТОБЫ ЛОВИТЬ ОШИБКУ С БЭКА ПРИ ИЗМЕНЕНИИ СТАТУСА НЕ НУЖНО ДЕЛАТЬ НОВЫЙ ЗАПРОС НА СЕРВЕР, А НУЖНО ПОМЕНЯТЬ ДАННЫЕ В ПРОФИЛЕ, ИСПРАВИТЬ!", id: 3}
   ],
   profile: null,
+  isProfileFetching: false,
   statusText: "",
 };
 
@@ -28,6 +31,8 @@ const profileReducer = (state = initialState, action) => {
       return {...state, statusText: action.statusText};
     case SET_PROFILE_STATUS:
       return {...state, statusText: action.statusText};
+    case FETCHING_PROFILE:
+      return {...state, isProfileFetching: action.isProfileFetching};
     default:
       return state;
   }
@@ -38,14 +43,19 @@ export const addPost = newPostText => ({
   newPostText
 });
 
-const setProfileStatus = (statusText) => ({
+const setProfileStatus = statusText => ({
   type: SET_PROFILE_STATUS,
   statusText
 });
 
-const getProfileStatus = (statusText) => ({
+const getProfileStatus = statusText => ({
   type: GET_PROFILE_STATUS,
   statusText
+});
+
+const toggleProfileFetching = isProfileFetching => ({
+  type: FETCHING_PROFILE,
+  isProfileFetching
 });
 
 const setProfilePage = (profile) => ({ type: SET_PROFILE_PAGE, profile});
@@ -53,8 +63,10 @@ const setProfilePage = (profile) => ({ type: SET_PROFILE_PAGE, profile});
 
 export const thunkSetCurrentProfile = userId => {
   return async dispatch => {
+    dispatch(toggleProfileFetching(true));
     const data = await profileApi.getUser(userId);
-    dispatch(setProfilePage(data))
+    await dispatch(setProfilePage(data));
+    dispatch(toggleProfileFetching(false))
   }
 };
 
@@ -74,8 +86,11 @@ export const thunkGetStatus = (userId) => {
 
 export const thunkPutUserInformation = (data, userId) => async dispatch => {
     let responseStatusInfo = await profileApi.setInformation(data);
-    debugger
-    if (responseStatusInfo.resultCode === 0) dispatch(thunkSetCurrentProfile(userId));
+    if (responseStatusInfo.resultCode === 0) {
+        dispatch(thunkSetCurrentProfile(userId));
+    } else {
+        dispatch(stopSubmit("settings", {_error: "Произошла ошибка при отправке данных"}));
+    }
 };
 
 export default profileReducer;

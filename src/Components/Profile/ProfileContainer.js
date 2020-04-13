@@ -11,27 +11,29 @@ import {
 import {withRouter} from "react-router-dom";
 import {authRedirect} from "../../HihgOrderComponents/redirectComponent";
 import {compose} from "redux";
+import Preloader from "../Common/Preloader";
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if(!userId ) userId = this.props.userProfile.id;
+        if (!userId) userId = this.props.userProfile.id;
         this.props.thunkSetCurrentProfile(userId);
         this.props.thunkGetStatus(userId)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.match.params.userId !== prevProps.match.params.userId){
-        this.componentDidMount()
-        }
+        if (this.props.match.params.userId !== prevProps.match.params.userId) this.componentDidMount()
     }
 
     render() {
         return (
-            <div className={classes.profile}>
-                <Profile {...this.props} />
-            </div>
+            <>
+                {this.props.profilePage.isProfileFetching && <Preloader/>}
+                {!this.props.profilePage.isProfileFetching && <div className={classes.profile}>
+                    <Profile {...this.props} isOwner={!this.props.match.params.userId}/>
+                </div>}
+            </>
         )
     }
 }

@@ -2,10 +2,6 @@ import React from "react";
 import {Field, reduxForm, reset} from "redux-form";
 import {Textarea} from "../../../Common/FieldControls";
 import {emptyField, maxLength, minLength} from "../../../../utils/validators";
-import classes from "./AddingNewPost.module.css"
-import Button from "@material-ui/core/Button";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Snackbar from "@material-ui/core/Snackbar/Snackbar";
 
 const PostFormContainer = props => {
     const onSubmit = (data, dispatch) => {

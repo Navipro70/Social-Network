@@ -1,7 +1,5 @@
 import React from "react";
 import classes from "./FieldControls.module.css"
-import {reset} from "redux-form";
-import Snackbar from "@material-ui/core/Snackbar";
 import Button from "@material-ui/core/Button";
 
 export const Textarea = ({input, meta, ...props}) => {

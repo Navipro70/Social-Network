@@ -10,7 +10,7 @@ const Header = props => {
             <h4>Grid social</h4>
             <div className={classes.auth}>
                 {props.data.currentUserProfile &&
-                <NavLink to={`/profile/${props.data.currentUserProfile.id}`}>
+                <NavLink to={`/profile`}>
                     {props.data.currentUserProfile.login}
                 </NavLink>}
                 {props.data.currentUserProfile &&

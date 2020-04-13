@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import "./Paginator.css";
 import classes from "../Users.module.css";
 import {connect} from "react-redux";
-import Button from "@material-ui/core/Button";
 
 const Paginator = React.memo(({totalUsersCount, pageSize, currentPage, setCurrentPage}) => {
     let pagesCount = Math.ceil(totalUsersCount / (pageSize));
