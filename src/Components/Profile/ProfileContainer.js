@@ -2,7 +2,12 @@ import React from "react";
 import classes from "./Profile.module.css";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {thunkGetStatus, thunkSetCurrentProfile, thunkSetStatus} from "../../redux/profile-reducer";
+import {
+    thunkGetStatus,
+    thunkPutUserInformation,
+    thunkSetCurrentProfile,
+    thunkSetStatus
+} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
 import {authRedirect} from "../../HihgOrderComponents/redirectComponent";
 import {compose} from "redux";
@@ -42,7 +47,8 @@ export default compose(
     connect(mapStateToProps, {
         thunkSetCurrentProfile,
         thunkGetStatus,
-        thunkSetStatus
+        thunkSetStatus,
+        thunkPutUserInformation
     }),
     withRouter,
     authRedirect

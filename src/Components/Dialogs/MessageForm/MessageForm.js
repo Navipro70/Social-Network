@@ -1,12 +1,12 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
+import {Field, reduxForm, reset} from "redux-form";
 import {emptyField, maxLength, minLength} from "../../../utils/validators";
 import {Textarea} from "../../Common/FieldControls";
 
 const MessageFormContainer = props => {
-    const onSubmit = data => {
+    const onSubmit = (data, dispatch) => {
         props.addMessage(data.message);
-        data.message = "";
+        dispatch(reset("message"));
     };
     const mexLength300 = maxLength(300);
     const minLength2 = minLength(2);

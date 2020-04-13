@@ -16,5 +16,9 @@ export const profileApi = {
         return axiosInstance.put(`profile/status`, {
             status: statusText,
         })
+    },
+    setInformation(data) {
+        return axiosInstance.put(`profile`, data)
+            .then(response => response.data)
     }
 };

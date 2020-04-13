@@ -50,6 +50,7 @@ const getProfileStatus = (statusText) => ({
 
 const setProfilePage = (profile) => ({ type: SET_PROFILE_PAGE, profile});
 
+
 export const thunkSetCurrentProfile = userId => {
   return async dispatch => {
     const data = await profileApi.getUser(userId);
@@ -60,7 +61,7 @@ export const thunkSetCurrentProfile = userId => {
 export const thunkSetStatus = statusText => {
   return async dispatch => {
     await profileApi.setStatus(statusText);
-    dispatch(setProfileStatus);
+    dispatch(setProfileStatus(statusText));
   }
 };
 
@@ -69,6 +70,12 @@ export const thunkGetStatus = (userId) => {
     let statusText = await profileApi.getStatus(userId);
     dispatch(getProfileStatus(statusText))
   }
+};
+
+export const thunkPutUserInformation = (data, userId) => async dispatch => {
+    let responseStatusInfo = await profileApi.setInformation(data);
+    debugger
+    if (responseStatusInfo.resultCode === 0) dispatch(thunkSetCurrentProfile(userId));
 };
 
 export default profileReducer;

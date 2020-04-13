@@ -25,7 +25,25 @@ export const LoginInput = ({input, meta, ...props}) => {
     return (
         <div className={styles.join(' ')}>
             <input {...input} {...props}/>
+
             {validation && <span>{error}</span>}
         </div>
+    )
+};
+
+export const SettingField = ({input, meta, ...props}) => {
+    const {error, submitFailed, active} = meta;
+    const validation = error && submitFailed && !active;
+    return (
+        <>
+            <input {...input} {...props}/>
+            {validation && <>
+                <span style={{color: "red", marginBottom: "2px"}}> *</span>
+                <div>
+                    <span style={{color: "red", marginBottom: "2px"}}>
+                        {error}
+                    </span>
+                </div></>}
+            </>
     )
 };

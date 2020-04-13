@@ -8,9 +8,9 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Snackbar from "@material-ui/core/Snackbar/Snackbar";
 
 const PostFormContainer = props => {
-    const onSubmit = data => {
+    const onSubmit = (data, dispatch) => {
         props.addPost(data.postText);
-        // data.postText = "";
+        dispatch(reset("post"));
     };
     const maxLength500 = maxLength(500);
     const minLength2 = minLength(2);
@@ -20,8 +20,7 @@ const PostFormContainer = props => {
             <ReduxPostForm
                 onSubmit={onSubmit}
                 maxLength500={maxLength500}
-                minLength2={minLength2}
-            />
+                minLength2={minLength2}/>
         </div>
     )
 };

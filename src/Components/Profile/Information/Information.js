@@ -3,11 +3,10 @@ import classes from "./Information.module.css";
 import Preloader from "../../Common/Preloader";
 import StatusHook from "./StatusHook";
 import anon from "../../../Images/anon.png"
-import Button from "@material-ui/core/Button";
 import ContactInformation from "./ContactInformation";
 import InformationForm from "./InformationForm";
 
-const Information = React.memo(({profile, statusText, setStatus}) => {
+const Information = React.memo(({profile, statusText, setStatus, thunkPutUserInformation}) => {
     const [editMode, setEditMode] = useState(false);
 
     if (!profile) return <Preloader/>;
@@ -30,9 +29,8 @@ const Information = React.memo(({profile, statusText, setStatus}) => {
                     <ContactInformation setEditMode={setEditMode} contacts={profile.contacts}/>
                 </div>
                 }
-                {editMode &&
-                <InformationForm setEditMode={setEditMode} />
-                }
+                {editMode && <InformationForm setEditMode={setEditMode} profile={profile}
+                 thunkPutUserInformation={thunkPutUserInformation} />}
             </div>
         </div>
     );
