@@ -25,8 +25,10 @@ const Login = (props) => {
                 <Field type="checkbox" name={"rememberMe"} id="checkbox" className="checkbox" component={"input"} />
                 <label htmlFor="checkbox" className="checkbox__text">Remember me</label>
             </div>
-            {props.error && <div className="form-row common-login-error">
+            {(props.error || props.captchaSrc) && <div className="form-row common-login-error">
                 {props.error}
+                <img src={props.captchaSrc}/>
+                {props.captchaSrc && <Field type="password" name={"captcha"} component={LoginInput} placeholder="Captcha"/>}
             </div>}
             <input type="submit" value="Sign up" />
         </form>

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import {Route, withRouter} from "react-router-dom";
+import {Redirect, Route, withRouter} from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import News from "./Components/News/News";
@@ -26,30 +26,13 @@ class App extends React.Component {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="content">
-                    <Route
-                        path="/profile/:userId?"
-                        render={() => <ProfileProvider/>}
-                    />
-                    <Route
-                        path="/dialogs"
-                        render={() => <DialogsContainer/>}
-                    />
-                    <Route
-                        path="/users"
-                        render={() => <UsersProvider/>}
-                    />
-                    <Route
-                        path="/news"
-                        render={() => <News/>}
-                    />
-                    <Route
-                        path="/settings"
-                        render={() => <Settings/>}
-                    />
-                    <Route
-                        path="/login"
-                        render={() => <LoginContainer/>}
-                    />
+                    <Route path="/profile/:userId?" render={() => <ProfileProvider/>}/>
+                    <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                    <Route path="/users" render={() => <UsersProvider/>}/>
+                    <Route path="/news" render={() => <News/>}/>
+                    <Route path="/settings" render={() => <Settings/>}/>
+                    <Route path="/login" render={() => <LoginContainer/>}/>
+                    <Route path="/" render={() => <Redirect to="/profile" />}/>
                 </div>
             </div>
         )
