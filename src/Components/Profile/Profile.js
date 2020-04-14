@@ -11,6 +11,7 @@ const Profile = ({isOwner, ...props}) => {
                 statusText={props.profilePage.statusText}
                 setStatus={props.thunkSetStatus}
                 thunkPutUserInformation={props.thunkPutUserInformation}
+                thunkSavePhoto={props.thunkSavePhoto}
                 isOwner={isOwner}/>
             <PostsContainer isOwner={isOwner}/>
         </div>

@@ -4,7 +4,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
     thunkGetStatus,
-    thunkPutUserInformation,
+    thunkPutUserInformation, thunkSavePhoto,
     thunkSetCurrentProfile,
     thunkSetStatus
 } from "../../redux/profile-reducer";
@@ -50,7 +50,8 @@ export default compose(
         thunkSetCurrentProfile,
         thunkGetStatus,
         thunkSetStatus,
-        thunkPutUserInformation
+        thunkPutUserInformation,
+        thunkSavePhoto
     }),
     withRouter,
     authRedirect

@@ -6,6 +6,7 @@ const SET_PROFILE_PAGE = "SET-PROFILE-PAGE";
 const SET_PROFILE_STATUS = "SET-PROFILE-STATUS";
 const GET_PROFILE_STATUS = "GET-PROFILE-STATUS";
 const FETCHING_PROFILE = "FETCHING-PROFILE";
+const UPLOAD_PROFILE_PHOTO = "UPLOAD-PROFILE-PHOTO";
 
 let initialState = {
   posts: [
@@ -33,6 +34,8 @@ const profileReducer = (state = initialState, action) => {
       return {...state, statusText: action.statusText};
     case FETCHING_PROFILE:
       return {...state, isProfileFetching: action.isProfileFetching};
+    case UPLOAD_PROFILE_PHOTO:
+      return {...state, profile: {...state.profile, photos: action.photoFiles}};
     default:
       return state;
   }
@@ -60,6 +63,8 @@ const toggleProfileFetching = isProfileFetching => ({
 
 const setProfilePage = (profile) => ({ type: SET_PROFILE_PAGE, profile});
 
+const uploadProfilePhoto = photoFiles => ({type: UPLOAD_PROFILE_PHOTO, photoFiles});
+
 
 export const thunkSetCurrentProfile = userId => {
   return async dispatch => {
@@ -85,12 +90,15 @@ export const thunkGetStatus = (userId) => {
 };
 
 export const thunkPutUserInformation = (data, userId) => async dispatch => {
-    let responseStatusInfo = await profileApi.setInformation(data);
-    if (responseStatusInfo.resultCode === 0) {
-        dispatch(thunkSetCurrentProfile(userId));
-    } else {
-        dispatch(stopSubmit("settings", {_error: "Произошла ошибка при отправке данных"}));
-    }
+  let responseStatusInfo = await profileApi.setInformation(data);
+  if (responseStatusInfo.resultCode === 0) dispatch(thunkSetCurrentProfile(userId));
+  else dispatch(stopSubmit("settings", {_error: "Произошла ошибка при отправке данных"}));
+};
+
+export const thunkSavePhoto  = (photoFile) => async dispatch => {
+  const data = await profileApi.setPhoto(photoFile);
+  debugger
+  if (data.resultCode === 0) dispatch(uploadProfilePhoto(data.data.photos));
 };
 
 export default profileReducer;

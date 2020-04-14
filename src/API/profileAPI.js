@@ -20,5 +20,10 @@ export const profileApi = {
     setInformation(data) {
         return axiosInstance.put(`profile`, data)
             .then(response => response.data)
+    },
+    setPhoto(photos) {
+        return axiosInstance.put(`profile/photo`, photos, {
+            headers: { 'content-type': 'multipart/form-data'}
+        }).then(response => response.data)
     }
 };
