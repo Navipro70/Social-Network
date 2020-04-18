@@ -4,13 +4,14 @@ import {connect} from "react-redux";
 import { thunkLogoutUser} from "../../redux/auth-reducer";
 
 class HeaderContainer extends React.Component {
+    logoutHandler = () => this.props.thunkLogoutUser();
     render () {
-        return <Header {...this.props} />
+        return <Header {...this.props} logoutHandler={this.logoutHandler} />
     }
 }
 
 const mapStateToProps = (state) => ({
-    data: state.auth
+    data: state.auth.currentUserProfile
 });
 
 export default connect(mapStateToProps, {

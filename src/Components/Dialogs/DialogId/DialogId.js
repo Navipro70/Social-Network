@@ -2,14 +2,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import classes from "../Dialogs.module.css";
 
-const DialogId = props => {
+const DialogId = ({id, name}) => {
   return (
     <NavLink
-      to={`/dialogs/${props.id}`}
+      to={`/dialogs/${id}`}
       activeClassName={classes.active}
       className={classes.name}
     >
-      {props.name}
+      {name}
     </NavLink>
   );
 };

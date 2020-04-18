@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Field, reduxForm} from "redux-form";
 import Button from "@material-ui/core/Button";
-import classes from "./Information.module.css";
-import {SettingField} from "../../Common/FieldControls";
-import {emptyField, urlValidator} from "../../../utils/validators";
+import classes from "../Information.module.css";
+import {SettingField} from "../../../Common/FieldControls";
+import {emptyField, urlValidator} from "../../../../utils/validators";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from '@material-ui/lab/Alert';
 

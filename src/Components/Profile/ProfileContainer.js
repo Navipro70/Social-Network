@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import classes from "./Profile.module.css";
 import Profile from "./Profile";
 import {connect} from "react-redux";
@@ -13,30 +13,29 @@ import {authRedirect} from "../../HihgOrderComponents/redirectComponent";
 import {compose} from "redux";
 import Preloader from "../Common/Preloader";
 
-class ProfileContainer extends React.Component {
+const ProfileContainer = ({match, ...props}) => {
+    const userIdIdentificator = () => {
+        let userId = match.params.userId;
+        if (!userId) userId = props.userProfile.id;
+        props.thunkSetCurrentProfile(userId);
+        props.thunkGetStatus(userId)
+    };
 
-    componentDidMount() {
-        let userId = this.props.match.params.userId;
-        if (!userId) userId = this.props.userProfile.id;
-        this.props.thunkSetCurrentProfile(userId);
-        this.props.thunkGetStatus(userId)
-    }
+    useEffect(() => {
+        userIdIdentificator()
+    }, []);
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.match.params.userId !== prevProps.match.params.userId) this.componentDidMount()
-    }
+    useEffect(() => {
+        userIdIdentificator()
+    }, [match.params.userId]);
 
-    render() {
-        return (
-            <>
-                {this.props.profilePage.isProfileFetching && <Preloader/>}
-                {!this.props.profilePage.isProfileFetching && <div className={classes.profile}>
-                    <Profile {...this.props} isOwner={!this.props.match.params.userId}/>
-                </div>}
-            </>
-        )
-    }
-}
+    if (props.profilePage.isProfileFetching) return <Preloader/>;
+    return (
+            <div className={classes.profile}>
+                <Profile {...props} isOwner={!match.params.userId}/>
+            </div>
+    )
+};
 
 const mapStateToProps = (state) => ({
     profilePage: state.profilePage,

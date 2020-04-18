@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import classes from "./Information.module.css";
+import classes from "../Information.module.css";
 
 const StatusHook = ({isOwner, statusText, ...props}) => {
     const [status, statusChanger] = useState(statusText);
@@ -27,24 +27,26 @@ const StatusHook = ({isOwner, statusText, ...props}) => {
     };
     if (!isOwner) return <span>{status || "No status"}</span>;
 
-    return <div>
+    return (
+        <div>
             <span
                 placeholder="Введите статус"
                 className={classes.status}
                 onClick={spanOnClick}>
                 {status || "Change status"}
             </span>
-        <div>
-            {visible
-            && <input type="text"
-                      value={status}
-                      onChange={onInputChange}
-                      onBlur={inputOnBlur}
-                      onKeyDown={inputKeyDown}
-                      autoFocus
-            />}
+            <div>
+                {visible
+                && <input type="text"
+                          value={status}
+                          onChange={onInputChange}
+                          onBlur={inputOnBlur}
+                          onKeyDown={inputKeyDown}
+                          autoFocus
+                />}
+            </div>
         </div>
-    </div>
+    )
 };
 
 export default StatusHook;

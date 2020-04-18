@@ -2,20 +2,18 @@ import React from "react";
 import classes from "./Dialogs.module.css";
 import Message from "./Messages/Messages";
 import DialogId from "./DialogId/DialogId";
-import MessageFormContainer from "./MessageForm/MessageForm";
+import MessageFormContainer from "./MessageForm/MessageFormContainer";
 
-const Dialogs = props => {
-  let currentUsers = props.users.map(user => (
+const Dialogs = ({users, messages, addMessage}) => {
+  const currentUsers = users.map(user => (
     <DialogId name={user.name} id={user.id} key={user.id} />
   ));
 
-  let currentMessages = props.messages.map(currentValue => (
+  const currentMessages = messages.map(currentValue => (
     <Message mess={currentValue.message} key={currentValue.id} />
   ));
 
-  const addMessage = (messageText) => {
-    props.addMessage(messageText);
-  };
+  const sendMessage = (messageText) => addMessage(messageText);
 
   return (
     <div className={classes.gridContent}>
@@ -26,7 +24,7 @@ const Dialogs = props => {
 
       <div className={classes.dialog}>
         {currentMessages}
-          <MessageFormContainer addMessage={addMessage}/>
+          <MessageFormContainer addMessage={sendMessage}/>
       </div>
     </div>
   );

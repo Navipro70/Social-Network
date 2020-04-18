@@ -10,7 +10,6 @@ import {authRedirect} from "../../HihgOrderComponents/redirectComponent";
 import {compose} from "redux";
 
 class UsersContainer extends React.Component {
-
     componentDidMount (){
         this.props.thunkGetUsers(this.props.currentPage, this.props.pageSize);
     }
@@ -20,17 +19,15 @@ class UsersContainer extends React.Component {
     };
 
     render() {
+        const {isFetching, users, following, isFollowingBlocker, thunkUserFollowing} = this.props;
+        if (isFetching) return <Preloader/>;
         return (
-            <>
-                {this.props.isFetching && <Preloader />}
-                {!this.props.isFetching && <Users
+                <Users
                     setCurrentPage={this.setCurrentPage}
-                    users={this.props.users}
-                    following={this.props.following}
-                    isFollowingBlocker={this.props.isFollowingBlocker}
-                    thunkUserFollowing={this.props.thunkUserFollowing}
-                />}
-            </>
+                    users={users}
+                    following={following}
+                    isFollowingBlocker={isFollowingBlocker}
+                    thunkUserFollowing={thunkUserFollowing}/>
         );
     }
 }

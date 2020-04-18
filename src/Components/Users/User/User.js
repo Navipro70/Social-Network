@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import classes from "./User.module.css";
 import anon from "./../../../Images/anon.png";
-import {NavLink} from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import {NavLinkWrapper} from "./NavLinkWrapper";
 
 const User = ({followed, thunkUserFollowing, id, photoSrc, isFollowingBlocker, status}) => {
     const [butText, setButText] = useState(followed ? "Unfollow" : "Follow");
@@ -12,26 +12,27 @@ const User = ({followed, thunkUserFollowing, id, photoSrc, isFollowingBlocker, s
         thunkUserFollowing(followed, id);
     };
 
+    const disabler = isFollowingBlocker.some(currentId => currentId === id)
+
     return (
         <div className={classes.user}>
             <div>
-                <NavLink to={`/profile/${id}`}>
+                <NavLinkWrapper id={id}>
                     <img src={photoSrc != null ? photoSrc : anon} alt="Profile img"/>
-                </NavLink>
+                </NavLinkWrapper>
                 <Button variant="contained" color="primary"
-                        disabled={isFollowingBlocker.some(currentId => currentId === id)}
-                        onClick={handleClick}
-                >
+                        disabled={disabler}
+                        onClick={handleClick}>
                     {butText}
                 </Button>
             </div>
             <div>
-                <NavLink to={`/profile/${id}`}>
+                <NavLinkWrapper id={id}>
                     <h2>{status}</h2>
-                </NavLink>
+                </NavLinkWrapper>
             </div>
         </div>
     )
 };
 
-export default User;
+export default React.memo(User);

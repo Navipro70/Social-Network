@@ -1,12 +1,12 @@
 import React from "react";
 import classes from "./AddingNewPost.module.css";
-import PostFormContainer from "./PostForm";
+import PostFormContainer from "./PostForm/PostFormContainer";
 
-const AddingNewPost = props => {
+const AddingNewPost = ({addPost}) => {
     return (
     <div className={classes.adding_new_post}>
       <h3>What's new?</h3>
-      <PostFormContainer addPost={props.addPost} />
+      <PostFormContainer addPost={addPost} />
     </div>
   );
 };

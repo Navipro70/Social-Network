@@ -3,15 +3,15 @@ import classes from "./Profile.module.css";
 import Information from "./Information/Information";
 import PostsContainer from "./Posts/PostsContainer";
 
-const Profile = ({isOwner, ...props}) => {
+const Profile = ({isOwner, profilePage, thunkSavePhoto, thunkPutUserInformation, thunkSetStatus}) => {
     return (
         <div className={classes.profile}>
             <Information
-                profile={props.profilePage.profile}
-                statusText={props.profilePage.statusText}
-                setStatus={props.thunkSetStatus}
-                thunkPutUserInformation={props.thunkPutUserInformation}
-                thunkSavePhoto={props.thunkSavePhoto}
+                profile={profilePage.profile}
+                statusText={profilePage.statusText}
+                setStatus={thunkSetStatus}
+                thunkPutUserInformation={thunkPutUserInformation}
+                thunkSavePhoto={thunkSavePhoto}
                 isOwner={isOwner}/>
             <PostsContainer isOwner={isOwner}/>
         </div>

@@ -1,36 +1,21 @@
 import React from "react";
 import "./login.css"
-import {Field, reduxForm} from "redux-form";
-import {LoginInput} from "../Common/FieldControls";
-import { emailValidator, emptyField} from "../../utils/validators";
+import {reduxForm} from "redux-form";
+import {LoginEmail} from "./LoginComponents/LoginEmail";
+import {LoginPassword} from "./LoginComponents/LoginPassword";
+import {LoginCheckbox} from "./LoginComponents/LoginCheckbox";
+import {LoginErrors} from "./LoginComponents/LoginErrors";
 
 
-const Login = (props) => {
+const Login = ({error, handleSubmit, maxLength20, minLength5, captchaSrc, ...props}) => {
     return (
-        <form onSubmit={props.handleSubmit} className="ui-form">
+        <form onSubmit={handleSubmit} className="ui-form">
             <h3>Login</h3>
-            <div className="form-row">
-                <Field type="text" name={"login"} id="email"
-                       component={LoginInput} placeholder="Email"
-                       validate={[emptyField, emailValidator]}
-                />
-            </div>
-            <div className="form-row">
-                <Field type="password" name={"password"} id="password"
-                       component={LoginInput} placeholder="Password"
-                       validate={[emptyField, props.maxLength20, props.minLength5]}
-                />
-            </div>
-            <div className="checkbox-row">
-                <Field type="checkbox" name={"rememberMe"} id="checkbox" className="checkbox" component={"input"} />
-                <label htmlFor="checkbox" className="checkbox__text">Remember me</label>
-            </div>
-            {(props.error || props.captchaSrc) && <div className="form-row common-login-error">
-                {props.error}
-                <img src={props.captchaSrc}/>
-                {props.captchaSrc && <Field type="password" name={"captcha"} component={LoginInput} placeholder="Captcha"/>}
-            </div>}
-            <input type="submit" value="Sign up" />
+            <LoginEmail />
+            <LoginPassword maxLength20={maxLength20} minLength5={minLength5} />
+            <LoginCheckbox />
+            {(error || captchaSrc) && <LoginErrors error={error} captchaSrc={captchaSrc} />}
+            <input type="submit" value="Sign up"/>
         </form>
     )
 };

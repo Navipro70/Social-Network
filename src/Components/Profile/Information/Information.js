@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import classes from "./Information.module.css";
 import Preloader from "../../Common/Preloader";
-import StatusHook from "./StatusHook";
+import StatusHook from "./Status/StatusHook";
 import anon from "../../../Images/anon.png"
-import ContactInformation from "./ContactInformation";
-import InformationForm from "./InformationForm";
+import ContactInformation from "./ContacInformation/ContactInformation";
+import InformationForm from "./InformationForm/InformationForm";
 import FileInput from "./ImagesComponents/FileInput";
 
-const Information = React.memo(({profile, statusText, setStatus, thunkPutUserInformation, isOwner, thunkSavePhoto}) => {
+const Information = ({profile, statusText, setStatus, thunkPutUserInformation, isOwner, thunkSavePhoto}) => {
     const [editMode, setEditMode] = useState(false);
     const onMainPhotoSelected = e => {
         const files = new FormData();
@@ -20,9 +20,13 @@ const Information = React.memo(({profile, statusText, setStatus, thunkPutUserInf
         <div className={classes.profile_information}>
             <div>
                 {profile.photos.small ?
-                    <img src={profile.photos.small} className={classes.avatar} alt="profile"/> : /*Вынести в отдельную компоненту*/
-                    <img src={anon} className={classes.avatar} alt="profile"/>}
-                   {isOwner && <FileInput onChanger={onMainPhotoSelected} />}
+                    <img src={profile.photos.small}
+                         className={classes.avatar}
+                         alt="profile"/> : /*Вынести в отдельную компоненту*/
+                    <img src={anon}
+                         className={classes.avatar}
+                         alt="profile"/>}
+                {isOwner && <FileInput onChanger={onMainPhotoSelected}/>}
             </div>
             <div>
                 <div className={classes.profileStatus}>
@@ -34,14 +38,20 @@ const Information = React.memo(({profile, statusText, setStatus, thunkPutUserInf
                     <ul className={classes.contact_information}>
                         <li>About me: {profile.aboutMe}</li>
                     </ul>
-                    <ContactInformation isOwner={isOwner} setEditMode={setEditMode} contacts={profile.contacts}/>
+                    <ContactInformation
+                        isOwner={isOwner}
+                        setEditMode={setEditMode}
+                        contacts={profile.contacts}/>
                 </div>}
 
-                {editMode && <InformationForm setEditMode={setEditMode} profile={profile}
-                              thunkPutUserInformation={thunkPutUserInformation} isOwner={isOwner} />}
+                {editMode && <InformationForm
+                    setEditMode={setEditMode}
+                    profile={profile}
+                    thunkPutUserInformation={thunkPutUserInformation}
+                    isOwner={isOwner}/>}
             </div>
         </div>
     );
-});
+};
 
-export default Information;
+export default React.memo(Information)
