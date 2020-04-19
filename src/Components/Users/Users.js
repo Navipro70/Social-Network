@@ -19,4 +19,4 @@ const Users = ({users, setCurrentPage, following, isFollowingBlocker, thunkUserF
     </div>
 };
 
-export default Users;
+export default React.memo(Users);

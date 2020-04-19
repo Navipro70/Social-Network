@@ -18,4 +18,4 @@ const Profile = ({isOwner, profilePage, thunkSavePhoto, thunkPutUserInformation,
     );
 };
 
-export default Profile;
+export default React.memo(Profile);

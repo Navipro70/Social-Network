@@ -1,25 +1,30 @@
 import {headerApi} from "../API/headerAPI";
 import {loginApi} from "../API/loginAPI";
 import {stopSubmit} from "redux-form";
-import {Redirect} from "react-router-dom";
-import React from "react";
 
 const USER_AUTHENTICATION = "USER-AUTHENTICATION";
 const PUT_CAPTCHA_TO_STATE = "PUT-CAPTCHA-TO-STATE";
 
+type currentUserProfileType = {
+    id: number,
+    login: string,
+    email: string
+}
+
 let initialState = {
-    currentUserProfile: null,
+    currentUserProfile: null as null | currentUserProfileType,
     isAuth: false,
-    captchaSrc: null
+    captchaSrc: null as null | string
 };
 
-const authReducer = (state = initialState, action) => {
+type initialStateType = typeof initialState
+
+const authReducer = (state: initialStateType = initialState, action: any):initialStateType => {
     switch (action.type) {
         case USER_AUTHENTICATION:
             return {...state,
                 currentUserProfile: action.data,
                 isAuth: action.isAuth,
-                loading: false
             };
         case PUT_CAPTCHA_TO_STATE:
             return {...state, captchaSrc: action.captchaSrc};
@@ -28,19 +33,30 @@ const authReducer = (state = initialState, action) => {
     }
 };
 
-const userAuthentication = (data, isAuth) => ({
+type userAuthenticationType = {
+    type: typeof USER_AUTHENTICATION,
+    data: currentUserProfileType | null,
+    isAuth: boolean
+}
+
+const userAuthentication = (data: currentUserProfileType | null, isAuth: boolean):userAuthenticationType => ({
     type: USER_AUTHENTICATION,
     data,
     isAuth
 });
 
-const putCaptchaSrcToState = captchaSrc => ({
+type putCaptchaSrcToStateType =  {
+    type: typeof PUT_CAPTCHA_TO_STATE,
+    captchaSrc:  string | null
+}
+
+const putCaptchaSrcToState = (captchaSrc: string | null): putCaptchaSrcToStateType => ({
     type: PUT_CAPTCHA_TO_STATE,
     captchaSrc
 });
 
 export const thunkAuthentication = () => {
-    return async dispatch => {
+    return async (dispatch: any) => {
         const data = await headerApi.getCurrentUserProfile();
                 if (Object.keys(data).length !== 0) dispatch(userAuthentication(data, true));
         return data;
@@ -48,15 +64,15 @@ export const thunkAuthentication = () => {
 };
 
 export const thunkShowCaptcha = () => {
-    return async dispatch => {
+    return async (dispatch: any) => {
         const data = await loginApi.getCaptcha();
         dispatch(putCaptchaSrcToState(data.data.url));
         return Promise.resolve(data);
     }
 };
 
-export const thunkLoginUser = (email, password, rememberMe, captcha) => {
-    return async dispatch => {
+export const thunkLoginUser = (email: string, password: string, rememberMe: boolean, captcha: string) => {
+    return async (dispatch: any) => {
         const response = await loginApi.loginUser(email, password, rememberMe, captcha);
             if (response.data.resultCode === 0) {
                 dispatch(thunkAuthentication());
@@ -71,10 +87,9 @@ export const thunkLoginUser = (email, password, rememberMe, captcha) => {
 };
 
 export const thunkLogoutUser = () => {
-    return async dispatch => {
+    return async (dispatch: any) => {
         const response = await loginApi.logoutUser();
                 if (response.data.resultCode === 0) dispatch(userAuthentication(null, false));
-                return <Redirect to="/login" /> // После выхода из профиля, редирект на регу
     }
 };
 

@@ -1,5 +1,15 @@
 const NEW_MESSAGE = "NEW-MESSAGE";
 
+type messageType = {
+  id: number
+  message: string
+};
+
+type usersType = {
+  id: number
+  name: string
+}
+
 let initialState = {
   messages: [
     { id: 1, message: "Hello" },
@@ -7,7 +17,7 @@ let initialState = {
     { id: 3, message: "Fine. What about you?" },
     { id: 4, message: "Me too, thanks" },
     { id: 5, message: "Goodbye" }
-  ],
+  ] as Array<messageType>,
   users: [
     { id: 1, name: "Bill" },
     { id: 2, name: "Sasha" },
@@ -15,10 +25,12 @@ let initialState = {
     { id: 4, name: "Diana" },
     { id: 5, name: "Andrew" },
     { id: 6, name: "Liza" }
-  ],
+  ] as Array<usersType>,
 };
 
-const dialogReducer = (state = initialState, action) => {
+type initialStateType = typeof initialState
+
+const dialogReducer = (state: initialStateType = initialState, action: any): initialStateType => {
   switch (action.type) {
     case NEW_MESSAGE:
       return {
@@ -30,7 +42,12 @@ const dialogReducer = (state = initialState, action) => {
   }
 };
 
-export const addMessage = messageText => ({
+type addMessageType = {
+  type: typeof NEW_MESSAGE
+  messageText: string
+}
+
+export const addMessage = (messageText: string): addMessageType => ({
   type: NEW_MESSAGE,
   messageText
 });

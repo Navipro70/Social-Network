@@ -30,4 +30,4 @@ const Dialogs = ({users, messages, addMessage}) => {
   );
 };
 
-export default Dialogs;
+export default React.memo(Dialogs);
