@@ -1,65 +1,34 @@
 import React, {useEffect, useState} from "react";
-import {Field, reduxForm} from "redux-form";
+import { reduxForm} from "redux-form";
 import Button from "@material-ui/core/Button";
 import classes from "../Information.module.css";
-import {SettingField} from "../../../Common/FieldControls";
 import {emptyField, urlValidator} from "../../../../utils/validators";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from '@material-ui/lab/Alert';
+import {ContactsItem} from "./InformationFormItems/ContactsItem";
+import {CheckboxItem} from "./InformationFormItems/CheckboxItem";
+import {SnackbarError} from "./InformationFormItems/SnackbarError";
 
-const InformationFormContainer = props => {
-    const onSubmit = (data, dispatch, {...props}) => {
-        props.thunkPutUserInformation(data, props.profile.userId);
-        props.setEditMode(true);
-    };
-
-    return <div>
-        <InformationFormProvider initialValues={{...props.profile, ...props.profile.contacts}}
-            setEditMode={props.setEditMode} profile={props.profile}
-            thunkPutUserInformation={props.thunkPutUserInformation}
-            onSubmit={onSubmit} />
-    </div>
-};
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
-const InformationForm = ({profile, ...props}) => {
+const InformationForm = ({profile, error, setEditMode, ...props}) => {
     const [open, setOpen] = useState(false);
-    useEffect(() => setOpen(typeof props.error === "string"), [props.error]);
+    useEffect(() => setOpen(typeof error === "string"), [error]);
 
+    const contactsMap = [...Object.keys(profile.contacts)];
     return (
-        <form onSubmit={props.handleSubmit} className={classes.fullForm} >
+        <form onSubmit={props.handleSubmit} className={classes.fullForm}>
             <ul className={classes.profileInfoForm}>
-                <li><Field name={"aboutMe"} validate={[emptyField]} placeholder={"About you"} component={SettingField} /></li>
-                <li><Field name={"contacts.facebook"} validate={[urlValidator]} placeholder={"Facebook"} component={SettingField} /></li>
-                <li><Field name={"contacts.github"} validate={[urlValidator]} placeholder={"Github"} component={SettingField} /></li>
-                <li><Field name={"contacts.instagram"} validate={[urlValidator]} placeholder={"Instagram"} component={SettingField} /></li>
-                <li><Field name={"contacts.mainLink"} validate={[urlValidator]} placeholder={"MainLink"} component={SettingField}/></li>
-                <li><Field name={"contacts.twitter"} validate={[urlValidator]} placeholder={"Twitter"} component={SettingField} /></li>
-                <li><Field name={"contacts.vk"} validate={[urlValidator]} placeholder={"Vk"} component={SettingField} /></li>
-                <li><Field name={"contacts.website"} validate={[urlValidator]} placeholder={"Website"} component={SettingField} /></li>
-                <li><Field name={"contacts.youtube"} validate={[urlValidator]} placeholder={"YouTube"} component={SettingField} /></li>
-                <li><Field name={"lookingForAJob"} id={"lookingForAJob"} component={"input"}
-                           type={"checkbox"} /><label htmlFor="lookingForAJob">Looking for a job?</label></li>
-                <li><Field name={"lookingForAJobDescription"} validate={[emptyField]}  placeholder={"What job is your favourite?"} component={SettingField} /></li>
-                <li><Field name={"fullName"} validate={[emptyField]}  placeholder={"Your full name"} component={SettingField} /></li>
+                <ContactsItem name="aboutMe" placeholder="About you" validators={[emptyField]}/>
+                {contactsMap.map(i => <ContactsItem key={i} name={`contacts.${i}`} validators={[urlValidator]} placeholder={i}/>)}
+                <CheckboxItem/>
+                <ContactsItem name={"lookingForAJobDescription"} placeholder={"What job is your favourite?"} validators={[emptyField]}/>
+                <ContactsItem name="fullName" placeholder="Your full name" validators={[emptyField]}/>
             </ul>
-            <Button type={"submit"} variant="contained" color="primary">Set changes</Button>
-            <Button onClick={() => props.setEditMode(false)} variant="contained">Cancel</Button>
-
-            <Snackbar open={open} onClick={() => setOpen(false)}>
-                <Alert severity="error">
-                    {props.error}
-                </Alert>
-            </Snackbar>
+            <Button type="submit" variant="contained" color="primary">Set changes</Button>
+            <Button onClick={() => setEditMode(false)} variant="contained">Cancel</Button>
+            <SnackbarError open={open} setOpen={setOpen} error={error}/>
         </form>
     )
 };
 
-const InformationFormProvider = reduxForm({
+export const InformationFormProvider = reduxForm({
     form: "settings"
 })(InformationForm);
 
-export default InformationFormContainer;

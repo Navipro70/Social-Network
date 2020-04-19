@@ -90,14 +90,13 @@ export const thunkGetStatus = (userId) => {
 };
 
 export const thunkPutUserInformation = (data, userId) => async dispatch => {
-  let responseStatusInfo = await profileApi.setInformation(data); // Это нужно исправить так, чтобы не запрашивать снова пользователя
-  if (responseStatusInfo.resultCode === 0) dispatch(thunkSetCurrentProfile(userId)); // А отсылать данные и из респонса их сетать в профиль
-  else dispatch(stopSubmit("settings", {_error: "Произошла ошибка при отправке данных"})); // НО пока что сервер не отправляет респонс с данныыми обратно:(
+  let responseStatusInfo = await profileApi.setInformation(data);
+  if (responseStatusInfo.resultCode === 0) dispatch(thunkSetCurrentProfile(userId));
+  else dispatch(stopSubmit("settings", {_error: "Произошла ошибка при отправке данных"}));
 };
 
 export const thunkSavePhoto  = (photoFile) => async dispatch => {
   const data = await profileApi.setPhoto(photoFile);
-  debugger
   if (data.resultCode === 0) dispatch(uploadProfilePhoto(data.data.photos));
 };
 
