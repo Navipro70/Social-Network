@@ -35,3 +35,11 @@ export type userType = {
     photos: photosType
     followed: boolean
 }
+
+export type ProfileInformationType = {
+    aboutMe: string | null
+    contacts: contactsType
+    lookingForAJob: boolean | null
+    "lookingForAJobDescription": string | null
+    "fullName": string | null
+}

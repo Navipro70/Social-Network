@@ -14,6 +14,7 @@ import {AppStateType} from "../../redux/redux-store";
 type MapStateToPropsType = {
     currentPage: number
     pageSize: number
+    totalUsersCount: number
     isFetching: boolean
     users: Array<userType>
     isFollowingBlocker: Array<number>
@@ -28,22 +29,27 @@ type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
-        this.props.thunkGetUsers(this.props.currentPage, this.props.pageSize, true);
+        const {currentPage, pageSize} = this.props
+        this.props.thunkGetUsers(currentPage, pageSize, true);
     }
 
     setCurrentPage = (pageNumber: number): void => {
-        this.props.thunkLoadUsers(pageNumber, this.props.pageSize, true);
+        const {pageSize} = this.props
+        this.props.thunkLoadUsers(pageNumber, pageSize, true);
     };
 
     render() {
-        const {isFetching, users, isFollowingBlocker, thunkUserFollowing} = this.props;
+        const {isFetching, users, isFollowingBlocker, thunkUserFollowing, pageSize, currentPage, totalUsersCount} = this.props;
         if (isFetching) return <Preloader/>;
         return (
             <Users
                 setCurrentPage={this.setCurrentPage}
                 users={users}
                 isFollowingBlocker={isFollowingBlocker}
-                thunkUserFollowing={thunkUserFollowing}/>
+                thunkUserFollowing={thunkUserFollowing}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                totalUsersCount={totalUsersCount}/>
         );
     }
 }

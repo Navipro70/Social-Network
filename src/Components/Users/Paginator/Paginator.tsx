@@ -1,24 +1,16 @@
 import React, {FC, useState} from "react";
 import "./Paginator.css";
 import classes from "../Users.module.css";
-import {connect} from "react-redux";
 import {PrevButton} from "./PaginatorComponents/PrevButton";
 import {NextButton} from "./PaginatorComponents/NextButton";
-import {compose} from "redux";
 import {PageNumber} from "./PaginatorComponents/PageNumber";
-import {AppStateType} from "../../../redux/redux-store";
 
-type MapStateToPropsType = {
+type PropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
-}
-
-type ExternalProps = {
     setCurrentPage: (page: number) => void
 }
-
-type PropsType = ExternalProps & MapStateToPropsType
 
 const Paginator: FC<PropsType> = ({totalUsersCount, pageSize, currentPage, setCurrentPage}) => {
     let pagesCount = Math.ceil(totalUsersCount / (pageSize));
@@ -43,14 +35,6 @@ const Paginator: FC<PropsType> = ({totalUsersCount, pageSize, currentPage, setCu
     )
 };
 
-const mapStateToProps = (state: AppStateType) => ({
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-});
 
 
-export default compose(
-    connect<MapStateToPropsType, null, ExternalProps, AppStateType>(mapStateToProps, null),
-    React.memo
-)(Paginator)
+export default React.memo(Paginator)

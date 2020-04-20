@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import User from "./User/User";
 import classes from "./Users.module.css";
 import Paginator from "./Paginator/Paginator";
@@ -6,12 +6,20 @@ import {userType} from "../../Types/types";
 
 type PropsType = {
     users: Array<userType>
-    setCurrentPage: (page: number) => void
     isFollowingBlocker: Array<number>
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
     thunkUserFollowing: (isFollowed: boolean, id: number) => void
+    setCurrentPage: (page: number) => void
 }
 
-const Users: React.FC<PropsType> = ({users, setCurrentPage, isFollowingBlocker, thunkUserFollowing}) => {
+const Users: FC<PropsType> = ({users, setCurrentPage,
+                                  isFollowingBlocker,
+                                  thunkUserFollowing,
+                                  totalUsersCount,
+                                  pageSize,
+                                  currentPage}) => {
     return (
         <div className={classes.user}>
             {users.map(user => <User
@@ -23,7 +31,10 @@ const Users: React.FC<PropsType> = ({users, setCurrentPage, isFollowingBlocker, 
                 isFollowingBlocker={isFollowingBlocker}
                 thunkUserFollowing={thunkUserFollowing}
             />)}
-            <Paginator setCurrentPage={setCurrentPage}/>
+            <Paginator setCurrentPage={setCurrentPage}
+                       pageSize={pageSize}
+                       currentPage={currentPage}
+                       totalUsersCount={totalUsersCount} />
         </div>
     )
 };

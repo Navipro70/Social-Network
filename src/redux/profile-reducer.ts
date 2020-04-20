@@ -1,6 +1,6 @@
 import {profileApi} from "../API/profileAPI";
 import {stopSubmit} from "redux-form";
-import {photosType, postType, profileType} from "../Types/types";
+import {photosType, postType, ProfileInformationType, profileType} from "../Types/types";
 
 const ADD_POST = "ADD-POST";
 const SET_PROFILE_PAGE = "SET-PROFILE-PAGE";
@@ -138,7 +138,7 @@ export const thunkGetStatus = (userId: number) => {
     }
 };
 
-export const thunkPutUserInformation = (data: profileType, userId: number) => async (dispatch: any) => {
+export const thunkPutUserInformation = (data: ProfileInformationType, userId: number) => async (dispatch: any) => {
     let responseStatusInfo = await profileApi.setInformation(data);
     if (responseStatusInfo.resultCode === 0) dispatch(thunkSetCurrentProfile(userId));
     else dispatch(stopSubmit("settings", {_error: "Произошла ошибка при отправке данных"}));
