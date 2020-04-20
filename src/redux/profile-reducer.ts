@@ -1,6 +1,7 @@
 import {profileApi} from "../API/profileAPI";
 import {stopSubmit} from "redux-form";
 import {photosType, postType, ProfileInformationType, profileType} from "../Types/types";
+import { ResultCodesEnum } from "../API/axiosInstance";
 
 const ADD_POST = "ADD-POST";
 const SET_PROFILE_PAGE = "SET-PROFILE-PAGE";
@@ -140,13 +141,13 @@ export const thunkGetStatus = (userId: number) => {
 
 export const thunkPutUserInformation = (data: ProfileInformationType, userId: number) => async (dispatch: any) => {
     let responseStatusInfo = await profileApi.setInformation(data);
-    if (responseStatusInfo.resultCode === 0) dispatch(thunkSetCurrentProfile(userId));
+    if (responseStatusInfo.resultCode === ResultCodesEnum.Success) dispatch(thunkSetCurrentProfile(userId));
     else dispatch(stopSubmit("settings", {_error: "Произошла ошибка при отправке данных"}));
 };
 
 export const thunkSavePhoto = (photoFile: photosType) => async (dispatch: any) => {
     const data = await profileApi.setPhoto(photoFile);
-    if (data.resultCode === 0) dispatch(uploadProfilePhoto(data.data.photos));
+    if (data.resultCode === ResultCodesEnum.Success) dispatch(uploadProfilePhoto(data.data.photos));
 };
 
 export default profileReducer;

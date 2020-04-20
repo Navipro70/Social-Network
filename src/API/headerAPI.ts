@@ -1,4 +1,4 @@
-import {axiosInstance} from "./axiosInstance";
+import {axiosInstance, ResultCodesEnum} from "./axiosInstance";
 
 type ResponseDataType = {
     data: {
@@ -6,7 +6,7 @@ type ResponseDataType = {
         email: string
         login: string
     }
-    resultCode: number
+    resultCode: ResultCodesEnum
     messages: Array<string>
 }
 

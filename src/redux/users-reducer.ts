@@ -1,5 +1,6 @@
 import {userApi} from "../API/usersAPI";
 import {userType} from "../Types/types";
+import {ResultCodesEnum} from "../API/axiosInstance";
 
 const FOLLOWING = "FOLLOWING";
 const SET_USERS = "SET-USERS";
@@ -151,13 +152,13 @@ export const thunkUserFollowing = (followed: boolean, id: number) => {
         dispatch(toggleBlocker(true, id));
         if (!followed) {
             const data = await userApi.postFollowing(id);
-            if (data.resultCode === 0) {
+            if (data.resultCode === ResultCodesEnum.Success) {
                 await dispatch(following(id));
             }
             dispatch(toggleBlocker(false, id));
         } else {
             const data = await userApi.deleteFollowing(id);
-            if (data.resultCode === 0) {
+            if (data.resultCode === ResultCodesEnum.Success) {
                 await dispatch(following(id));
             }
             dispatch(toggleBlocker(false, id));

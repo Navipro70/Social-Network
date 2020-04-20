@@ -1,7 +1,6 @@
 import {thunkAuthentication} from "./auth-reducer";
 import { ThunkAction } from "redux-thunk";
 import {AppStateType} from "./redux-store";
-import {act} from "react-dom/test-utils";
 
 const INITIALIZING_APP = "INITIALIZING-APP";
 const SHOW_ERROR = "SHOW-ERROR";
@@ -53,7 +52,7 @@ export const showingError = (showError: boolean): ShowErrorType => ({
 
 type ThunkActionType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
-export const thunkInitializing = (): ThunkActionType => async (dispatch: any) => {
+export const thunkInitializing = (): ThunkActionType => async (dispatch, getState) => {
     await dispatch(thunkAuthentication());
     dispatch(appIsInitialized())
 };

@@ -7,7 +7,7 @@ export const LoginErrors = ({error, captchaSrc}) => {
     return (
         <div className="form-row common-login-error">
             {error}
-            <img src={captchaSrc} />
+            <img src={captchaSrc} alt=""/>
             {captchaSrc &&
             <Field type="text" name="captcha" component={LoginInput} placeholder="Captcha"/>}
         </div>

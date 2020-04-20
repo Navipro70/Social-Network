@@ -1,8 +1,8 @@
-import {axiosInstance} from "./axiosInstance";
+import {axiosInstance, ResultCodesEnum} from "./axiosInstance";
 import { CommonResponse } from "./usersAPI";
 
 type LoginResponseType = {
-    resultCode: number
+    resultCode: ResultCodesEnum
     messages: Array<string>
     data: {
         userId: number

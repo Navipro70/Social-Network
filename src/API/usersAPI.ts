@@ -1,14 +1,14 @@
-import {axiosInstance} from "./axiosInstance";
+import {axiosInstance, ResultCodesEnum} from "./axiosInstance";
 import {userType} from "../Types/types";
 
 type ResponseUsersType = {
     items: Array<userType>
-    totalCount: number
+    totalCount: ResultCodesEnum
     error: string | null
 }
 
 export type CommonResponse = {
-    resultCode: number
+    resultCode: ResultCodesEnum
     messages: Array<string>
     data: any //additional data
 }
