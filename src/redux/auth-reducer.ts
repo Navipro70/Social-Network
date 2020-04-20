@@ -19,10 +19,11 @@ let initialState = {
 
 type initialStateType = typeof initialState
 
-const authReducer = (state: initialStateType = initialState, action: any):initialStateType => {
+const authReducer = (state: initialStateType = initialState, action: any): initialStateType => {
     switch (action.type) {
         case USER_AUTHENTICATION:
-            return {...state,
+            return {
+                ...state,
                 currentUserProfile: action.data,
                 isAuth: action.isAuth,
             };
@@ -39,15 +40,15 @@ type userAuthenticationType = {
     isAuth: boolean
 }
 
-const userAuthentication = (data: currentUserProfileType | null, isAuth: boolean):userAuthenticationType => ({
+const userAuthentication = (data: currentUserProfileType | null, isAuth: boolean): userAuthenticationType => ({
     type: USER_AUTHENTICATION,
     data,
     isAuth
 });
 
-type putCaptchaSrcToStateType =  {
+type putCaptchaSrcToStateType = {
     type: typeof PUT_CAPTCHA_TO_STATE,
-    captchaSrc:  string | null
+    captchaSrc: string | null
 }
 
 const putCaptchaSrcToState = (captchaSrc: string | null): putCaptchaSrcToStateType => ({
@@ -58,7 +59,7 @@ const putCaptchaSrcToState = (captchaSrc: string | null): putCaptchaSrcToStateTy
 export const thunkAuthentication = () => {
     return async (dispatch: any) => {
         const data = await headerApi.getCurrentUserProfile();
-                if (Object.keys(data).length !== 0) dispatch(userAuthentication(data, true));
+        if (Object.keys(data).length !== 0) dispatch(userAuthentication(data, true));
         return data;
     }
 };
@@ -74,22 +75,20 @@ export const thunkShowCaptcha = () => {
 export const thunkLoginUser = (email: string, password: string, rememberMe: boolean, captcha: string) => {
     return async (dispatch: any) => {
         const response = await loginApi.loginUser(email, password, rememberMe, captcha);
-            if (response.data.resultCode === 0) {
-                dispatch(thunkAuthentication());
-                dispatch(putCaptchaSrcToState(null))
-            }
-            else if (response.data.resultCode === 10) { // 10 - Приходит каптча, запрашиваем УРЛ на неё и потом показываем
-                await dispatch(thunkShowCaptcha());     // этот УРЛ в img с сообщением ошибки в Login компоненте
-                dispatch(stopSubmit("login", {_error: response.data.messages[0]}));
-            }
-            else dispatch(stopSubmit("login", {_error: response.data.messages[0]}))
+        if (response.data.resultCode === 0) {
+            dispatch(thunkAuthentication());
+            dispatch(putCaptchaSrcToState(null))
+        } else if (response.data.resultCode === 10) { // 10 - Приходит каптча, запрашиваем УРЛ на неё и потом показываем
+            await dispatch(thunkShowCaptcha());     // этот УРЛ в img с сообщением ошибки в Login компоненте
+            dispatch(stopSubmit("login", {_error: response.data.messages[0]}));
+        } else dispatch(stopSubmit("login", {_error: response.data.messages[0]}))
     }
 };
 
 export const thunkLogoutUser = () => {
     return async (dispatch: any) => {
         const response = await loginApi.logoutUser();
-                if (response.data.resultCode === 0) dispatch(userAuthentication(null, false));
+        if (response.data.resultCode === 0) dispatch(userAuthentication(null, false));
     }
 };
 

@@ -16,11 +16,13 @@ let initialState: initialStateType = {
 const appReducer = (state: initialStateType = initialState, action: any): initialStateType => {
     switch (action.type) {
         case INITIALIZING_APP:
-            return {...state,
+            return {
+                ...state,
                 initialized: true,
             };
         case SHOW_ERROR:
-            return {...state,
+            return {
+                ...state,
                 showError: action.showError
             };
         default:
@@ -28,7 +30,7 @@ const appReducer = (state: initialStateType = initialState, action: any): initia
     }
 };
 
-type appIsInitializedType = {type: typeof INITIALIZING_APP}
+type appIsInitializedType = { type: typeof INITIALIZING_APP }
 
 const appIsInitialized = (): appIsInitializedType => ({
     type: INITIALIZING_APP

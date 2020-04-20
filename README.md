@@ -1479,7 +1479,7 @@ componentDidMount() {
 
 ## Redux-Thunk
 
-users-reducer.js
+users-reducer.ts
 
 ```
 export const getUsers = (pageSize, currentPage) => {
@@ -1778,7 +1778,7 @@ Redux-Form это библиотека, которая берёт на себя 
 
 2) Создаём новую ветку state под названием form и присваиваем ей formReducer, импортированный из пакета redux-form ( В самом пакете он называется reducer, что может ввести в заблуждение, так что импортируйте под названием, которое будет понятно **ВАМ**, например formReducer)
 
-redux-store.js
+redux-store.ts
 
 ```javascript
 import { createStore, combineReducers, applyMiddleware } from "redux";

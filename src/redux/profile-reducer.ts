@@ -1,5 +1,6 @@
 import {profileApi} from "../API/profileAPI";
 import {stopSubmit} from "redux-form";
+import {photosType, postType, profileType} from "../Types/types";
 
 const ADD_POST = "ADD-POST";
 const SET_PROFILE_PAGE = "SET-PROFILE-PAGE";
@@ -8,35 +9,6 @@ const GET_PROFILE_STATUS = "GET-PROFILE-STATUS";
 const FETCHING_PROFILE = "FETCHING-PROFILE";
 const UPLOAD_PROFILE_PHOTO = "UPLOAD-PROFILE-PHOTO";
 
-type postType = {
-    postText: string
-    id: number
-}
-
-type contactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
-
-type photosType = {
-    small: string | null
-    large: string | null
-}
-
-type profileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: contactsType
-    photos: photosType
-}
 
 let initialState = {
     posts: [
@@ -76,7 +48,7 @@ const profileReducer = (state: initialStateType = initialState, action: any): in
         case FETCHING_PROFILE:
             return {...state, isProfileFetching: action.isProfileFetching};
         case UPLOAD_PROFILE_PHOTO:
-            return {...state, profile: {...state.profile, photos: action.photoFiles}};
+            return {...state, profile: {...state.profile, photos: action.photoFiles} as profileType};
         default:
             return state;
     }
@@ -122,12 +94,22 @@ const toggleProfileFetching = (isProfileFetching: boolean): toggleProfileFetchin
     isProfileFetching
 });
 
-const setProfilePage = (profile: profileType) => ({
+type setProfilePageType = {
+    type: typeof SET_PROFILE_PAGE
+    profile: profileType
+}
+
+const setProfilePage = (profile: profileType): setProfilePageType => ({
     type: SET_PROFILE_PAGE,
     profile
 });
 
-const uploadProfilePhoto = (photoFiles: photosType) => ({
+type uploadProfilePhotoType = {
+    type: typeof UPLOAD_PROFILE_PHOTO
+    photoFiles: photosType
+}
+
+const uploadProfilePhoto = (photoFiles: photosType): uploadProfilePhotoType => ({
     type: UPLOAD_PROFILE_PHOTO,
     photoFiles
 });
