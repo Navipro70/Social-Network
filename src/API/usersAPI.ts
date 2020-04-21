@@ -1,10 +1,10 @@
 import {axiosInstance, ResultCodesEnum} from "./axiosInstance";
-import {userType} from "../Types/types";
+import {Nullable, userType} from "../Types/types";
 
 type ResponseUsersType = {
     items: Array<userType>
     totalCount: ResultCodesEnum
-    error: string | null
+    error: Nullable<string>
 }
 
 export type CommonResponse = {

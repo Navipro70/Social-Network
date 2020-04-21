@@ -3,9 +3,10 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {currentUserProfileType, thunkLogoutUser} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
+import {Nullable} from "../../Types/types";
 
 type MapStateToPropsType = {
-    currentUserProfile: currentUserProfileType | null
+    currentUserProfile: Nullable<currentUserProfileType>
 }
 
 type MapDispatchToPropsType = {

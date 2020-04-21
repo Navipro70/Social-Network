@@ -1,15 +1,15 @@
 import {
     thunkGetUsers,
     thunkLoadUsers, thunkUserFollowing
-} from "../../redux/users-reducer";
-import Users from "./Users";
-import {connect} from "react-redux";
-import React from "react";
-import Preloader from "../Common/Preloader";
-import {authRedirect} from "../../HihgOrderComponents/redirectComponent";
-import {compose} from "redux";
-import {userType} from "../../Types/types";
-import {AppStateType} from "../../redux/redux-store";
+} from "../../redux/users-reducer"
+import Users from "./Users"
+import {connect} from "react-redux"
+import React from "react"
+import Preloader from "../Common/Preloader"
+import {authRedirect} from "../../HihgOrderComponents/redirectComponent"
+import {compose} from "redux"
+import {userType} from "../../Types/types"
+import {AppStateType} from "../../redux/redux-store"
 
 type MapStateToPropsType = {
     currentPage: number
@@ -19,6 +19,7 @@ type MapStateToPropsType = {
     users: Array<userType>
     isFollowingBlocker: Array<number>
 }
+
 type MapDispatchToPropsType = {
     thunkGetUsers: (currentPage: number, pageSize: number, isFetching: boolean) => void //ДАТЬ ТИПЫ THUNK
     thunkLoadUsers: (pageNumber: number, pageSize: number, isFetching: boolean) => void //ДАТЬ ТИПЫ THUNK
@@ -67,8 +68,10 @@ let mapStateToProps = (state: AppStateType) => {
 
 
 export default compose(
-    connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {thunkGetUsers, thunkLoadUsers, thunkUserFollowing}),
+    connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
+        thunkGetUsers,
+        thunkLoadUsers,
+        thunkUserFollowing
+    }),
     authRedirect
 )(UsersContainer);
-
-

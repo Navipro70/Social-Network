@@ -6,11 +6,12 @@ import {LoginPassword} from "./LoginComponents/LoginPassword";
 import {LoginCheckbox} from "./LoginComponents/LoginCheckbox";
 import {LoginErrors} from "./LoginComponents/LoginErrors";
 import {ReduxFormDataType} from "./LoginContainer";
+import {Nullable} from "../../Types/types";
 
 type PropsType = {
     maxLength20: (value: string) => string | undefined
     minLength5: (value: string) => string | undefined
-    captchaSrc: string | null
+    captchaSrc: Nullable<string>
 }
 
 const Login: FC<InjectedFormProps<ReduxFormDataType, PropsType> & PropsType> = ({error, handleSubmit, maxLength20, minLength5, captchaSrc}) => (

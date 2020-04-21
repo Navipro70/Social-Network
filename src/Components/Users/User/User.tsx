@@ -3,21 +3,22 @@ import classes from "./User.module.css";
 import anon from "./../../../Images/anon.png";
 import Button from "@material-ui/core/Button";
 import {NavLink} from "react-router-dom";
+import {Nullable} from "../../../Types/types";
 
 type PropsType = {
     followed: boolean
     id: number
-    photoSrcSmall: null | string
+    photoSrcSmall: Nullable<string>
     isFollowingBlocker: Array<number>
     status: string
     thunkUserFollowing: (isFollowed: boolean, id: number) => void
 }
 
 const User: React.FC<PropsType> = ({followed, thunkUserFollowing, id, photoSrcSmall, isFollowingBlocker, status}) => {
-    const [butText, setButText] = useState<string>(followed ? "Unfollow" : "Follow");
+    const [butText, setButText] = useState<string>(followed ? "UnFollow" : "Follow");
 
     const handleClick = () => {
-        setButText(followed ? "Follow" : "Unfollow");
+        setButText(followed ? "Follow" : "UnFollow");
         thunkUserFollowing(followed, id);
     };
 

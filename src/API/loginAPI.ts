@@ -1,5 +1,5 @@
 import {axiosInstance, ResultCodesEnum} from "./axiosInstance";
-import { CommonResponse } from "./usersAPI";
+import {CommonResponse} from "./usersAPI";
 
 type LoginResponseType = {
     resultCode: ResultCodesEnum
@@ -22,6 +22,6 @@ export const loginApi = {
         return axiosInstance.delete<CommonResponse>(`/auth/login`)
     },
     getCaptcha() {
-        return axiosInstance.get<{url: string | null}>("security/get-captcha-url")
+        return axiosInstance.get<{ url: string | null }>("security/get-captcha-url")
     }
 };

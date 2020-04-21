@@ -36,5 +36,4 @@ const Paginator: FC<PropsType> = ({totalUsersCount, pageSize, currentPage, setCu
 };
 
 
-
 export default React.memo(Paginator)

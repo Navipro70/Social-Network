@@ -1,5 +1,5 @@
-import React from "react";
-import classes from "../../Users.module.css";
+import React from "react"
+import classes from "../../Users.module.css"
 
 type PropsType = {
     i: number

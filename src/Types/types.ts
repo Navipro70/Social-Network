@@ -1,3 +1,5 @@
+export type Nullable<T> = null | T
+
 export type postType = {
     postText: string
     id: number
@@ -15,8 +17,8 @@ export type contactsType = {
 }
 
 export type photosType = {
-    small: string | null
-    large: string | null
+    small: Nullable<string>
+    large: Nullable<string>
 }
 
 export type profileType = {
@@ -31,15 +33,15 @@ export type profileType = {
 export type userType = {
     id: number
     name: string
-    status: string | null
+    status: Nullable<string>
     photos: photosType
     followed: boolean
 }
 
 export type ProfileInformationType = {
-    aboutMe: string | null
+    aboutMe: Nullable<string>
     contacts: contactsType
-    lookingForAJob: boolean | null
-    "lookingForAJobDescription": string | null
-    "fullName": string | null
+    lookingForAJob: Nullable<boolean>
+    "lookingForAJobDescription": Nullable<string>
+    "fullName": Nullable<string>
 }

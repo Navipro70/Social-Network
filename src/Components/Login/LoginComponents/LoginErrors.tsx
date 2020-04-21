@@ -1,10 +1,11 @@
 import {Field} from "redux-form";
 import {LoginInput} from "../../Common/FieldControls";
 import React, {FC} from "react";
+import {Nullable} from "../../../Types/types";
 
 type PropsType = {
-    error: string | null
-    captchaSrc: string | null
+    error: Nullable<string>
+    captchaSrc: Nullable<string>
 }
 
 export const LoginErrors: FC<PropsType> = ({error, captchaSrc}) => (

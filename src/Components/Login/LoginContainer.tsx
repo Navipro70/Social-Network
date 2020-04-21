@@ -6,10 +6,11 @@ import {Redirect} from "react-router-dom";
 import {maxLength, minLength} from "../../utils/validators";
 import {thunkLoginUser} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
+import {Nullable} from "../../Types/types";
 
 type MapStatePropsType = {
     isAuth: boolean
-    captchaSrc: string | null
+    captchaSrc: Nullable<string>
 }
 
 type MadDispatchPropsType = {
