@@ -1924,7 +1924,7 @@ const Login = (props) => {
 
 Для начала создадим сами валидаторы. **Валидаторы** - это функции, которые принимают введённое в Field значение и следуя логике, написанной нами отдают либо undefinned, либо текст ошибки.
 
-validators.js
+validators.ts
 
 ```javascript
 export const required = value => {

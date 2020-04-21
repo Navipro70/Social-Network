@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
-import {currentUserProfileType, thunkLogoutUser, ThunkActionType} from "../../redux/auth-reducer";
+import {currentUserProfileType, thunkLogoutUser} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
 
 type MapStateToPropsType = {
@@ -23,7 +23,7 @@ const HeaderContainer: FC<PropsType> = ({thunkLogoutUser, currentUserProfile}) =
     )
 };
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+const mapStateToProps = (state: AppStateType) => ({
     currentUserProfile: state.auth.currentUserProfile
 });
 
