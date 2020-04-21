@@ -15,9 +15,9 @@ let initialState: InitialStateType = {
     showError: false
 };
 
-type ActionTypes  = AppIsInitializedType | ShowErrorType
+type ActionType  = AppIsInitializedType | ShowErrorType
 
-const appReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
+const appReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case INITIALIZING_APP:
             return {
@@ -50,7 +50,7 @@ export const showingError = (showError: boolean): ShowErrorType => ({
     showError
 });
 
-type ThunkActionType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
+type ThunkActionType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 
 export const thunkInitializing = (): ThunkActionType => async (dispatch, getState) => {
     await dispatch(thunkAuthentication());

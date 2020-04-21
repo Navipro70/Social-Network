@@ -1,8 +1,13 @@
-import React from "react";
+import React, {FC} from "react";
 import classes from "../Header.module.css";
 import {NavLink} from "react-router-dom";
 
-export const CurrentProfileNavLink = ({login, logoutHandler}) => {
+type PropsType = {
+    login: string
+    logoutHandler: () => void
+};
+
+export const CurrentProfileNavLink: FC<PropsType> = ({login, logoutHandler}) => {
     return (
         <div className={classes.auth}>
             <NavLink to={`/profile`}>{login}</NavLink>

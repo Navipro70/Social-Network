@@ -20,21 +20,21 @@ type MapStateToPropsType = {
     isFollowingBlocker: Array<number>
 }
 type MapDispatchToPropsType = {
-    thunkGetUsers: (currentPage: number, pageSize: number, isFetching: boolean) => void
-    thunkLoadUsers: (pageNumber: number, pageSize: number, isFetching: boolean) => void
-    thunkUserFollowing: (isFollowed: boolean, id: number) => void
+    thunkGetUsers: (currentPage: number, pageSize: number, isFetching: boolean) => void //ДАТЬ ТИПЫ THUNK
+    thunkLoadUsers: (pageNumber: number, pageSize: number, isFetching: boolean) => void //ДАТЬ ТИПЫ THUNK
+    thunkUserFollowing: (isFollowed: boolean, id: number) => void //ДАТЬ ТИПЫ THUNK
 }
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
-        const {currentPage, pageSize} = this.props
+        const {currentPage, pageSize} = this.props;
         this.props.thunkGetUsers(currentPage, pageSize, true);
     }
 
     setCurrentPage = (pageNumber: number): void => {
-        const {pageSize} = this.props
+        const {pageSize} = this.props;
         this.props.thunkLoadUsers(pageNumber, pageSize, true);
     };
 

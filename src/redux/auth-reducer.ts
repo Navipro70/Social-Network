@@ -2,11 +2,13 @@ import {headerApi} from "../API/headerAPI";
 import {loginApi} from "../API/loginAPI";
 import {stopSubmit} from "redux-form";
 import {ResultCodesEnum} from "../API/axiosInstance";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const USER_AUTHENTICATION = "USER-AUTHENTICATION";
 const PUT_CAPTCHA_TO_STATE = "PUT-CAPTCHA-TO-STATE";
 
-type currentUserProfileType = {
+export type currentUserProfileType = {
     id: number,
     login: string,
     email: string
@@ -20,7 +22,9 @@ let initialState = {
 
 type initialStateType = typeof initialState
 
-const authReducer = (state: initialStateType = initialState, action: any): initialStateType => {
+type ActionType = userAuthenticationType | putCaptchaSrcToStateType
+
+const authReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
         case USER_AUTHENTICATION:
             return {
@@ -57,24 +61,35 @@ const putCaptchaSrcToState = (captchaSrc: string | null): putCaptchaSrcToStateTy
     captchaSrc
 });
 
-export const thunkAuthentication = () => {
-    return async (dispatch: any) => {
+export type ThunkActionType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
+
+// ===================GENERICS=TYPES=EXAMPLE============================
+// type ThunkResult<R> = ThunkAction<R, IinitialState, undefined, any>;
+//
+// export function anotherThunkAction(): ThunkResult<Promise<boolean>> {
+//     return (dispatch, getState) => {
+//         return Promise.resolve(true);
+//     }
+// }
+
+export const thunkAuthentication = (): ThunkActionType => {
+    return async (dispatch) => {
         const data = await headerApi.getCurrentUserProfile();
         if (Object.keys(data).length !== 0) dispatch(userAuthentication(data, true));
-        return data;
+        // return Promise.resolve(data)
     }
 };
 
-export const thunkShowCaptcha = () => {
-    return async (dispatch: any) => {
+export const thunkShowCaptcha = (): ThunkActionType => {
+    return async (dispatch) => {
         const data = await loginApi.getCaptcha();
         dispatch(putCaptchaSrcToState(data.data.url));
-        return Promise.resolve(data);
+        // return Promise.resolve(data)
     }
 };
 
-export const thunkLoginUser = (email: string, password: string, rememberMe: boolean, captcha: string) => {
-    return async (dispatch: any) => {
+export const thunkLoginUser = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkActionType => {
+    return async (dispatch: any) => { //any убрать УБРАТЬ УБРАТЬ УБРАТЬ УБРАТЬ
         const response = await loginApi.loginUser(email, password, rememberMe, captcha);
         if (response.data.resultCode === ResultCodesEnum.Success) {
             dispatch(thunkAuthentication());
@@ -86,8 +101,8 @@ export const thunkLoginUser = (email: string, password: string, rememberMe: bool
     }
 };
 
-export const thunkLogoutUser = () => {
-    return async (dispatch: any) => {
+export const thunkLogoutUser = (): ThunkActionType => {
+    return async (dispatch) => {
         const response = await loginApi.logoutUser();
         if (response.data.resultCode === ResultCodesEnum.Success) dispatch(userAuthentication(null, false));
     }
