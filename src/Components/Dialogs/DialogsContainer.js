@@ -1,5 +1,5 @@
 import Dialogs from "./Dialogs";
-import {addMessage} from "../../redux/dialog-reducer";
+import {actions} from "../../redux/dialog-reducer";
 import {connect} from "react-redux";
 import {authRedirect} from "../../HihgOrderComponents/redirectComponent";
 
@@ -13,4 +13,6 @@ let mapStateToProps = (state) => {
 
 const DialogRedirect = authRedirect(Dialogs);
 
-export default connect(mapStateToProps, {addMessage})(DialogRedirect);
+export default connect(mapStateToProps, {
+  addMessage: actions.addMessage
+})(DialogRedirect);

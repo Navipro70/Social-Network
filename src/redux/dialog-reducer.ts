@@ -1,5 +1,3 @@
-const NEW_MESSAGE = "NEW-MESSAGE";
-
 type messageType = {
     id: number
     message: string
@@ -32,7 +30,7 @@ type initialStateType = typeof initialState
 
 const dialogReducer = (state: initialStateType = initialState, action: any): initialStateType => {
     switch (action.type) {
-        case NEW_MESSAGE:
+        case 'dialog/NEW_MESSAGE':
             return {
                 ...state,
                 messages: [...state.messages, {id: state.messages.length + 1, message: action.messageText}],
@@ -42,14 +40,11 @@ const dialogReducer = (state: initialStateType = initialState, action: any): ini
     }
 };
 
-type addMessageType = {
-    type: typeof NEW_MESSAGE
-    messageText: string
-}
-
-export const addMessage = (messageText: string): addMessageType => ({
-    type: NEW_MESSAGE,
-    messageText
-});
+export const actions = {
+    addMessage: (messageText: string) => ({
+        type: 'dialog/NEW_MESSAGE',
+        messageText
+    } as const)
+};
 
 export default dialogReducer;

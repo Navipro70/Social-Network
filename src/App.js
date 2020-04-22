@@ -11,7 +11,7 @@ import HeaderContainer from "./Components/Header/HeaderContainer";
 import LoginContainer from "./Components/Login/LoginContainer";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {showingError, thunkInitializing} from "./redux/app-reducer";
+import {actions, thunkInitializing} from "./redux/app-reducer";
 import Preloader from "./Components/Common/Preloader";
 import {SnackbarError} from "./Components/Profile/Information/InformationForm/InformationFormItems/SnackbarError";
 
@@ -67,6 +67,6 @@ export default compose(
     withRouter,
     connect(mapStateToProps, {
         thunkInitializing,
-        showingError
+        showingError: actions.showingError
     })
 )(App);

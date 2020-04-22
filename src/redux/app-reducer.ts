@@ -1,30 +1,24 @@
-import {thunkAuthentication} from "./auth-reducer";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./redux-store";
+import {thunkAuthentication} from "./auth-reducer"
+import {ThunkAction} from "redux-thunk"
+import {AppStateType, InferActionsType} from "./redux-store"
 
-const INITIALIZING_APP = "INITIALIZING-APP";
-const SHOW_ERROR = "SHOW-ERROR";
-
-type InitialStateType = {
-    initialized: boolean,
-    showError: boolean
-}
-
-let initialState: InitialStateType = {
+let initialState = {
     initialized: false,
     showError: false
 };
 
-type ActionType = AppIsInitializedType | ShowErrorType
+type InitialStateType = typeof initialState
+
+type ActionType = InferActionsType<typeof actions>
 
 const appReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
-        case INITIALIZING_APP:
+        case 'app/INITIALIZING_APP':
             return {
                 ...state,
                 initialized: true,
             };
-        case SHOW_ERROR:
+        case 'app/SHOW_ERROR':
             return {
                 ...state,
                 showError: action.showError
@@ -34,27 +28,16 @@ const appReducer = (state: InitialStateType = initialState, action: ActionType):
     }
 };
 
-type AppIsInitializedType = { type: typeof INITIALIZING_APP }
-
-const appIsInitialized = (): AppIsInitializedType => ({
-    type: INITIALIZING_APP
-});
-
-type ShowErrorType = {
-    type: typeof SHOW_ERROR
-    showError: boolean
-}
-
-export const showingError = (showError: boolean): ShowErrorType => ({
-    type: SHOW_ERROR,
-    showError
-});
+export const actions = {
+    appIsInitialized: () => ({type: 'app/INITIALIZING_APP'} as const),
+    showingError: (showError: boolean) => ({type: 'app/SHOW_ERROR', showError} as const)
+};
 
 type ThunkActionType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 
 export const thunkInitializing = (): ThunkActionType => async (dispatch) => { //also can get state
     await dispatch(thunkAuthentication());
-    dispatch(appIsInitialized())
+    dispatch(actions.appIsInitialized())
 };
 
 export default appReducer;
