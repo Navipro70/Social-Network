@@ -678,7 +678,7 @@ export default StoreContext;
 
 При создании контейнерной компоненты нам приходилось возвращать разметку внутри StoreContext.Consumer'a. Там же нам приходилось получать state через getState() и dispatch'и. Чтобы всё это передать в презентационную компоненту через пропсы.
 
-**DialogsContainer.js**
+**DialogsContainer.tsx**
 
 ```javascript
 import React from 'react';

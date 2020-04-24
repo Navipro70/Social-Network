@@ -1,4 +1,17 @@
+.posts {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
 .post {
-  margin-left: 30px;
-  margin-right: 30px;
+    display: inline-flex;
+    margin-top: 20px;
+}
+
+.post img {
+    margin-top: 15px;
+    margin-right: 10px;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
 }

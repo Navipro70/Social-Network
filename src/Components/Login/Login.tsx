@@ -28,5 +28,3 @@ const Login: FC<InjectedFormProps<ReduxFormDataType, PropsType> & PropsType> = (
 export default reduxForm<ReduxFormDataType, PropsType>({
     form: "login"
 })(Login);
-
-

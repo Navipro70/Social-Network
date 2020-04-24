@@ -42,12 +42,10 @@ const LoginContainer: FC<PropsType> = ({thunkLoginUser, isAuth, captchaSrc}) => 
     )
 };
 
-const mapStateToProps = (state: AppStateType): MapStatePropsType => {
-    return {
-        isAuth: state.auth.isAuth,
-        captchaSrc: state.auth.captchaSrc
-    }
-};
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
+    isAuth: state.auth.isAuth,
+    captchaSrc: state.auth.captchaSrc
+});
 
 export default connect<MapStatePropsType, MadDispatchPropsType, {}, AppStateType>(mapStateToProps, {
     thunkLoginUser

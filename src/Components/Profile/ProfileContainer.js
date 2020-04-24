@@ -3,6 +3,7 @@ import classes from "./Profile.module.css";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
+    actions,
     thunkGetStatus,
     thunkPutUserInformation, thunkSavePhoto,
     thunkSetCurrentProfile,
@@ -31,16 +32,17 @@ const ProfileContainer = ({match, ...props}) => {
 
     if (props.profilePage.isProfileFetching) return <Preloader/>;
     return (
-            <div className={classes.profile}>
-                <Profile {...props} isOwner={!match.params.userId}/>
-            </div>
+        <div className={classes.profile}>
+            <Profile {...props} isOwner={!match.params.userId}/>
+        </div>
     )
 };
 
 const mapStateToProps = (state) => ({
     profilePage: state.profilePage,
     userProfile: state.auth.currentUserProfile,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    posts: state.profilePage.posts
 });
 
 
@@ -50,7 +52,8 @@ export default compose(
         thunkGetStatus,
         thunkSetStatus,
         thunkPutUserInformation,
-        thunkSavePhoto
+        thunkSavePhoto,
+        addPost: actions.addPost
     }),
     withRouter,
     authRedirect

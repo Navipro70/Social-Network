@@ -7,12 +7,14 @@ const InformationFormContainer = ({profile, thunkPutUserInformation, setEditMode
         setEditMode(true);
     };
 
-    return <div>
-        <InformationFormProvider initialValues={{...profile, ...profile.contacts}}
-                                 setEditMode={setEditMode} profile={profile}
-                                 thunkPutUserInformation={thunkPutUserInformation}
-                                 onSubmit={onSubmit}/>
-    </div>
+    return (
+        <div>
+            <InformationFormProvider initialValues={{...profile, ...profile.contacts}}
+                                     setEditMode={setEditMode} profile={profile}
+                                     thunkPutUserInformation={thunkPutUserInformation}
+                                     onSubmit={onSubmit}/>
+        </div>
+    )
 };
 
 export default InformationFormContainer;

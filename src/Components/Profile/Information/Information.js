@@ -4,7 +4,7 @@ import Preloader from "../../Common/Preloader";
 import StatusHook from "./Status/StatusHook";
 import InformationFormContainer from "./InformationForm/InformationFormContainer";
 import FileInput from "./ImagesComponents/FileInput";
-import {StaticInfo} from "./InformationComponents/StaticInfo/StaticInfo";
+import {StaticInfo} from "./InformationComponents/StaticInfo";
 import {UserPhoto} from "../../Common/UserPhoto";
 
 const Information = ({profile, statusText, setStatus, thunkPutUserInformation, isOwner, thunkSavePhoto}) => {
