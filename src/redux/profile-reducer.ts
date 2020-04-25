@@ -25,7 +25,7 @@ let initialState = {
     statusText: "",
 };
 
-type initialStateType = typeof initialState
+export type initialStateType = typeof initialState
 
 type ActionType = InferActionsType<typeof actions>
 

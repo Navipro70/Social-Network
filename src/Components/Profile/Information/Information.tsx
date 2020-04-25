@@ -6,10 +6,10 @@ import InformationFormContainer from "./InformationForm/InformationFormContainer
 import FileInput from "./InformationComponents/FileInput"
 import ContactInformation from "./InformationComponents/ContactInformation"
 import {UserPhoto} from "../../Common/UserPhoto"
-import {ProfileInformationType, profileType} from "../../../Types/types"
+import {ProfileInformationType, profileType, Nullable} from "../../../Types/types"
 
 type PropsType = {
-    profile: profileType //bad SO BAD SO BAD FIX FIX IFX
+    profile: Nullable<profileType>
     statusText: string
     setStatus: (statusText: string) => void
     thunkPutUserInformation: (data: ProfileInformationType, userIf: number) => void
