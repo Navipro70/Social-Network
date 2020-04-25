@@ -1,13 +1,16 @@
-import React, {useEffect, useState} from "react";
-import { reduxForm} from "redux-form";
+import React, {FC, useEffect, useState} from "react";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import Button from "@material-ui/core/Button";
 import classes from "../Information.module.css";
 import {emptyField, urlValidator} from "../../../../utils/validators";
 import {ContactsItem} from "./InformationFormItems/ContactsItem";
 import {CheckboxItem} from "./InformationFormItems/CheckboxItem";
 import {SnackbarError} from "./InformationFormItems/SnackbarError";
+import {ProfileInformationType} from "../../../../Types/types";
+import {PropsType} from "./InformationFormContainer";
 
-const InformationForm = ({profile, error, setEditMode, ...props}) => {
+
+const InformationForm: FC<InjectedFormProps<ProfileInformationType, PropsType> & PropsType> = ({profile, error, setEditMode, ...props}) => {
     const [open, setOpen] = useState(false);
     useEffect(() => setOpen(typeof error === "string"), [error]);
 
@@ -16,9 +19,11 @@ const InformationForm = ({profile, error, setEditMode, ...props}) => {
         <form onSubmit={props.handleSubmit} className={classes.fullForm}>
             <ul className={classes.profileInfoForm}>
                 <ContactsItem name="aboutMe" placeholder="About you" validators={[emptyField]}/>
-                {contactsMap.map(i => <ContactsItem key={i} name={`contacts.${i}`} validators={[urlValidator]} placeholder={i}/>)}
+                {contactsMap.map(i => <ContactsItem key={i} name={`contacts.${i}`} validators={[urlValidator]}
+                                                    placeholder={i}/>)}
                 <CheckboxItem/>
-                <ContactsItem name={"lookingForAJobDescription"} placeholder={"What job is your favourite?"} validators={[emptyField]}/>
+                <ContactsItem name={"lookingForAJobDescription"} placeholder={"What job is your favourite?"}
+                              validators={[emptyField]}/>
                 <ContactsItem name="fullName" placeholder="Your full name" validators={[emptyField]}/>
             </ul>
             <Button type="submit" variant="contained" color="primary">Set changes</Button>
@@ -28,7 +33,6 @@ const InformationForm = ({profile, error, setEditMode, ...props}) => {
     )
 };
 
-export const InformationFormProvider = reduxForm({
+export default reduxForm<ProfileInformationType, PropsType>({
     form: "settings"
 })(InformationForm);
-

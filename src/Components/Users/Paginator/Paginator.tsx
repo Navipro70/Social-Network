@@ -1,9 +1,8 @@
 import React, {FC, useState} from "react";
 import "./Paginator.css";
 import classes from "../Users.module.css";
-import {PrevButton} from "./PaginatorComponents/PrevButton";
-import {NextButton} from "./PaginatorComponents/NextButton";
 import {PageNumber} from "./PaginatorComponents/PageNumber";
+import {PaginatorButton} from "./PaginatorComponents/PaginatorButton";
 
 type PropsType = {
     totalUsersCount: number
@@ -28,9 +27,9 @@ const Paginator: FC<PropsType> = ({totalUsersCount, pageSize, currentPage, setCu
 
     return (
         <div className={classes.numbers + " numbers"}>
-            {portionNumber > 1 && <PrevButton prevButtonHandler={prevButtonHandler}/>}
+            {portionNumber > 1 && <PaginatorButton buttonHandler={prevButtonHandler} buttonName="Prev"/>}
             {filteredPages}
-            {portionNumber < pagesCount / 10 && <NextButton nextButtonHandler={nextButtonHandler}/>}
+            {portionNumber < pagesCount / 10 && <PaginatorButton buttonHandler={nextButtonHandler} buttonName="Next"/>}
         </div>
     )
 };

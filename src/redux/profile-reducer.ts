@@ -82,7 +82,7 @@ export const thunkGetStatus = (userId: number): ThunkActionType => async (dispat
     dispatch(actions.getProfileStatus(statusText))
 };
 
-type ThunkPutUserInfoType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType | FormAction>
+export type ThunkPutUserInfoType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType | FormAction>
 
 export const thunkPutUserInformation = (data: ProfileInformationType, userId: number): ThunkPutUserInfoType => async (dispatch) => {
     let responseStatusInfo = await profileApi.setInformation(data);

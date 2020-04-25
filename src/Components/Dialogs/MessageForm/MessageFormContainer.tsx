@@ -1,5 +1,5 @@
 import React, {FC} from "react"
-import {InjectedFormProps, reset} from "redux-form"
+import {reset} from "redux-form"
 import {maxLength, minLength} from "../../../utils/validators"
 import {ReduxMessageForm} from "./MessageForm"
 import {DispatchReduxFormType} from "../../../Types/ReduxFormTypes"
