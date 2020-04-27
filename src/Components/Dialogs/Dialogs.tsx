@@ -3,7 +3,7 @@ import classes from "./Dialogs.module.css";
 import Message from "./Messages/Messages";
 import DialogId from "./DialogId/DialogId";
 import MessageFormContainer from "./MessageForm/MessageFormContainer";
-import { PropsType } from "./DialogsContainer";
+import {PropsType} from "./DialogsContainer";
 
 const Dialogs: FC<PropsType> = ({users, messages, addMessage}) => {
     const currentUsers = users.map(user => (

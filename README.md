@@ -187,7 +187,7 @@ export let addPost = (postMessage) => {
 export default state;
 ```
 
-**Файл index.js:**
+**Файл index.tsx:**
 
 ```javascript
 import './index.css';
@@ -289,7 +289,7 @@ window.store = store;
 
 ## Перерисовка
 
-Файл index.js
+Файл index.tsx
 
 ```javascript
 import './index.css';
@@ -614,7 +614,7 @@ React-redux это библиотека, позволяющая react работ
 
 **Context API**
 
-Как это было раньше. Мы использовали функцию reRenderEntireTree. Вызывали её в index.js во время старта и также передавали её как callback subscribe'у если требовалось отрисовать дерево заново, если изменялся state. 
+Как это было раньше. Мы использовали функцию reRenderEntireTree. Вызывали её в index.tsx во время старта и также передавали её как callback subscribe'у если требовалось отрисовать дерево заново, если изменялся state. 
 
 **Index.js**
 
@@ -652,7 +652,7 @@ serviceWorker.unregister();
 
 Также мы использовали файл StoreContext для работы с ContextAPI. Мы создавали собственную компоненту Provider внутрь которой передавали store через value с помощью ContextAPI.
 
-И использовали компоненту Provider внутри index.js
+И использовали компоненту Provider внутри index.tsx
 
 Это позволяло давать доступ контейнерным компонентам к store без необходимости прокидывать его через props.
 
@@ -725,7 +725,7 @@ export default DialogsContainer;
 
 1) Удаляем файл StoreContext.js. Он нам больше не нужен.
 
-2)  Удаляем функцию reRenderEntireTree в index.js! Она нам также больше не нужна.
+2)  Удаляем функцию reRenderEntireTree в index.tsx! Она нам также больше не нужна.
 
 3) Компоненту Provider оставляем, но импортируем её уже не через StoreContext, а через react-redux.
 
@@ -1302,7 +1302,7 @@ export default UserItem;
 to={'/profile/' + props.id}
 ```
 
-Мы кликаем на этого пользователя. Далее в файле App.js Route отслеживает изменение url адреса по пути /profile и отрисовывает компоненту ProfileContainer
+Мы кликаем на этого пользователя. Далее в файле App.tsx Route отслеживает изменение url адреса по пути /profile и отрисовывает компоненту ProfileContainer
 
 ```javascript
 import React from 'react';
@@ -1410,13 +1410,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouterProfileCon
 
 И вот её то уже и экспортируем по default.
 
-И именно она вызовется в App.js. Давайте взглянем на наши пропсы теперь
+И именно она вызовется в App.tsx. Давайте взглянем на наши пропсы теперь
 
 ![1565517952176](https://github.com/Dvachee/SocialNetworkReact/raw/master/README-IMG/1565517952176.png)
 
 Теперь помимо profileData и setUserProfile к нам приходит множество новых данных. Но самое главное находится в match.
 
-- isExact говорит о точном совпадении адреса указанном в Route и адреса, который прописан в данный момент. False потому, что в App.js указан путь /profile, а у нас сейчас /profile/8
+- isExact говорит о точном совпадении адреса указанном в Route и адреса, который прописан в данный момент. False потому, что в App.tsx указан путь /profile, а у нас сейчас /profile/8
 
 - path - путь, указанный в app.js
 - url - текущий адрес(Может показаться что они совпадают, но нет, просто наш параметр 8 не определяется)

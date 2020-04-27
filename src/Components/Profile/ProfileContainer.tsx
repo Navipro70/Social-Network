@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from "react"
+import React, {ComponentType, FC, useEffect} from "react"
 import classes from "./Profile.module.css"
 import Profile, {PropsType} from "./Profile"
 import {connect} from "react-redux"
@@ -10,26 +10,29 @@ import {
     thunkSetStatus
 } from "../../redux/profile-reducer"
 import {withRouter, RouteComponentProps} from "react-router-dom"
-import {authRedirect} from "../../HihgOrderComponents/redirectComponent"
+import {withAuthRedirect} from "../../HihgOrderComponents/RedirectComponent"
 import {compose} from "redux"
 import Preloader from "../Common/Preloader"
 import {AppStateType} from "../../redux/redux-store"
 import {DispatchReduxFormType} from "../../Types/ReduxFormTypes"
 import {currentUserProfileType} from "../../redux/auth-reducer"
 
-type AdditionTypes = {
+type MapStatePropsType = {
     dispatch: DispatchReduxFormType
     isAuth: boolean
+    userProfile: currentUserProfileType
+}
+
+type MapDispatchPropsType = {
     thunkSetCurrentProfile: (userId: number) => void
     thunkGetStatus: (userId: number) => void
-    userProfile: currentUserProfileType
 }
 
 type TParams = {
     userId: string | undefined
 }
 
-type PropsProfile = PropsType & AdditionTypes & RouteComponentProps<TParams>
+type PropsProfile = PropsType & MapStatePropsType & MapDispatchPropsType & RouteComponentProps<TParams>
 
 const ProfileContainer: FC<PropsProfile> = ({...props}) => {
     const userIdIdentificator = () => {
@@ -62,7 +65,7 @@ const mapStateToProps = (state: AppStateType) => ({
     posts: state.profilePage.posts
 });
 
-export default compose(
+export default compose<ComponentType>( ////////// ДОБАВИТЬ ТИПИЗАЦИЮ
     connect(mapStateToProps, {
         thunkSetCurrentProfile,
         thunkGetStatus,
@@ -72,5 +75,5 @@ export default compose(
         addPost: actions.addPost
     }),
     withRouter,
-    authRedirect
+    withAuthRedirect
 )(ProfileContainer)
