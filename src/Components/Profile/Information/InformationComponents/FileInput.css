@@ -1,25 +1,25 @@
 #fileInput {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 #fileLabel {
-    margin-left: 45px;
-    margin-top: 10px;
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: orangered;
-    display: inline-block;
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 5px;
-    transition: .3s linear;
+  margin-left: 45px;
+  margin-top: 10px;
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: orangered;
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  transition: 0.3s linear;
 }
 #fileLabel:focus,
 #fileLabel:hover {
-    background-color: red;
+  background-color: red;
 }

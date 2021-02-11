@@ -1,27 +1,27 @@
-import {axiosInstance, ResultCodesEnum} from "./axiosInstance";
-import {CommonResponse} from "./usersAPI";
+import { axiosInstance, ResultCodesEnum } from './axiosInstance'
+import { CommonResponse } from './usersAPI'
 
 type LoginResponseType = {
-    resultCode: ResultCodesEnum
-    messages: Array<string>
-    data: {
-        userId: number
-    }
+  resultCode: ResultCodesEnum
+  messages: Array<string>
+  data: {
+    userId: number
+  }
 }
 
 export const loginApi = {
-    loginUser(email: string, password: string, rememberMe = false, captcha: string | null = null) {
-        return axiosInstance.post<LoginResponseType>(`/auth/login`, {
-            email,
-            password,
-            rememberMe,
-            captcha
-        })
-    },
-    logoutUser() {
-        return axiosInstance.delete<CommonResponse>(`/auth/login`)
-    },
-    getCaptcha() {
-        return axiosInstance.get<{ url: string | null }>("security/get-captcha-url")
-    }
-};
+  loginUser(email: string, password: string, rememberMe = false, captcha: string | null = null) {
+    return axiosInstance.post<LoginResponseType>(`/auth/login`, {
+      email,
+      password,
+      rememberMe,
+      captcha,
+    })
+  },
+  logoutUser() {
+    return axiosInstance.delete<CommonResponse>(`/auth/login`)
+  },
+  getCaptcha() {
+    return axiosInstance.get<{ url: string | null }>('security/get-captcha-url')
+  },
+}

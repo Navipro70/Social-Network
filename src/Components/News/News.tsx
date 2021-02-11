@@ -1,9 +1,9 @@
-import React, {FC} from "react";
+import React, { FC } from 'react'
 
 const News: FC = () => (
-    <div>
-        <div>News</div>
-    </div>
-);
+  <div>
+    <div>News</div>
+  </div>
+)
 
-export default News;
+export default News
