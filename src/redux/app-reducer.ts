@@ -1,5 +1,6 @@
-import { thunkAuthentication } from './auth-reducer'
 import { ThunkAction } from 'redux-thunk'
+
+import { thunkAuthentication } from './auth-reducer'
 import { AppStateType, InferActionsType } from './redux-store'
 
 let initialState = {

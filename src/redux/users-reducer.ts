@@ -1,16 +1,18 @@
-import { userApi } from '../API/usersAPI'
-import { userType } from '../Types/types'
-import { ResultCodesEnum } from '../API/axiosInstance'
-import { AppStateType, InferActionsType } from './redux-store'
 import { ThunkAction } from 'redux-thunk'
 
+import { ResultCodesEnum } from '../API/axiosInstance'
+import { userApi } from '../API/usersAPI'
+import { userType } from '../Types/types'
+
+import { AppStateType, InferActionsType } from './redux-store'
+
 let initialState = {
-  users: [] as Array<userType>,
+  users: [] as userType[],
   pageSize: 10,
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
-  isFollowingBlocker: [] as Array<number>, //array of users id
+  isFollowingBlocker: [] as number[], //array of users id
 }
 
 type initialStateType = typeof initialState
@@ -65,7 +67,7 @@ const usersReducer = (
 
 const actions = {
   following: (id: number) => ({ type: 'users/FOLLOWING', id: id } as const),
-  setUsers: (users: Array<userType>) => ({ type: 'users/SET_USERS', users: users } as const),
+  setUsers: (users: userType[]) => ({ type: 'users/SET_USERS', users: users } as const),
   setCurrentPage: (pageNumber: number) =>
     ({ type: 'users/SET_PAGE', currentPage: pageNumber } as const),
   setTotalUsersCount: (totalUsersCount: number) =>

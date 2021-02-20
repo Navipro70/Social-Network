@@ -1,8 +1,10 @@
-import { profileApi } from '../API/profileAPI'
 import { FormAction, stopSubmit } from 'redux-form'
-import { Nullable, photosType, postType, ProfileInformationType, profileType } from '../Types/types'
-import { ResultCodesEnum } from '../API/axiosInstance'
 import { ThunkAction } from 'redux-thunk'
+
+import { ResultCodesEnum } from '../API/axiosInstance'
+import { profileApi } from '../API/profileAPI'
+import { Nullable, photosType, postType, ProfileInformationType, profileType } from '../Types/types'
+
 import { AppStateType, InferActionsType } from './redux-store'
 
 let initialState = {
@@ -10,7 +12,7 @@ let initialState = {
     { postText: 'Димоооон турутурурутуруру', id: 1 },
     { postText: 'Димоооон турутурурутуруру', id: 2 },
     { postText: 'Димоооон турутурурутуруру', id: 3 },
-  ] as Array<postType>,
+  ] as postType[],
   profile: null as Nullable<profileType>,
   isProfileFetching: false,
   statusText: '',

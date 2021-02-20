@@ -15,7 +15,7 @@ let initialState = {
     { id: 3, message: 'Fine. What about you?' },
     { id: 4, message: 'Me too, thanks' },
     { id: 5, message: 'Goodbye' },
-  ] as Array<MessageType>,
+  ] as MessageType[],
   users: [
     { id: 1, name: 'Bill' },
     { id: 2, name: 'Sasha' },
@@ -23,7 +23,7 @@ let initialState = {
     { id: 4, name: 'Diana' },
     { id: 5, name: 'Andrew' },
     { id: 6, name: 'Liza' },
-  ] as Array<UsersType>,
+  ] as UsersType[],
 }
 
 type initialStateType = typeof initialState

@@ -1,28 +1,29 @@
-import { axiosInstance, ResultCodesEnum } from './axiosInstance'
 import { Nullable, userType } from '../Types/types'
 
+import { axiosInstance, ResultCodesEnum } from './axiosInstance'
+
 type ResponseUsersType = {
-  items: Array<userType>
+  items: userType[]
   totalCount: ResultCodesEnum
   error: Nullable<string>
 }
 
 export type CommonResponse = {
   resultCode: ResultCodesEnum
-  messages: Array<string>
+  messages: string[]
   data: any //additional data
 }
 
 export const userApi = {
-  getUsers(currentPage: number, pageSize: number) {
+  async getUsers(currentPage: number, pageSize: number) {
     return axiosInstance
       .get<ResponseUsersType>(`users?page=${currentPage}&count=${pageSize}`)
       .then((response) => response.data)
   },
-  postFollowing(userId: number) {
+  async postFollowing(userId: number) {
     return axiosInstance.post<CommonResponse>(`follow/${userId}`).then((response) => response.data)
   },
-  deleteFollowing(userId: number) {
+  async deleteFollowing(userId: number) {
     return axiosInstance
       .delete<CommonResponse>(`follow/${userId}`)
       .then((response) => response.data)
