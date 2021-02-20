@@ -1,5 +1,6 @@
-import React, { FC } from 'react'
 import Button from '@material-ui/core/Button'
+import React, { FC } from 'react'
+
 import { contactsType } from '../../../../Types/types'
 
 type PropsType = {
@@ -21,7 +22,7 @@ const ContactInformation: FC<PropsType> = ({ contacts, isOwner, setEditMode }) =
       <div style={{ marginLeft: '40px' }}>
         <h4>No contact information</h4>
         {isOwner && (
-          <Button onClick={editModeHandler} variant="contained" color="primary">
+          <Button color="primary" variant="contained" onClick={editModeHandler}>
             Set information
           </Button>
         )}
@@ -34,10 +35,10 @@ const ContactInformation: FC<PropsType> = ({ contacts, isOwner, setEditMode }) =
       {profileContacts}
       {isOwner && (
         <Button
-          onClick={editModeHandler}
+          color="primary"
           style={{ marginTop: '15px' }}
           variant="contained"
-          color="primary"
+          onClick={editModeHandler}
         >
           Change information
         </Button>

@@ -1,7 +1,8 @@
-import { Field } from 'redux-form'
-import { LoginInput } from '../../Common/FieldControls'
 import React, { FC } from 'react'
+import { Field } from 'redux-form'
+
 import { Nullable } from '../../../Types/types'
+import { LoginInput } from '../../Common/FieldControls'
 
 type PropsType = {
   error: Nullable<string>
@@ -11,9 +12,9 @@ type PropsType = {
 export const LoginErrors: FC<PropsType> = ({ error, captchaSrc }) => (
   <div className="form-row common-login-error">
     {error}
-    <img src={captchaSrc!} alt="" />
+    <img alt="" src={captchaSrc!} />
     {captchaSrc && (
-      <Field type="text" name="captcha" component={LoginInput} placeholder="Captcha" />
+      <Field component={LoginInput} name="captcha" placeholder="Captcha" type="text" />
     )}
   </div>
 )

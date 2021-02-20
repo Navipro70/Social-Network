@@ -1,7 +1,9 @@
 import React, { FC } from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
-import { Textarea } from '../../../Common/FieldControls'
+
 import { emptyField } from '../../../../utils/validators'
+import { Textarea } from '../../../Common/FieldControls'
+
 import { ReduxFormPostType } from './PostFormContainer'
 
 type PropsType = {
@@ -16,8 +18,8 @@ const PostForm: FC<InjectedFormProps<ReduxFormPostType, PropsType> & PropsType> 
 }) => (
   <form onSubmit={handleSubmit}>
     <Field
-      name={'postText'}
       component={Textarea}
+      name="postText"
       placeholder="Ваш пост..."
       validate={[emptyField, maxLength500, minLength2]}
     />

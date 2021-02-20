@@ -1,8 +1,11 @@
 import React, { FC } from 'react'
-import classes from './Header.module.css'
-import { HeaderPerformance } from '../Common/HeaderPerfomance'
-import { CurrentProfileNavLink } from './CurrentProfileNavLink/CurrentProfileNavLink'
+
 import { currentUserProfileType } from '../../redux/auth-reducer'
+import { HeaderPerformance } from '../Common/HeaderPerfomance'
+
+import { CurrentProfileNavLink } from './CurrentProfileNavLink/CurrentProfileNavLink'
+import classes from './Header.module.css'
+
 
 type PropsType = {
   currentUserProfile: currentUserProfileType | null

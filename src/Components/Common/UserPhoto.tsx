@@ -1,7 +1,8 @@
-import classes from '../Profile/Information/Information.module.css'
-import anon from '../../Images/anon.png'
 import React, { FC } from 'react'
+
+import anon from '../../Images/anon.png'
 import { Nullable } from '../../Types/types'
+import classes from '../Profile/Information/Information.module.css'
 
 type PropsType = {
   photo: Nullable<string>
@@ -11,12 +12,12 @@ export const UserPhoto: FC<PropsType> = ({ photo }) => (
   <>
     {photo ? (
       <img
-        src={photo}
-        className={classes.avatar}
         alt="profile"
+        className={classes.avatar}
+        src={photo}
       /> /*Вынести в отдельную компоненту*/
     ) : (
-      <img src={anon} className={classes.avatar} alt="profile" />
+      <img alt="profile" className={classes.avatar} src={anon} />
     )}
   </>
 )

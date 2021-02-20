@@ -1,22 +1,23 @@
 import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
+
 import classes from './Navbar.module.css'
 
 const Navbar: FC = () => (
   <nav className={classes.nav}>
-    <NavLink to="/profile" activeClassName={classes.activeColor}>
+    <NavLink activeClassName={classes.activeColor} to="/profile">
       Profile
     </NavLink>
-    <NavLink to="/dialogs" activeClassName={classes.activeColor}>
+    <NavLink activeClassName={classes.activeColor} to="/dialogs">
       Messages
     </NavLink>
-    <NavLink to="/users" activeClassName={classes.activeColor}>
+    <NavLink activeClassName={classes.activeColor} to="/users">
       Users
     </NavLink>
-    <NavLink to="/news" activeClassName={classes.activeColor}>
+    <NavLink activeClassName={classes.activeColor} to="/news">
       News
     </NavLink>
-    <NavLink to="/settings" activeClassName={classes.activeColor}>
+    <NavLink activeClassName={classes.activeColor} to="/settings">
       Settings
     </NavLink>
   </nav>

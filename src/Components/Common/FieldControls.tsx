@@ -1,7 +1,8 @@
-import React, { FC } from 'react'
-import classes from './FieldControls.module.css'
 import Button from '@material-ui/core/Button'
+import React, { FC } from 'react'
 import { WrappedFieldProps } from 'redux-form'
+
+import classes from './FieldControls.module.css'
 
 type OwnFieldsType = {
   placeholder: string
@@ -15,7 +16,7 @@ export const Textarea: FC<PropsFieldType> = ({ input, meta, placeholder }) => {
   return (
     <div>
       <textarea {...input} placeholder={placeholder} />
-      <Button type="submit" variant="contained" color="primary" disabled={validation}>
+      <Button color="primary" disabled={validation} type="submit" variant="contained">
         Add new post
       </Button>
     </div>
@@ -40,7 +41,7 @@ export const LoginInput: FC<PropsFieldType & LoginOwnFieldsType> = ({
   if (validation) styles.push(classes.error)
   return (
     <div className={styles.join(' ')}>
-      <input {...input} id={id} type={type} placeholder={placeholder} />
+      <input {...input} id={id} placeholder={placeholder} type={type} />
       {validation && <span>{error}</span>}
     </div>
   )

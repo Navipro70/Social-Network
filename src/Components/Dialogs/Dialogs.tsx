@@ -1,15 +1,16 @@
 import React, { FC } from 'react'
-import classes from './Dialogs.module.css'
-import Message from './Messages/Messages'
+
 import DialogId from './DialogId/DialogId'
-import MessageFormContainer from './MessageForm/MessageFormContainer'
+import classes from './Dialogs.module.css'
 import { PropsType } from './DialogsContainer'
+import MessageFormContainer from './MessageForm/MessageFormContainer'
+import Message from './Messages/Messages'
 
 const Dialogs: FC<PropsType> = ({ users, messages, addMessage }) => {
-  const currentUsers = users.map((user) => <DialogId name={user.name} id={user.id} key={user.id} />)
+  const currentUsers = users.map((user) => <DialogId id={user.id} key={user.id} name={user.name} />)
 
   const currentMessages = messages.map((currentValue) => (
-    <Message mess={currentValue.message} key={currentValue.id} />
+    <Message key={currentValue.id} mess={currentValue.message} />
   ))
 
   const sendMessage = (messageText: string) => addMessage(messageText)

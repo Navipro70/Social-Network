@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
-import classes from './User.module.css'
-import anon from './../../../Images/anon.png'
 import Button from '@material-ui/core/Button'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+
+import anon from "../../../Images/anon.png"
 import { Nullable } from '../../../Types/types'
+
+import classes from './User.module.css'
 
 type PropsType = {
   followed: boolean
   id: number
   photoSrcSmall: Nullable<string>
-  isFollowingBlocker: Array<number>
+  isFollowingBlocker: number[]
   status: string
   thunkUserFollowing: (isFollowed: boolean, id: number) => void
 }
@@ -35,9 +37,9 @@ const User: React.FC<PropsType> = ({
     <div className={classes.user}>
       <div>
         <NavLink to={`/profile/${id}`}>
-          <img src={photoSrcSmall !== null ? photoSrcSmall : anon} alt="Profile img" />
+          <img alt="Profile img" src={photoSrcSmall !== null ? photoSrcSmall : anon} />
         </NavLink>
-        <Button variant="contained" color="primary" disabled={disabler} onClick={handleClick}>
+        <Button color="primary" disabled={disabler} variant="contained" onClick={handleClick}>
           {butText}
         </Button>
       </div>

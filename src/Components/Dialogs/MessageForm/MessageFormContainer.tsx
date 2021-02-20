@@ -1,8 +1,10 @@
 import React, { FC } from 'react'
 import { reset } from 'redux-form'
-import { maxLength, minLength } from '../../../utils/validators'
-import { ReduxMessageForm } from './MessageForm'
+
 import { DispatchReduxFormType } from '../../../Types/ReduxFormTypes'
+import { maxLength, minLength } from '../../../utils/validators'
+
+import { ReduxMessageForm } from './MessageForm'
 
 type PropsType = {
   addMessage: (messageText: string) => void
@@ -23,7 +25,7 @@ const MessageFormContainer: FC<PropsType> = ({ addMessage }) => {
 
   return (
     <div>
-      <ReduxMessageForm onSubmit={onSubmit} maxLength300={mexLength300} minLength2={minLength2} />
+      <ReduxMessageForm maxLength300={mexLength300} minLength2={minLength2} onSubmit={onSubmit} />
     </div>
   )
 }

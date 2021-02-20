@@ -1,9 +1,11 @@
 import React, { FC } from 'react'
-import Header from './Header'
 import { connect } from 'react-redux'
+
+import { Nullable } from '../../Types/types'
 import { currentUserProfileType, thunkLogoutUser } from '../../redux/auth-reducer'
 import { AppStateType } from '../../redux/redux-store'
-import { Nullable } from '../../Types/types'
+
+import Header from './Header'
 
 type MapStateToPropsType = {
   currentUserProfile: Nullable<currentUserProfileType>

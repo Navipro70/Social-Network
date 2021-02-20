@@ -1,20 +1,22 @@
-import { thunkGetUsers, thunkLoadUsers, thunkUserFollowing } from '../../redux/users-reducer'
-import Users from './Users'
-import { connect } from 'react-redux'
 import React, { ComponentType } from 'react'
-import Preloader from '../Common/Preloader'
-import { withAuthRedirect } from '../../HihgOrderComponents/RedirectComponent'
+import { connect } from 'react-redux'
 import { compose } from 'redux'
+
+import { withAuthRedirect } from '../../HihgOrderComponents/RedirectComponent'
 import { userType } from '../../Types/types'
 import { AppStateType } from '../../redux/redux-store'
+import { thunkGetUsers, thunkLoadUsers, thunkUserFollowing } from '../../redux/users-reducer'
+import Preloader from '../Common/Preloader'
+
+import Users from './Users'
 
 type MapStateToPropsType = {
   currentPage: number
   pageSize: number
   totalUsersCount: number
   isFetching: boolean
-  users: Array<userType>
-  isFollowingBlocker: Array<number>
+  users: userType[]
+  isFollowingBlocker: number[]
 }
 
 type MapDispatchToPropsType = {
@@ -49,13 +51,13 @@ class UsersContainer extends React.Component<PropsType> {
     if (isFetching) return <Preloader />
     return (
       <Users
-        setCurrentPage={this.setCurrentPage}
-        users={users}
-        isFollowingBlocker={isFollowingBlocker}
-        thunkUserFollowing={thunkUserFollowing}
-        pageSize={pageSize}
         currentPage={currentPage}
+        isFollowingBlocker={isFollowingBlocker}
+        pageSize={pageSize}
+        setCurrentPage={this.setCurrentPage}
+        thunkUserFollowing={thunkUserFollowing}
         totalUsersCount={totalUsersCount}
+        users={users}
       />
     )
   }

@@ -3,7 +3,7 @@ import { Field } from 'redux-form'
 
 export const CheckboxItem: FC = () => (
   <li>
-    <Field name="lookingForAJob" id="lookingForAJob" component="input" type="checkbox" />
+    <Field component="input" id="lookingForAJob" name="lookingForAJob" type="checkbox" />
     <label htmlFor="lookingForAJob">Looking for a job?</label>
   </li>
 )

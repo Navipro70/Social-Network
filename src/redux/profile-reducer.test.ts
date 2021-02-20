@@ -1,5 +1,6 @@
-import profileReducer, { actions, initialStateType } from './profile-reducer'
 import { contactsType, profileType } from '../Types/types'
+
+import profileReducer, { actions, initialStateType } from './profile-reducer'
 
 const state: initialStateType = {
   // Test data
