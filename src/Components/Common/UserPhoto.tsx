@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react';
 
 import anon from '../../Images/anon.png'
 import { Nullable } from '../../Types/types'

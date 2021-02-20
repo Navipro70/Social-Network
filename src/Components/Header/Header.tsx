@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { memo, FC } from 'react';
 
 import { currentUserProfileType } from '../../redux/auth-reducer'
 import { HeaderPerformance } from '../Common/HeaderPerfomance'
@@ -21,4 +21,4 @@ const Header: FC<PropsType> = ({ currentUserProfile, logoutHandler }) => (
   </header>
 )
 
-export default React.memo(Header)
+export default memo(Header)

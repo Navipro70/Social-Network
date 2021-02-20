@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { memo, FC } from 'react';
 
 import { photosType, postType, ProfileInformationType } from '../../Types/types'
 import { initialStateType } from '../../redux/profile-reducer'
@@ -40,4 +40,4 @@ const Profile: FC<PropsType> = ({
   </div>
 )
 
-export default React.memo(Profile)
+export default memo(Profile)

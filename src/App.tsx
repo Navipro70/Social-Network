@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react'
+import { Component, ComponentType } from 'react';
 import './App.css'
 import { connect } from 'react-redux'
 import { Redirect, Route, withRouter, Switch, RouteComponentProps } from 'react-router-dom'
@@ -24,7 +24,7 @@ interface AppPropsType {
   initialized: boolean
 }
 
-class App extends React.Component<AppPropsType & RouteComponentProps> {
+class App extends Component<AppPropsType & RouteComponentProps> {
   catchAllUnhandledErrors = () => {
     this.props.showingError(true)
     setTimeout(() => {

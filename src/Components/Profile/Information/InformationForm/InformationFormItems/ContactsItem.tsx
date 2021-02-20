@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react';
 import { Field } from 'redux-form'
 
 import { ValidatorType } from '../../../../../utils/validators'

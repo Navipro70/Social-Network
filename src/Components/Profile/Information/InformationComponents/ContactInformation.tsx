@@ -1,5 +1,5 @@
 import Button from '@material-ui/core/Button'
-import React, { FC } from 'react'
+import { FC } from 'react';
 
 import { contactsType } from '../../../../Types/types'
 

@@ -1,5 +1,6 @@
 import Button from '@material-ui/core/Button'
-import React, { useState } from 'react'
+import { useState } from 'react';
+import * as React from 'react';
 import { NavLink } from 'react-router-dom'
 
 import anon from "../../../Images/anon.png"

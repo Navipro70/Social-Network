@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { memo, FC } from 'react';
 import { NavLink } from 'react-router-dom'
 
 import classes from './Navbar.module.css'
@@ -23,4 +23,4 @@ const Navbar: FC = () => (
   </nav>
 )
 
-export default React.memo(Navbar)
+export default memo(Navbar)

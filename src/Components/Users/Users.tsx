@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { memo, FC } from 'react';
 
 import { userType } from '../../Types/types'
 
@@ -48,4 +48,4 @@ const Users: FC<PropsType> = ({
   )
 }
 
-export default React.memo(Users)
+export default memo(Users)

@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react'
+import { memo, useState, FC } from 'react';
 
 import { ProfileInformationType, profileType, Nullable } from '../../../Types/types'
 import Preloader from '../../Common/Preloader'
@@ -69,4 +69,4 @@ const Information: FC<PropsType> = ({
   )
 }
 
-export default React.memo(Information)
+export default memo(Information)

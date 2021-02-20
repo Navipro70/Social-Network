@@ -1,5 +1,5 @@
 import Button from '@material-ui/core/Button'
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react';
 import { InjectedFormProps, reduxForm } from 'redux-form'
 
 import { ProfileInformationType } from '../../../../Types/types'

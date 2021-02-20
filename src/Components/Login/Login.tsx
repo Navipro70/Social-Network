@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react';
 import './login.css'
 import { InjectedFormProps, reduxForm } from 'redux-form'
 

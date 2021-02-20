@@ -1,6 +1,6 @@
 import Snackbar from '@material-ui/core/Snackbar/Snackbar'
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert/Alert'
-import React, { FC } from 'react'
+import { FC } from 'react';
 
 type PropsType = {
   open: boolean

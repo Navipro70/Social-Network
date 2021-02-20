@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react';
 import { reset } from 'redux-form'
 
 import { DispatchReduxFormType } from '../../../Types/ReduxFormTypes'

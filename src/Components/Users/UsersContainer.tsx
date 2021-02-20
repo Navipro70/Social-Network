@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react'
+import { Component, ComponentType } from 'react';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -27,7 +27,7 @@ type MapDispatchToPropsType = {
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class UsersContainer extends React.Component<PropsType> {
+class UsersContainer extends Component<PropsType> {
   componentDidMount() {
     const { currentPage, pageSize } = this.props
     this.props.thunkGetUsers(currentPage, pageSize, true)

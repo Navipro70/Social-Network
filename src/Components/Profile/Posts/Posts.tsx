@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { memo, FC } from 'react';
 
 import { postType } from '../../../Types/types'
 
@@ -22,4 +22,4 @@ const Posts: FC<PropsType> = ({ isOwner, posts, addPost }) => (
   </div>
 )
 
-export default React.memo(Posts)
+export default memo(Posts)

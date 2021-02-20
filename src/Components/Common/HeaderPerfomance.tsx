@@ -1,5 +1,3 @@
-import React from 'react'
-
 import brave from '../../Images/brave.png'
 
 export const HeaderPerformance = () => (

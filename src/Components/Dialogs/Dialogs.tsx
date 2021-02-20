@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { memo, FC } from 'react';
 
 import DialogId from './DialogId/DialogId'
 import classes from './Dialogs.module.css'
@@ -29,4 +29,4 @@ const Dialogs: FC<PropsType> = ({ users, messages, addMessage }) => {
   )
 }
 
-export default React.memo<PropsType>(Dialogs)
+export default memo<PropsType>(Dialogs)

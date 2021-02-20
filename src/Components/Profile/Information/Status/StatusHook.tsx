@@ -1,5 +1,5 @@
 import { Input } from '@material-ui/core'
-import React, { ChangeEvent, FC, useEffect, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 
 import classes from '../Information.module.css'
 

@@ -1,5 +1,5 @@
 import Button from '@material-ui/core/Button'
-import React, { FC } from 'react'
+import { FC } from 'react';
 import { WrappedFieldProps } from 'redux-form'
 
 import classes from './FieldControls.module.css'

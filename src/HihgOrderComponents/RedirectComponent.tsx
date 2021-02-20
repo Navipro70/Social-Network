@@ -1,4 +1,4 @@
-import React, { ComponentType, FC } from 'react'
+import { ComponentType, FC } from 'react';
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 

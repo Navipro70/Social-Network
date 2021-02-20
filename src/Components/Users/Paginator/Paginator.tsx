@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import { memo, FC, useState } from 'react';
 
 import './Paginator.css'
 import classes from '../Users.module.css'
@@ -40,4 +40,4 @@ const Paginator: FC<PropsType> = ({ totalUsersCount, pageSize, currentPage, setC
   )
 }
 
-export default React.memo(Paginator)
+export default memo(Paginator)
