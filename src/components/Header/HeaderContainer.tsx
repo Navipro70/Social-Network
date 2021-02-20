@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import { FC } from 'react'
 import { connect } from 'react-redux'
 
 import { Nullable } from '../../Types/types'
 import { currentUserProfileType, thunkLogoutUser } from '../../redux/auth-reducer'
 import { AppStateType } from '../../redux/redux-store'
 
-import Header from './Header'
+import { Header } from './Header'
 
 type MapStateToPropsType = {
   currentUserProfile: Nullable<currentUserProfileType>
@@ -17,7 +17,7 @@ type MapDispatchToPropsType = {
 
 type PropsType = MapDispatchToPropsType & MapStateToPropsType
 
-const HeaderContainer: FC<PropsType> = ({ thunkLogoutUser, currentUserProfile }) => {
+const ContainerComponent: FC<PropsType> = ({ thunkLogoutUser, currentUserProfile }) => {
   const logoutHandler = () => thunkLogoutUser()
   return <Header currentUserProfile={currentUserProfile} logoutHandler={logoutHandler} />
 }
@@ -26,11 +26,11 @@ const mapStateToProps = (state: AppStateType) => ({
   currentUserProfile: state.auth.currentUserProfile,
 })
 
-export default connect<
+export const HeaderContainer = connect<
   MapStateToPropsType,
   MapDispatchToPropsType,
   Record<string, unknown>,
   AppStateType
 >(mapStateToProps, {
   thunkLogoutUser,
-})(HeaderContainer)
+})(ContainerComponent)

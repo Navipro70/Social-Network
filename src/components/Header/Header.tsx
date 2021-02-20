@@ -1,24 +1,25 @@
-import { memo, FC } from 'react';
+import { FC } from 'react'
+import { NavLink } from 'react-router-dom'
 
+import brave from '../../Images/brave.png'
 import { currentUserProfileType } from '../../redux/auth-reducer'
-import { HeaderPerformance } from '../Common/HeaderPerfomance'
 
-import { CurrentProfileNavLink } from './CurrentProfileNavLink/CurrentProfileNavLink'
 import classes from './Header.module.css'
-
 
 type PropsType = {
   currentUserProfile: currentUserProfileType | null
   logoutHandler: () => void
 }
 
-const Header: FC<PropsType> = ({ currentUserProfile, logoutHandler }) => (
+export const Header: FC<PropsType> = ({ currentUserProfile, logoutHandler }) => (
   <header className={classes.header}>
-    <HeaderPerformance />
+    <img alt="Logotype" src={brave} />
+    <h4>Grid social</h4>
     {currentUserProfile && (
-      <CurrentProfileNavLink login={currentUserProfile.login} logoutHandler={logoutHandler} />
+      <div className={classes.auth}>
+        <NavLink to="/profile">{currentUserProfile.login}</NavLink>
+        <button onClick={logoutHandler}>Logout</button>
+      </div>
     )}
   </header>
 )
-
-export default memo(Header)

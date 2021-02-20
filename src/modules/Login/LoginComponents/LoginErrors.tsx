@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Field } from 'redux-form'
 
 import { Nullable } from '../../../Types/types'
-import { LoginInput } from '../../../components/Common/FieldControls'
+import { LoginInput } from '../../../components'
 
 type PropsType = {
   error: Nullable<string>

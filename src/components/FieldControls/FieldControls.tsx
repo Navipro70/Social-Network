@@ -1,5 +1,5 @@
 import Button from '@material-ui/core/Button'
-import { FC } from 'react';
+import { FC } from 'react'
 import { WrappedFieldProps } from 'redux-form'
 
 import classes from './FieldControls.module.css'
@@ -13,6 +13,7 @@ type PropsFieldType = OwnFieldsType & WrappedFieldProps
 export const Textarea: FC<PropsFieldType> = ({ input, meta, placeholder }) => {
   const { error, submitFailed, active } = meta
   const validation = error && submitFailed && !active
+
   return (
     <div>
       <textarea {...input} placeholder={placeholder} />
@@ -38,7 +39,9 @@ export const LoginInput: FC<PropsFieldType & LoginOwnFieldsType> = ({
   const { error, submitFailed, active } = meta
   const validation = error && submitFailed && !active
   const styles: string[] = []
+
   if (validation) styles.push(classes.error)
+
   return (
     <div className={styles.join(' ')}>
       <input {...input} id={id} placeholder={placeholder} type={type} />
@@ -50,6 +53,7 @@ export const LoginInput: FC<PropsFieldType & LoginOwnFieldsType> = ({
 export const SettingField: FC<PropsFieldType> = ({ input, meta, placeholder }) => {
   const { error, submitFailed, active } = meta
   const validation = error && submitFailed && !active
+
   return (
     <>
       <input {...input} placeholder={placeholder} />
