@@ -1,10 +1,11 @@
-import { ComponentType, FC, useEffect } from 'react';
+import { ComponentType, FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { compose } from 'redux'
 
 import { withAuthRedirect } from '../../HihgOrderComponents/RedirectComponent'
 import { DispatchReduxFormType } from '../../Types/ReduxFormTypes'
+import { LoadingView } from '../../components'
 import { currentUserProfileType } from '../../redux/auth-reducer'
 import {
   actions,
@@ -15,7 +16,6 @@ import {
   thunkSetStatus,
 } from '../../redux/profile-reducer'
 import { AppStateType } from '../../redux/redux-store'
-import Preloader from '../Common/Preloader'
 
 import Profile, { PropsType } from './Profile'
 import classes from './Profile.module.css'
@@ -56,7 +56,7 @@ const ProfileContainer: FC<PropsProfile> = ({ ...props }) => {
     userIdIdentificator()
   }, [props.match.params.userId])
 
-  if (props.profilePage.isProfileFetching) return <Preloader />
+  if (props.profilePage.isProfileFetching) return <LoadingView />
   return (
     <div className={classes.profile}>
       <Profile {...props} isOwner={!props.match.params.userId} />

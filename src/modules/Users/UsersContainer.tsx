@@ -1,12 +1,12 @@
-import { Component, ComponentType } from 'react';
+import { Component, ComponentType } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import { withAuthRedirect } from '../../HihgOrderComponents/RedirectComponent'
 import { userType } from '../../Types/types'
+import { LoadingView } from '../../components'
 import { AppStateType } from '../../redux/redux-store'
 import { thunkGetUsers, thunkLoadUsers, thunkUserFollowing } from '../../redux/users-reducer'
-import Preloader from '../Common/Preloader'
 
 import Users from './Users'
 
@@ -48,7 +48,9 @@ class UsersContainer extends Component<PropsType> {
       currentPage,
       totalUsersCount,
     } = this.props
-    if (isFetching) return <Preloader />
+
+    if (isFetching) return <LoadingView />
+
     return (
       <Users
         currentPage={currentPage}

@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC } from 'react'
 import '../login.css'
 import { Field } from 'redux-form'
 
+import { LoginInput } from '../../../components/Common/FieldControls'
 import { emptyField } from '../../../utils/validators'
-import { LoginInput } from '../../Common/FieldControls'
 
 type PropsType = {
   maxLength20: (value: string) => string | undefined

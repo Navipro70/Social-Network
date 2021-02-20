@@ -1,9 +1,9 @@
-import { memo, FC } from 'react';
+import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import classes from './Navbar.module.css'
 
-const Navbar: FC = () => (
+export const Navbar: FC = () => (
   <nav className={classes.nav}>
     <NavLink activeClassName={classes.activeColor} to="/profile">
       Profile
@@ -22,5 +22,3 @@ const Navbar: FC = () => (
     </NavLink>
   </nav>
 )
-
-export default memo(Navbar)

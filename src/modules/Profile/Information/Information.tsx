@@ -1,15 +1,14 @@
-import { memo, useState, FC } from 'react';
+import { memo, useState, FC } from 'react'
 
 import { ProfileInformationType, profileType, Nullable } from '../../../Types/types'
-import Preloader from '../../Common/Preloader'
-import { UserPhoto } from '../../Common/UserPhoto'
+import { LoadingView } from '../../../components'
+import { UserPhoto } from '../../../components/UserPhoto'
 
 import classes from './Information.module.css'
 import ContactInformation from './InformationComponents/ContactInformation'
 import FileInput from './InformationComponents/FileInput'
 import InformationFormContainer from './InformationForm/InformationFormContainer'
 import StatusHook from './Status/StatusHook'
-
 
 type PropsType = {
   profile: Nullable<profileType>
@@ -35,7 +34,7 @@ const Information: FC<PropsType> = ({
     thunkSavePhoto(files)
   }
 
-  if (!profile) return <Preloader />
+  if (!profile) return <LoadingView />
   return (
     <div className={classes.profile_information}>
       <div>

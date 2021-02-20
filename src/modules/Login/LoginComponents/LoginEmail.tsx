@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC } from 'react'
 import '../login.css'
 import { Field } from 'redux-form'
 
+import { LoginInput } from '../../../components/Common/FieldControls'
 import { emailValidator, emptyField } from '../../../utils/validators'
-import { LoginInput } from '../../Common/FieldControls'
 
 export const LoginEmail: FC = () => (
   <div className="form-row">

@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC } from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 
+import { Textarea } from '../../../components/Common/FieldControls'
 import { emptyField } from '../../../utils/validators'
-import { Textarea } from '../../Common/FieldControls'
 
 import { ReduxFormDataType } from './MessageFormContainer'
 

@@ -1,19 +1,18 @@
-import { Component, ComponentType } from 'react';
+import { Component, ComponentType } from 'react'
 import './App.css'
 import { connect } from 'react-redux'
 import { Redirect, Route, withRouter, Switch, RouteComponentProps } from 'react-router-dom'
 import { compose } from 'redux'
 
-import Preloader from './Components/Common/Preloader'
-import DialogsContainer from './Components/Dialogs/DialogsContainer'
-import HeaderContainer from './Components/Header/HeaderContainer'
-import LoginContainer from './Components/Login/LoginContainer'
-import Navbar from './Components/Navbar/Navbar'
-import News from './Components/News/News'
-import { SnackbarError } from './Components/Profile/Information/InformationForm/InformationFormItems/SnackbarError'
-import ProfileProvider from './Components/Profile/ProfileContainer'
-import Settings from './Components/Settings/Settings'
-import UsersContainer from './Components/Users/UsersContainer'
+import { Navbar, LoadingView } from './components'
+import HeaderContainer from './components/Header/HeaderContainer'
+import DialogsContainer from './modules/Dialogs/DialogsContainer'
+import LoginContainer from './modules/Login/LoginContainer'
+import News from './modules/News/News'
+import { SnackbarError } from './modules/Profile/Information/InformationForm/InformationFormItems/SnackbarError'
+import ProfileProvider from './modules/Profile/ProfileContainer'
+import Settings from './modules/Settings/Settings'
+import UsersContainer from './modules/Users/UsersContainer'
 import { actions, thunkInitializing } from './redux/app-reducer'
 import { AppStateType } from './redux/redux-store'
 
@@ -43,7 +42,9 @@ class App extends Component<AppPropsType & RouteComponentProps> {
 
   render() {
     const { showingError, showError, initialized } = this.props
-    if (!initialized) return <Preloader />
+
+    if (!initialized) return <LoadingView />
+
     return (
       <div className="app-wrapper container">
         <HeaderContainer />

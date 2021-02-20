@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC } from 'react'
 import { Field } from 'redux-form'
 
+import { SettingField } from '../../../../../components/Common/FieldControls'
 import { ValidatorType } from '../../../../../utils/validators'
-import { SettingField } from '../../../../Common/FieldControls'
 
 type PropsType = {
   name: string
