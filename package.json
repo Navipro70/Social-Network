@@ -47,7 +47,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "ts:check": "tsc --watch"
+    "ts:check": "tsc --watch",
+    "ts:check:ci": "tsc"
   },
   "browserslist": {
     "production": [
