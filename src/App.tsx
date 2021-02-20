@@ -1,5 +1,4 @@
 import { Component, ComponentType } from 'react'
-import './App.css'
 import { connect } from 'react-redux'
 import { Redirect, Route, withRouter, Switch, RouteComponentProps } from 'react-router-dom'
 import { compose } from 'redux'
@@ -14,6 +13,8 @@ import Settings from './modules/Settings/Settings'
 import UsersContainer from './modules/Users/UsersContainer'
 import { actions, thunkInitializing } from './redux/app-reducer'
 import { AppStateType } from './redux/redux-store'
+
+import './App.css'
 
 interface AppPropsType {
   showingError: (showError: boolean) => void
