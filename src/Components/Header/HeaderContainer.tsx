@@ -26,9 +26,11 @@ const mapStateToProps = (state: AppStateType) => ({
   currentUserProfile: state.auth.currentUserProfile,
 })
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(
-  mapStateToProps,
-  {
-    thunkLogoutUser,
-  },
-)(HeaderContainer)
+export default connect<
+  MapStateToPropsType,
+  MapDispatchToPropsType,
+  Record<string, unknown>,
+  AppStateType
+>(mapStateToProps, {
+  thunkLogoutUser,
+})(HeaderContainer)

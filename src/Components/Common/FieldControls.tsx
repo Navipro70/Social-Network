@@ -37,7 +37,7 @@ export const LoginInput: FC<PropsFieldType & LoginOwnFieldsType> = ({
 }) => {
   const { error, submitFailed, active } = meta
   const validation = error && submitFailed && !active
-  const styles = []
+  const styles: string[] = []
   if (validation) styles.push(classes.error)
   return (
     <div className={styles.join(' ')}>

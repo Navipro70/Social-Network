@@ -1,6 +1,4 @@
 import React, { FC } from 'react'
-
-import './login.css'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
@@ -8,6 +6,8 @@ import { Nullable } from '../../Types/types'
 import { thunkLoginUser } from '../../redux/auth-reducer'
 import { AppStateType } from '../../redux/redux-store'
 import { maxLength, minLength } from '../../utils/validators'
+
+import './login.css'
 
 import Login from './Login'
 
@@ -52,6 +52,11 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
   captchaSrc: state.auth.captchaSrc,
 })
 
-export default connect<MapStatePropsType, MadDispatchPropsType, {}, AppStateType>(mapStateToProps, {
+export default connect<
+  MapStatePropsType,
+  MadDispatchPropsType,
+  Record<string, unknown>,
+  AppStateType
+>(mapStateToProps, {
   thunkLoginUser,
 })(LoginContainer)

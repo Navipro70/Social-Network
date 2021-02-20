@@ -8,8 +8,6 @@ import { AppStateType } from '../../redux/redux-store'
 
 import Dialogs from './Dialogs'
 
-
-
 type MapStatePropsType = {
   users: UsersType[]
   messages: MessageType[]
@@ -27,8 +25,11 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
 })
 
 export default compose<ComponentType>(
-  connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {
-    addMessage: actions.addMessage,
-  }),
+  connect<MapStatePropsType, MapDispatchPropsType, Record<string, unknown>, AppStateType>(
+    mapStateToProps,
+    {
+      addMessage: actions.addMessage,
+    },
+  ),
   withAuthRedirect,
 )(Dialogs)

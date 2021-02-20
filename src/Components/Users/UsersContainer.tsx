@@ -75,10 +75,13 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 export default compose<ComponentType>(
-  connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
-    thunkGetUsers,
-    thunkLoadUsers,
-    thunkUserFollowing,
-  }),
+  connect<MapStateToPropsType, MapDispatchToPropsType, Record<string, unknown>, AppStateType>(
+    mapStateToProps,
+    {
+      thunkGetUsers,
+      thunkLoadUsers,
+      thunkUserFollowing,
+    },
+  ),
   withAuthRedirect,
 )(UsersContainer)
