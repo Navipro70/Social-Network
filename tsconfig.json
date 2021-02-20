@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "noEmit": true,
-
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -11,21 +10,19 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-
     "baseUrl": ".",
     "outDir": "./dist",
-
     "pretty": true,
     "allowSyntheticDefaultImports": true,
-    "jsx": "react-native",
+    "jsx": "react-jsx",
     "lib": ["es2017", "dom", "esnext"],
     "moduleResolution": "node",
     "preserveConstEnums": true,
     "target": "es6",
     "skipLibCheck": true,
-    "paths": {
-      "~/*": ["src/*"]
-    }
+    "allowJs": true,
+    "module": "esnext",
+    "isolatedModules": true
   },
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules"]

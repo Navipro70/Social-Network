@@ -1,19 +1,20 @@
 import React, { ComponentType } from 'react'
 import './App.css'
+import { connect } from 'react-redux'
 import { Redirect, Route, withRouter, Switch, RouteComponentProps } from 'react-router-dom'
-import Navbar from './Components/Navbar/Navbar'
+import { compose } from 'redux'
+
+import Preloader from './Components/Common/Preloader'
 import DialogsContainer from './Components/Dialogs/DialogsContainer'
-import News from './Components/News/News'
-import Settings from './Components/Settings/Settings'
-import UsersContainer from './Components/Users/UsersContainer'
-import ProfileProvider from './Components/Profile/ProfileContainer'
 import HeaderContainer from './Components/Header/HeaderContainer'
 import LoginContainer from './Components/Login/LoginContainer'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { actions, thunkInitializing } from './redux/app-reducer'
-import Preloader from './Components/Common/Preloader'
+import Navbar from './Components/Navbar/Navbar'
+import News from './Components/News/News'
 import { SnackbarError } from './Components/Profile/Information/InformationForm/InformationFormItems/SnackbarError'
+import ProfileProvider from './Components/Profile/ProfileContainer'
+import Settings from './Components/Settings/Settings'
+import UsersContainer from './Components/Users/UsersContainer'
+import { actions, thunkInitializing } from './redux/app-reducer'
 import { AppStateType } from './redux/redux-store'
 
 interface AppPropsType {
@@ -55,10 +56,10 @@ class App extends React.Component<AppPropsType & RouteComponentProps> {
             <Route path="/news" render={() => <News />} />
             <Route path="/settings" render={() => <Settings />} />
             <Route path="/login" render={() => <LoginContainer />} />
-            <Route path="/" exact render={() => <Redirect to="/profile" />} />
+            <Route exact path="/" render={() => <Redirect to="/profile" />} />
             <Route path="*" render={() => <div>404 NOT FOUND</div>} />
           </Switch>
-          <SnackbarError setOpen={showingError} open={showError} error={'Something went wrong'} />
+          <SnackbarError error="Something went wrong" open={showError} setOpen={showingError} />
         </div>
       </div>
     )
