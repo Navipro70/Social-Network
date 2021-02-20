@@ -1,14 +1,14 @@
 .user {
-    display: block;
-    width: 80vw;
+  display: block;
+  width: 80vw;
 }
 
 .selected {
-    display: inline-block;
-    font-weight: bold;
+  display: inline-block;
+  font-weight: bold;
 }
 
 .numbers {
-    margin-left: 20px;
-    margin-top: 20px;
+  margin-left: 20px;
+  margin-top: 20px;
 }
