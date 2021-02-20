@@ -1,12 +1,15 @@
-import React, { FC } from 'react'
-import './login.css'
-import Login from './Login'
+import { FC } from 'react';
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { maxLength, minLength } from '../../utils/validators'
+
+import { Nullable } from '../../Types/types'
 import { thunkLoginUser } from '../../redux/auth-reducer'
 import { AppStateType } from '../../redux/redux-store'
-import { Nullable } from '../../Types/types'
+import { maxLength, minLength } from '../../utils/validators'
+
+import './login.css'
+
+import Login from './Login'
 
 type MapStatePropsType = {
   isAuth: boolean
@@ -36,10 +39,10 @@ const LoginContainer: FC<PropsType> = ({ thunkLoginUser, isAuth, captchaSrc }) =
   if (isAuth) return <Redirect to="/profile" />
   return (
     <Login
-      onSubmit={onSubmit}
-      minLength5={minLength5}
-      maxLength20={maxLength20}
       captchaSrc={captchaSrc}
+      maxLength20={maxLength20}
+      minLength5={minLength5}
+      onSubmit={onSubmit}
     />
   )
 }
@@ -49,6 +52,11 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
   captchaSrc: state.auth.captchaSrc,
 })
 
-export default connect<MapStatePropsType, MadDispatchPropsType, {}, AppStateType>(mapStateToProps, {
+export default connect<
+  MapStatePropsType,
+  MadDispatchPropsType,
+  Record<string, unknown>,
+  AppStateType
+>(mapStateToProps, {
   thunkLoginUser,
 })(LoginContainer)

@@ -1,12 +1,15 @@
-import React, { useState, FC } from 'react'
-import classes from './Information.module.css'
-import Preloader from '../../Common/Preloader'
-import StatusHook from './Status/StatusHook'
-import InformationFormContainer from './InformationForm/InformationFormContainer'
-import FileInput from './InformationComponents/FileInput'
-import ContactInformation from './InformationComponents/ContactInformation'
-import { UserPhoto } from '../../Common/UserPhoto'
+import { memo, useState, FC } from 'react';
+
 import { ProfileInformationType, profileType, Nullable } from '../../../Types/types'
+import Preloader from '../../Common/Preloader'
+import { UserPhoto } from '../../Common/UserPhoto'
+
+import classes from './Information.module.css'
+import ContactInformation from './InformationComponents/ContactInformation'
+import FileInput from './InformationComponents/FileInput'
+import InformationFormContainer from './InformationForm/InformationFormContainer'
+import StatusHook from './Status/StatusHook'
+
 
 type PropsType = {
   profile: Nullable<profileType>
@@ -42,22 +45,22 @@ const Information: FC<PropsType> = ({
       <div>
         <div className={classes.profileStatus}>
           <h4>{profile.fullName}</h4>
-          <StatusHook statusText={statusText} setStatus={setStatus} isOwner={isOwner} />
+          <StatusHook isOwner={isOwner} setStatus={setStatus} statusText={statusText} />
           {profile.lookingForAJob && <h4>{profile.lookingForAJobDescription}</h4>}
           {profile.aboutMe && <h4>About me: {profile.aboutMe}</h4>}
         </div>
         {!editMode && (
           <ContactInformation
+            contacts={profile.contacts}
             isOwner={isOwner}
             setEditMode={setEditMode}
-            contacts={profile.contacts}
           />
         )}
 
         {editMode && (
           <InformationFormContainer
-            setEditMode={setEditMode}
             profile={profile}
+            setEditMode={setEditMode}
             thunkPutUserInformation={thunkPutUserInformation}
           />
         )}
@@ -66,4 +69,4 @@ const Information: FC<PropsType> = ({
   )
 }
 
-export default React.memo(Information)
+export default memo(Information)

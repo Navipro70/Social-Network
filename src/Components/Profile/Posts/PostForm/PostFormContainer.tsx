@@ -1,8 +1,10 @@
-import React, { FC } from 'react'
-import ReduxPostForm from './PostForm'
+import { FC } from 'react';
 import { reset } from 'redux-form'
-import { maxLength, minLength } from '../../../../utils/validators'
+
 import { DispatchReduxFormType } from '../../../../Types/ReduxFormTypes'
+import { maxLength, minLength } from '../../../../utils/validators'
+
+import ReduxPostForm from './PostForm'
 
 export type PropsType = {
   addPost: (postText: string) => void
@@ -23,7 +25,7 @@ const PostFormContainer: FC<PropsType> = ({ addPost }) => {
   return (
     <div>
       <h3>What's new?</h3>
-      <ReduxPostForm onSubmit={onSubmit} maxLength500={maxLength500} minLength2={minLength2} />
+      <ReduxPostForm maxLength500={maxLength500} minLength2={minLength2} onSubmit={onSubmit} />
     </div>
   )
 }

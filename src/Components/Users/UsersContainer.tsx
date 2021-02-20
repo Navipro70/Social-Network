@@ -1,20 +1,22 @@
-import { thunkGetUsers, thunkLoadUsers, thunkUserFollowing } from '../../redux/users-reducer'
-import Users from './Users'
+import { Component, ComponentType } from 'react';
 import { connect } from 'react-redux'
-import React, { ComponentType } from 'react'
-import Preloader from '../Common/Preloader'
-import { withAuthRedirect } from '../../HihgOrderComponents/RedirectComponent'
 import { compose } from 'redux'
+
+import { withAuthRedirect } from '../../HihgOrderComponents/RedirectComponent'
 import { userType } from '../../Types/types'
 import { AppStateType } from '../../redux/redux-store'
+import { thunkGetUsers, thunkLoadUsers, thunkUserFollowing } from '../../redux/users-reducer'
+import Preloader from '../Common/Preloader'
+
+import Users from './Users'
 
 type MapStateToPropsType = {
   currentPage: number
   pageSize: number
   totalUsersCount: number
   isFetching: boolean
-  users: Array<userType>
-  isFollowingBlocker: Array<number>
+  users: userType[]
+  isFollowingBlocker: number[]
 }
 
 type MapDispatchToPropsType = {
@@ -25,7 +27,7 @@ type MapDispatchToPropsType = {
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class UsersContainer extends React.Component<PropsType> {
+class UsersContainer extends Component<PropsType> {
   componentDidMount() {
     const { currentPage, pageSize } = this.props
     this.props.thunkGetUsers(currentPage, pageSize, true)
@@ -49,13 +51,13 @@ class UsersContainer extends React.Component<PropsType> {
     if (isFetching) return <Preloader />
     return (
       <Users
-        setCurrentPage={this.setCurrentPage}
-        users={users}
-        isFollowingBlocker={isFollowingBlocker}
-        thunkUserFollowing={thunkUserFollowing}
-        pageSize={pageSize}
         currentPage={currentPage}
+        isFollowingBlocker={isFollowingBlocker}
+        pageSize={pageSize}
+        setCurrentPage={this.setCurrentPage}
+        thunkUserFollowing={thunkUserFollowing}
         totalUsersCount={totalUsersCount}
+        users={users}
       />
     )
   }
@@ -73,10 +75,13 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 export default compose<ComponentType>(
-  connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
-    thunkGetUsers,
-    thunkLoadUsers,
-    thunkUserFollowing,
-  }),
+  connect<MapStateToPropsType, MapDispatchToPropsType, Record<string, unknown>, AppStateType>(
+    mapStateToProps,
+    {
+      thunkGetUsers,
+      thunkLoadUsers,
+      thunkUserFollowing,
+    },
+  ),
   withAuthRedirect,
 )(UsersContainer)

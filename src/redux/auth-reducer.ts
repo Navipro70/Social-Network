@@ -1,10 +1,12 @@
+import { stopSubmit } from 'redux-form'
+import { ThunkAction } from 'redux-thunk'
+
+import { ResultCodesEnum } from '../API/axiosInstance'
 import { headerApi } from '../API/headerAPI'
 import { loginApi } from '../API/loginAPI'
-import { stopSubmit } from 'redux-form'
-import { ResultCodesEnum } from '../API/axiosInstance'
-import { ThunkAction } from 'redux-thunk'
-import { AppStateType, InferActionsType } from './redux-store'
 import { Nullable } from '../Types/types'
+
+import { AppStateType, InferActionsType } from './redux-store'
 
 export type currentUserProfileType = {
   id: number
@@ -55,15 +57,6 @@ export const actions = {
 }
 
 export type ThunkActionType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
-
-// ===================GENERICS=TYPES=EXAMPLE============================
-// type ThunkResult<R> = ThunkAction<R, InitialState, undefined, any>;
-//
-// export function anotherThunkAction(): ThunkResult<Promise<boolean>> {
-//     return (dispatch, getState) => {
-//         return Promise.resolve(true);
-//     }
-// }
 
 export const thunkAuthentication = (): ThunkActionType => {
   return async (dispatch) => {

@@ -3,14 +3,19 @@ import { CommonResponse } from './usersAPI'
 
 type LoginResponseType = {
   resultCode: ResultCodesEnum
-  messages: Array<string>
+  messages: string[]
   data: {
     userId: number
   }
 }
 
 export const loginApi = {
-  loginUser(email: string, password: string, rememberMe = false, captcha: string | null = null) {
+  async loginUser(
+    email: string,
+    password: string,
+    rememberMe = false,
+    captcha: string | null = null,
+  ) {
     return axiosInstance.post<LoginResponseType>(`/auth/login`, {
       email,
       password,
@@ -18,10 +23,10 @@ export const loginApi = {
       captcha,
     })
   },
-  logoutUser() {
+  async logoutUser() {
     return axiosInstance.delete<CommonResponse>(`/auth/login`)
   },
-  getCaptcha() {
+  async getCaptcha() {
     return axiosInstance.get<{ url: string | null }>('security/get-captcha-url')
   },
 }

@@ -1,7 +1,8 @@
-import React, { FC } from 'react'
-import InformationForm from './InformationForm'
+import { FC } from 'react'
+
 import { ProfileInformationType, profileType } from '../../../../Types/types'
-import { DispatchReduxFormType } from '../../../../Types/ReduxFormTypes'
+
+import InformationForm from './InformationForm'
 
 export type PropsType = {
   profile: profileType
@@ -14,7 +15,7 @@ const InformationFormContainer: FC<PropsType> = ({
   thunkPutUserInformation,
   setEditMode,
 }) => {
-  const onSubmit = (data: ProfileInformationType, dispatch: DispatchReduxFormType) => {
+  const onSubmit = (data: ProfileInformationType) => {
     thunkPutUserInformation(data, profile.userId)
     setEditMode(true)
   }
@@ -23,8 +24,8 @@ const InformationFormContainer: FC<PropsType> = ({
     <div>
       <InformationForm
         initialValues={{ ...profile, ...profile.contacts }}
-        setEditMode={setEditMode}
         profile={profile}
+        setEditMode={setEditMode}
         thunkPutUserInformation={thunkPutUserInformation}
         onSubmit={onSubmit}
       />

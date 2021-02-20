@@ -1,7 +1,9 @@
-import React, { FC } from 'react'
+import { FC } from 'react';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+
 import { emptyField } from '../../../utils/validators'
 import { Textarea } from '../../Common/FieldControls'
+
 import { ReduxFormDataType } from './MessageFormContainer'
 
 type PropsType = {
@@ -16,9 +18,9 @@ const MessageForm: FC<InjectedFormProps<ReduxFormDataType, PropsType> & PropsTyp
 }) => (
   <form onSubmit={handleSubmit}>
     <Field
-      name={'message'}
-      placeholder={'Your message...'}
       component={Textarea}
+      name="message"
+      placeholder="Your message..."
       validate={[emptyField, maxLength300, minLength2]}
     />
   </form>

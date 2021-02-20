@@ -1,9 +1,12 @@
-import React, { FC } from 'react'
-import classes from './Profile.module.css'
+import { memo, FC } from 'react';
+
+import { photosType, postType, ProfileInformationType } from '../../Types/types'
+import { initialStateType } from '../../redux/profile-reducer'
+
 import Information from './Information/Information'
 import Posts from './Posts/Posts'
-import { initialStateType } from '../../redux/profile-reducer'
-import { photosType, postType, ProfileInformationType } from '../../Types/types'
+import classes from './Profile.module.css'
+
 
 export type PropsType = {
   isOwner: boolean
@@ -12,7 +15,7 @@ export type PropsType = {
   thunkPutUserInformation: (data: ProfileInformationType, userId: number) => void
   thunkSetStatus: (statusText: string) => void
   addPost: (postText: string) => void
-  posts: Array<postType>
+  posts: postType[]
 }
 
 const Profile: FC<PropsType> = ({
@@ -26,15 +29,15 @@ const Profile: FC<PropsType> = ({
 }) => (
   <div className={classes.profile}>
     <Information
+      isOwner={isOwner}
       profile={profilePage.profile}
-      statusText={profilePage.statusText}
       setStatus={thunkSetStatus}
+      statusText={profilePage.statusText}
       thunkPutUserInformation={thunkPutUserInformation}
       thunkSavePhoto={thunkSavePhoto}
-      isOwner={isOwner}
     />
-    <Posts isOwner={isOwner} addPost={addPost} posts={posts} />
+    <Posts addPost={addPost} isOwner={isOwner} posts={posts} />
   </div>
 )
 
-export default React.memo(Profile)
+export default memo(Profile)

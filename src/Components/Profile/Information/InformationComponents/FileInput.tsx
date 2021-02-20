@@ -1,4 +1,5 @@
-import React, { FC } from 'react'
+import { FC } from 'react';
+import * as React from 'react';
 import './FileInput.css'
 
 type PropsType = {
@@ -7,7 +8,7 @@ type PropsType = {
 
 const FileInput: FC<PropsType> = ({ photoHandler }) => (
   <div>
-    <input type="file" name="fileInput" id="fileInput" onChange={photoHandler} />
+    <input id="fileInput" name="fileInput" type="file" onChange={photoHandler} />
     <label htmlFor="fileInput" id="fileLabel">
       {' '}
       Choose a file{' '}

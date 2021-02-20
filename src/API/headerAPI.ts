@@ -7,11 +7,11 @@ type ResponseDataType = {
     login: string
   }
   resultCode: ResultCodesEnum
-  messages: Array<string>
+  messages: string[]
 }
 
 export const headerApi = {
-  getCurrentUserProfile() {
+  async getCurrentUserProfile() {
     return axiosInstance.get<ResponseDataType>(`/auth/me`).then((response) => response.data.data)
   },
 }

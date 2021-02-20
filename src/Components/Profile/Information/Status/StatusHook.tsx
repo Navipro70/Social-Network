@@ -1,6 +1,7 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react'
-import classes from '../Information.module.css'
 import { Input } from '@material-ui/core'
+import { ChangeEvent, FC, useEffect, useState } from 'react';
+
+import classes from '../Information.module.css'
 
 type PropsType = {
   isOwner: boolean
@@ -37,18 +38,18 @@ const StatusHook: FC<PropsType> = ({ isOwner, statusText, setStatus }) => {
 
   return (
     <div>
-      <span placeholder="Введите статус" className={classes.status} onClick={spanOnClick}>
+      <span className={classes.status} placeholder="Введите статус" onClick={spanOnClick}>
         {status || 'Change status'}
       </span>
       <div>
         {visible && (
           <Input
+            autoFocus
             type="text"
             value={status}
-            onChange={onInputChange}
             onBlur={inputOnBlur}
+            onChange={onInputChange}
             onKeyDown={inputKeyDown}
-            autoFocus
           />
         )}
       </div>

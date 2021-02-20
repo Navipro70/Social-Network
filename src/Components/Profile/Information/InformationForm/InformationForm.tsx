@@ -1,13 +1,17 @@
-import React, { FC, useEffect, useState } from 'react'
-import { InjectedFormProps, reduxForm } from 'redux-form'
 import Button from '@material-ui/core/Button'
-import classes from '../Information.module.css'
-import { emptyField, urlValidator } from '../../../../utils/validators'
-import { ContactsItem } from './InformationFormItems/ContactsItem'
-import { CheckboxItem } from './InformationFormItems/CheckboxItem'
-import { SnackbarError } from './InformationFormItems/SnackbarError'
+import { FC, useEffect, useState } from 'react';
+import { InjectedFormProps, reduxForm } from 'redux-form'
+
 import { ProfileInformationType } from '../../../../Types/types'
+import { emptyField, urlValidator } from '../../../../utils/validators'
+import classes from '../Information.module.css'
+
 import { PropsType } from './InformationFormContainer'
+import { CheckboxItem } from './InformationFormItems/CheckboxItem'
+import { ContactsItem } from './InformationFormItems/ContactsItem'
+import { SnackbarError } from './InformationFormItems/SnackbarError'
+
+
 
 const InformationForm: FC<InjectedFormProps<ProfileInformationType, PropsType> & PropsType> = ({
   profile,
@@ -20,32 +24,32 @@ const InformationForm: FC<InjectedFormProps<ProfileInformationType, PropsType> &
 
   const contactsMap = [...Object.keys(profile.contacts)]
   return (
-    <form onSubmit={props.handleSubmit} className={classes.fullForm}>
+    <form className={classes.fullForm} onSubmit={props.handleSubmit}>
       <ul className={classes.profileInfoForm}>
         <ContactsItem name="aboutMe" placeholder="About you" validators={[emptyField]} />
         {contactsMap.map((i) => (
           <ContactsItem
             key={i}
             name={`contacts.${i}`}
-            validators={[urlValidator]}
             placeholder={i}
+            validators={[urlValidator]}
           />
         ))}
         <CheckboxItem />
         <ContactsItem
-          name={'lookingForAJobDescription'}
-          placeholder={'What job is your favourite?'}
+          name="lookingForAJobDescription"
+          placeholder="What job is your favourite?"
           validators={[emptyField]}
         />
         <ContactsItem name="fullName" placeholder="Your full name" validators={[emptyField]} />
       </ul>
-      <Button type="submit" variant="contained" color="primary">
+      <Button color="primary" type="submit" variant="contained">
         Set changes
       </Button>
-      <Button onClick={() => setEditMode(false)} variant="contained">
+      <Button variant="contained" onClick={() => setEditMode(false)}>
         Cancel
       </Button>
-      <SnackbarError open={open} setOpen={setOpen} error={error} />
+      <SnackbarError error={error} open={open} setOpen={setOpen} />
     </form>
   )
 }

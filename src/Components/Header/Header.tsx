@@ -1,8 +1,11 @@
-import React, { FC } from 'react'
-import classes from './Header.module.css'
-import { HeaderPerformance } from '../Common/HeaderPerfomance'
-import { CurrentProfileNavLink } from './CurrentProfileNavLink/CurrentProfileNavLink'
+import { memo, FC } from 'react';
+
 import { currentUserProfileType } from '../../redux/auth-reducer'
+import { HeaderPerformance } from '../Common/HeaderPerfomance'
+
+import { CurrentProfileNavLink } from './CurrentProfileNavLink/CurrentProfileNavLink'
+import classes from './Header.module.css'
+
 
 type PropsType = {
   currentUserProfile: currentUserProfileType | null
@@ -18,4 +21,4 @@ const Header: FC<PropsType> = ({ currentUserProfile, logoutHandler }) => (
   </header>
 )
 
-export default React.memo(Header)
+export default memo(Header)

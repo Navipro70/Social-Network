@@ -1,7 +1,11 @@
-import React, { ComponentType, FC, useEffect } from 'react'
-import classes from './Profile.module.css'
-import Profile, { PropsType } from './Profile'
+import { ComponentType, FC, useEffect } from 'react';
 import { connect } from 'react-redux'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { compose } from 'redux'
+
+import { withAuthRedirect } from '../../HihgOrderComponents/RedirectComponent'
+import { DispatchReduxFormType } from '../../Types/ReduxFormTypes'
+import { currentUserProfileType } from '../../redux/auth-reducer'
 import {
   actions,
   thunkGetStatus,
@@ -10,13 +14,11 @@ import {
   thunkSetCurrentProfile,
   thunkSetStatus,
 } from '../../redux/profile-reducer'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { withAuthRedirect } from '../../HihgOrderComponents/RedirectComponent'
-import { compose } from 'redux'
-import Preloader from '../Common/Preloader'
 import { AppStateType } from '../../redux/redux-store'
-import { DispatchReduxFormType } from '../../Types/ReduxFormTypes'
-import { currentUserProfileType } from '../../redux/auth-reducer'
+import Preloader from '../Common/Preloader'
+
+import Profile, { PropsType } from './Profile'
+import classes from './Profile.module.css'
 
 type MapStatePropsType = {
   dispatch: DispatchReduxFormType

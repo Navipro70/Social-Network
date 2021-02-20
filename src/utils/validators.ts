@@ -1,7 +1,7 @@
 export type ValidatorType = (value: string) => undefined | string
 
-export const emptyField: ValidatorType = (value) => {
-  return value && value.toString().trim() ? undefined : 'Field is required'
+export const emptyField: ValidatorType = (value?: string) => {
+  return value?.toString().trim() ? undefined : 'Field is required'
 }
 
 export const minLength = (minLength: number): ValidatorType => (value) => {
